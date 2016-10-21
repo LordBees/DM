@@ -458,7 +458,7 @@ class main_win:
         ##end
         self.This_win.after(1500,self.Alt_loop)
 
-    def array2csv(array):##from beelib
+    def array2csv(self,array):##from beelib
         temp = ''
         for fl in array:
             print(fl)
@@ -466,7 +466,7 @@ class main_win:
         temp+=','
         return temp
     
-    def csv2array(csvstr):##may need os.isfile() or whatever it is to check file is in dir before declaring eofsame for array2csv      ##from beelib
+    def csv2array(self,csvstr):##may need os.isfile() or whatever it is to check file is in dir before declaring eofsame for array2csv      ##from beelib
         arrayreturn = []
         temp = ''
         flag = False
@@ -481,6 +481,24 @@ class main_win:
                 temp+=x
                 flag = False
         return arrayreturn
+
+    def csv2dot(self,strng):##replaces , with . char for  sub 'csvising them'
+        temp = ''
+        for x in range(len(strng)):
+            if strng[x] == ',':
+                temp += '.'
+            else:
+                temp += strng[x]
+        return temp
+
+    def dot2csv(self,strng):##replaces . with , char for  sub 'uncsvising them'
+        temp = ''
+        for x in range(len(strng)):
+            if strng[x] == '.':
+                temp += ','
+            else:
+                temp += strng[x]
+        return temp
 
     def readfile(self,fname):
         try:
@@ -518,8 +536,79 @@ class main_win:
         pass #self.QS_path_currfile
     def internal_loadfile(self,fname):
         pass
-    def internal_savefile(self,fname,dat):
-        pass
+##    def internal_savefile(self,dat):##prepares file data for saving
+##        file_data = []
+##        temp = []
+##        file_data.append(self.csv2dot(self.array2csv(dat[0])))
+##        file_data.append(self.csv2dot(self.array2csv(dat[1])))
+##        file_data.append(self.csv2dot(self.array2csv(dat[2])))
+##        file_data.append(dat[3])
+##        file_data.append(dat[4])
+##        file_data.append(dat[5])
+##        
+##        for x in dat[6]:
+##            temp.append(self.array2csv(x))
+##        file_data.append(self.csv2dot(temp))
+##        temp =[]
+##        
+##        for x in dat[7]:
+##            temp.append(self.array2csv(x))
+##        file_data.append(self.csv2dot(temp))
+##        temp =[]
+##        
+##        file_data.append(self.array2csv(dat[8]))
+##        file_data.append(self.array2csv(dat[9]))
+##
+##        for x in dat[8][0]:
+##            temp.append(self.array2csv(x))
+##        file_data.append(self.csv2dot(temp))
+##        temp =[]
+##        
+##        file_data.append(dat[8][1])
+##        file_data.append(dat[9])
+##        file_data.append(dat[10])
+##        file_data.append(self.array2csv(dat[11]))
+##
+##        return file_data
+    def internal_savefile(self,dat):##prepares file data for saving
+        file_data = []
+        
+        for x in dat[0]:
+            file_data.append(str(x))
+        for x in dat[1]:
+            file_data.append(str(x))
+        for x in dat[2]:
+            file_data.append(str(x))
+        file_data.append(str(dat[3]))
+        file_data.append(str(dat[4]))
+        file_data.append(str(dat[5]))
+        
+        for x in dat[6]:
+            file_data.append(str(x[0]))
+            file_data.append(str(x[1]))
+        for x in range(len(dat[7])):
+            for y in range(len(dat[7][x])):
+                file_data.append(str(dat[7][x][y]))
+        for x in dat[8]:
+            file_data.append(str(x))
+        for x in dat[9]:
+            file_data.append(str(x))
+        
+
+        for x in range(len(dat[10][0])):
+            for y in range(len(dat[10][0][x])):
+                file_data.append(str(dat[10][0][x][y]))
+        
+        file_data.append(str(dat[10][1]))
+        file_data.append(str(dat[11]))
+        file_data.append(str(dat[12]))
+        for x in dat[13]:
+            file_data.append(str(x))
+
+        return file_data
+
+                         
+        
     def internal_savefileaskchecker(self):##returns name and true if file exists
         FPath = filedialog.asksaveasfilename(filetypes=(("D&D character sheet", "*.ADV"),("All Files", "*.*") ))##adv extention is forced onto ##EDIT took out this defaultextension=".ADV", 
         EXISTS_FLAG = False
