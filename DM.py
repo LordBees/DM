@@ -30,6 +30,7 @@ class main_win:
     ##TK start
     This_win = Tk()
     ##variables
+    d='1'
 
     ##charbase_name
     charbase_name_CNM_BOX_VAR = StringVar()
@@ -431,7 +432,7 @@ class main_win:
         Menu_settings = Menu(Menu_main,tearoff = 0)
         #Menu_settings = Menu(menubar, tearoff=0)
         Menu_settings.add_command(label="dice roller", command=dicewin)
-        Menu_settings.add_command(label="custom link")#, command=Menu_customchoose_window)
+        Menu_settings.add_command(label="combat helper")#, command=Menu_customchoose_window)
 
         Menu_main.add_cascade(label = '|File|',menu = Menu_FileIO)
         Menu_main.add_cascade(label = '|Tools|',menu = Menu_settings)
@@ -444,8 +445,16 @@ class main_win:
         ##additional event loop code here
         #print(self.get_attackplusspells())
         #print(self.get_secondaryskills())
-        print(self.get_ALL())
-        self.set_primaryattributes([random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random()])
+##        print(self.get_ALL())
+##        self.set_primaryattributes([random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random()])
+        if self.d == '1':
+            self.d = '0'
+            self.set_ALL([['1', '2', '3', '4', '5', '6', '7'], ['1', '2', '3', '4', '5', '6'], ['1', '2', '3', '4', '5', '6'], 'qwerty', 'asdfgh', 'zxcvbn', [(1, 'aa'), (1, 'bb'), (1, 'cc'), (1, 'dd'), (1, 'ee'), (1, 'ff')], [['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]], ['q', 'w', 'e', 'r', 't', 'y'], ['a', 's', 1, 1, 1, 1, 1, 1], [[['1a', '2a', '3a'], ['1b', '2b', '3b'], ['1c', '2c', '3c']], 'dat text'], 'qwert', 'www', ['o', 'p', 'k', 'l', 'nm']])
+        else:
+            self.d='1'
+            self.set_ALL([['', '', '', '', '', '', ''], ['', '', '', '', '', ''], ['', '', '', '', '', ''], '', '', '', [(0, ''), (0, ''), (0, ''), (0, ''), (0, ''), (0, '')], [['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], ['', '', '', '', '', ''], ['', '', 0, 0, 0, 0, 0, 0], [[['', '', ''], ['', '', ''], ['', '', '']], ''], '', '', ['', '', '', '', '']])
+        ##end
+
         ##end
         self.This_win.after(1500,self.Alt_loop)
 
@@ -687,6 +696,20 @@ class main_win:
     def get_attackplusspells(self):
         return [self.get_attackplusspells_VAR(),self.get_attackplusspells_TXT()]
     #text boxes additionally need to be added
+    def get_languageplusskills(self):
+        #traits/lang box
+        return self.languagesplusskills_TBX_TXT.get(1.0, 'end-1c')
+    def get_equipmain(self):
+        #equip/inventory
+        return self.equipmain_TBX_TXT.get(1.0, 'end-1c')
+    def get_personalinfo_basic(self):
+        #traits
+        return[
+            self.personalinfo_traits_TBX_TXT.get(1.0, 'end-1c'),
+            self.personalinfo_ideals_TBX_TXT.get(1.0, 'end-1c'),
+            self.personalinfo_bonds_TBX_TXT.get(1.0, 'end-1c'),
+            self.personalinfo_flaws_TBX_TXT.get(1.0, 'end-1c'),
+            self.personalinfo_features_TBX_TXT.get(1.0, 'end-1c')]
     def get_ALL(self):
         return[
         self.get_charbase_name(),
@@ -699,7 +722,10 @@ class main_win:
         self.get_secondaryskills(),
         self.get_hpmiscskills(),
         self.get_diceandsavesmisc(),
-        self.get_attackplusspells()]
+        self.get_attackplusspells(),
+        self.get_languageplusskills(),
+        self.get_equipmain(),
+        self.get_personalinfo_basic()]
         #add txt boxes
 
 
@@ -733,31 +759,31 @@ class main_win:
 
     #perception
     def set_Perception(self,data):
-        self.Perception_PER_BOX.set(data[0])
+        self.Perception_PER_BOX_VAR.set(data)
 
     #inspiration
     def set_inspiration(self,data):
-        self.inspiration_STR_BOX_VAR.set(data[0])
+        self.inspiration_STR_BOX_VAR.set(data)
 
     # proviciency bonus
     def set_proficiencybonus(self,data):
-        self.proficiencybonus_STR_BOX_VAR.set(data[0])
+        self.proficiencybonus_STR_BOX_VAR.set(data)
 
     #saving throws
     def set_savingthrows(self,data):
-        self.savingthrows_STR_BOX_VAR.set(data[0][0])
-        self.savingthrows_DEX_BOX_VAR.set(data[0][1])
-        self.savingthrows_CON_BOX_VAR.set(data[0][2])
-        self.savingthrows_INT_BOX_VAR.set(data[0][3])
-        self.savingthrows_WIS_BOX_VAR.set(data[0][4])
-        self.savingthrows_CHR_BOX_VAR.set(data[0][5])
+        self.savingthrows_STR_BOX_VAR.set(data[0][1])
+        self.savingthrows_DEX_BOX_VAR.set(data[1][1])
+        self.savingthrows_CON_BOX_VAR.set(data[2][1])
+        self.savingthrows_INT_BOX_VAR.set(data[3][1])
+        self.savingthrows_WIS_BOX_VAR.set(data[4][1])
+        self.savingthrows_CHR_BOX_VAR.set(data[5][1])
         
-        self.savingthrows_STR_CHK_VAR.set(data[1][0])
-        self.savingthrows_DEX_CHK_VAR.set(data[1][1])
-        self.savingthrows_CON_CHK_VAR.set(data[1][2])
-        self.savingthrows_INT_CHK_VAR.set(data[1][3])
-        self.savingthrows_WIS_CHK_VAR.set(data[1][4])
-        self.savingthrows_CHR_CHK_VAR.set(data[1][5])
+        self.savingthrows_STR_CHK_VAR.set(data[0][0])
+        self.savingthrows_DEX_CHK_VAR.set(data[1][0])
+        self.savingthrows_CON_CHK_VAR.set(data[2][0])
+        self.savingthrows_INT_CHK_VAR.set(data[3][0])
+        self.savingthrows_WIS_CHK_VAR.set(data[4][0])
+        self.savingthrows_CHR_CHK_VAR.set(data[5][0])
 
     #secondary stats
     def set_secondaryskills(self,data):#[boxdata/checkboxdata][data]
@@ -844,10 +870,42 @@ class main_win:
         #self.attackplusspells_MSC_TXT
     def set_attackplusspells_TXT(self,data):
         #text hack
-        return self.attackplusspells_MSC_TXT.set(data[0])##char1 2 end
+        self.attackplusspells_MSC_TXT.delete(1.0, 'end-1c')
+        for x in data:#.insert for loop or pass whole string with newlines
+            self.attackplusspells_MSC_TXT.insert(INSERT,x)#.set(data[0])##char1 2 end
     def set_attackplusspells(self,data):
-        return [self.set_attackplusspells_VAR(data[0]),self.set_attackplusspells_TXT(data[1])]
+        self.set_attackplusspells_VAR(data[0])
+        self.set_attackplusspells_TXT(data[1])
     #text boxes additionally need to be added
+    def set_languageplusskills(self,data):
+        #traits/lang box
+        self.languagesplusskills_TBX_TXT.delete(1.0, 'end-1c')
+        for x in data:
+            self.languagesplusskills_TBX_TXT.insert(INSERT,x)
+    def set_equipmain(self,data):
+        #equip/inventory
+        self.equipmain_TBX_TXT.delete(1.0, 'end-1c')
+        for x in data:
+            self.equipmain_TBX_TXT.insert(INSERT,x)
+    def set_personalinfo_basic(self,data):
+        #traits
+
+        self.personalinfo_traits_TBX_TXT.delete(1.0, 'end-1c')
+        self.personalinfo_ideals_TBX_TXT.delete(1.0, 'end-1c')
+        self.personalinfo_bonds_TBX_TXT.delete(1.0, 'end-1c')
+        self.personalinfo_flaws_TBX_TXT.delete(1.0, 'end-1c')
+        self.personalinfo_features_TBX_TXT.delete(1.0, 'end-1c')
+            
+        for x in data[0]:   
+            self.personalinfo_traits_TBX_TXT.insert(INSERT,x)
+        for x in data[1]:
+            self.personalinfo_ideals_TBX_TXT.insert(INSERT,x)
+        for x in data[2]:
+            self.personalinfo_bonds_TBX_TXT.insert(INSERT,x)
+        for x in data[3]:
+            self.personalinfo_flaws_TBX_TXT.insert(INSERT,x)
+        for x in data[4]:
+            self.personalinfo_features_TBX_TXT.insert(INSERT,x)
     
     def set_ALL(self,data):
         self.set_charbase_name(data[0])
@@ -861,6 +919,9 @@ class main_win:
         self.set_hpmiscskills(data[8])
         self.set_diceandsavesmisc(data[9])
         self.set_attackplusspells(data[10])
+        self.set_languageplusskills(data[11])
+        self.set_equipmain(data[12])
+        self.set_personalinfo_basic(data[13])
         #add txt boxes
     def get_a():
         pass
