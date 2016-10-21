@@ -376,17 +376,17 @@ class main_win:
         attackplusspells_LF.place(x=400,y=300)
 
         languagesplusskills_LF = LabelFrame(self.This_win,text = 'proficiencies and languages')
-        self.languagesplusskills_TBX_TXT = Text(languagesplusskills_LF,height = 25,width = 25)#add scrollbar to list
+        self.languagesplusskills_TBX_TXT = Text(languagesplusskills_LF,height = 10,width = 25)#add scrollbar to list
         self.languagesplusskills_TBX_TXT.grid(row=0,column=0)
-        #languagesplusskills_LF.place(x=0,y=0)
+        languagesplusskills_LF.place(x=825,y=50)
 
         equipmain_LF = LabelFrame(self.This_win,text = 'inventory')
         self.equipmain_TBX_TXT = Text(equipmain_LF,height = 25,width = 25)#add scrollbar to list
         self.equipmain_TBX_TXT.grid(row=0,column=0)
-        equipmain_LF.place(x=0,y=0)
+        equipmain_LF.place(x=825,y=230)
 
         #personalinfo_basic
-        personalinfo_traits_LF = LabelFrame(self.This_win,text = 'personality traits')
+        personalinfo_traits_LF = LabelFrame(self.This_win,text = 'misc personality traits')
         self.personalinfo_traits_TBX_TXT = Text(personalinfo_traits_LF,height = 5,width = 25)#add scrollbar to list
         self.personalinfo_traits_TBX_TXT.grid(row=0,column=0)
         personalinfo_traits_LF.place(x=600,y=50)
@@ -409,7 +409,7 @@ class main_win:
         personalinfo_features_LF = LabelFrame(self.This_win,text = 'personality traits')
         self.personalinfo_features_TBX_TXT = Text(personalinfo_features_LF,height = 25,width = 25)#add scrollbar to list
         self.personalinfo_features_TBX_TXT.grid(row=0,column=0)
-        personalinfo_features_LF.place(x=825,y=50)
+        personalinfo_features_LF.place(x=600,y=400)
 
 ##        languagesplusskills_TBX_TXT
 ##        equipmain_TBX_TXT
@@ -533,46 +533,51 @@ class main_win:
         pass
     def savefile(self):
         pass
+    def internal_resolve_ADV(self,FN):
+        if FN[-4:].upper() == '.ADV':
+            pass
+        else:
+            FN += '.ADV'
+        return FN
     def internal_save_current(self):
         pass #self.QS_path_currfile
     def internal_loadfile(self,fname):
-        pass
-##    def internal_savefile(self,dat):##prepares file data for saving
-##        file_data = []
-##        temp = []
-##        file_data.append(self.csv2dot(self.array2csv(dat[0])))
-##        file_data.append(self.csv2dot(self.array2csv(dat[1])))
-##        file_data.append(self.csv2dot(self.array2csv(dat[2])))
-##        file_data.append(dat[3])
-##        file_data.append(dat[4])
-##        file_data.append(dat[5])
-##        
-##        for x in dat[6]:
-##            temp.append(self.array2csv(x))
-##        file_data.append(self.csv2dot(temp))
-##        temp =[]
-##        
-##        for x in dat[7]:
-##            temp.append(self.array2csv(x))
-##        file_data.append(self.csv2dot(temp))
-##        temp =[]
-##        
-##        file_data.append(self.array2csv(dat[8]))
-##        file_data.append(self.array2csv(dat[9]))
-##
-##        for x in dat[8][0]:
-##            temp.append(self.array2csv(x))
-##        file_data.append(self.csv2dot(temp))
-##        temp =[]
-##        
-##        file_data.append(dat[8][1])
-##        file_data.append(dat[9])
-##        file_data.append(dat[10])
-##        file_data.append(self.array2csv(dat[11]))
-##
-##        return file_data
-    def internal_savefile(self,dat):##prepares file data for saving
         file_data = []
+        fname = self.internal_resolve_ADV(fname)
+        print(fname)
+        dat = self.readfile(fname)
+        ##special cases for unpacking
+        #dat 6
+        dat[6] = self.csv2array(dat[6])
+        for x in range(len(dat[6])):
+            dat[6][x] = self.csv2array(self.dot2csv(dat[6][x]))
+        print(dat[6])
+
+        #dat 7
+        dat[7] =  self.csv2array(dat[7])
+        for x in range(len(dat[7])):
+            dat[7][x] = self.csv2array(self.dot2csv(dat[7][x]))
+
+        #dat 10
+        dat[10] =  self.csv2array(dat[10])
+        for x in range(len(dat[10])):
+            dat[10][x] = self.csv2array(self.dot2csv(dat[10][x]))
+            
+        return_data =[self.csv2array(dat[0]),
+         self.csv2array(dat[1]),
+         self.csv2array(dat[2]),
+         dat[3].strip('\n'),dat[4].strip('\n'),dat[5].strip('\n'),
+         dat[6],
+         [dat[7]],
+         csv2array(dat[8]),
+         csv2array(dat[9]),
+         [dat[10],
+          dat[11]], dat[12], dat[13],
+         ['', '', '', '', '']]
+        return return_data
+        
+    def internal_savefile(self,dat):##prepares file data for saving
+        file_data = []##mega instead?
         
         for x in dat[0]:
             file_data.append(str(x))
@@ -638,7 +643,14 @@ class main_win:
         file_data.append(dat[10][1])
         file_data.append(dat[11])
         file_data.append(dat[12])
-        file_data.append(self.array2csv(dat[13]))
+        print('~~~~~~~~')
+        print(dat[13])
+        print('####')
+        print(self.array2csv(dat[13]))
+        print('~~~~~~~~')
+        #file_data.append(self.array2csv(dat[13]))
+        for x in dat[13]:
+            file_data.append(x)
 
         return file_data
                          
@@ -656,33 +668,37 @@ class main_win:
 ##    def internal_update_Charsheet(self,data):
 ##        self.set_ALL(data)
         
-    def sub_button_newfile(self):
+    def sub_button_newfile(self):##Testcharacter1
         Fpath = self.internal_savefileaskchecker()
+        Fpath[0] = self.internal_resolve_ADV(Fpath[0])
         print(Fpath)
-        dat = [['1', '1', '', '', '', '', ''],
-               ['', '', '', '', '', ''],
-               ['', '', '', '', '', ''],
-               '', '', '',
-               [(0, ''), (0, ''), (0, ''), (0, ''), (0, ''), (0, '')],
-               [['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-               ['', '', '', '', '', ''],
-               ['', '', 0, 0, 0, 0, 0, 0],
-               [[['', '', ''],
-                 ['', '', ''],
-                 ['', '', '']],
-                '']
-               , '', '',
-               ['', '', '', '', '']]
+        dat = [['New Character', 'New Player', 'None', '0', 'None', 'None', '0XP'],
+               ['0', '0', '0', '0', '0', '0'],
+               ['-+0', '-+0', '-+0', '-+0', '-+0', '-+0'],
+               '-+0', '0', '-+0',
+               [(0, '-+0'), (0, '-+0'), (0, '-+0'), (0, '-+0'), (0, '-+0'), (0, '-+0')],
+               [['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], ['0', '-+0', '0', '0', '0', '0'],
+               ['-+0', '0', 0, 0, 0, 0, 0, 0],
+               [[['name', 'name', 'name'],
+                 ['-+0', '-+0', '-+0'],
+                 ['None', 'None', 'None']],
+                'enter weapon notes here'],
+               'Enter proficiences and languages here', 'enter inventory information here',
+               ['Enter Personality Traits here.',
+                'Enter character ideals here.',
+                'Enter\ncharacter bonds here.',
+                'Enter Personality flaws here.',
+                'enter additional \nfeatures,traits and other\ninformation such as \nbackground traits here.']]
         if Fpath[1] == True:
             if messagebox.askokcancel(title = 'confirm',message = 'this will OVERWRITE the selected file with data\nare you sure?'):
                 #self.writefile(Fpath,self.array2csv(self.internal_savefile(dat)),ARRAY = False)##temp
-                self.writefile(str(Fpath)+'.ADV',self.internal_savefile2(dat))
+                self.writefile(str(Fpath[1]),self.internal_savefile2(dat))
             else:
                 pass
         else:
             print(self.internal_savefile2(dat))
-            self.writefile(Fpath,self.internal_savefile2(dat))
+            self.writefile(str(Fpath[0]),self.internal_savefile2(dat))
     
     def sub_button_loadfile(self):##load file menubutton
         FPath = filedialog.askopenfilename(defaultextension=".ADV", filetypes=(("D&D character sheet", "*.ADV"),("All Files", "*.*") ))
@@ -1088,7 +1104,7 @@ class dicewin:
         #self.This_win = Toplevel()##minus the ()?
         self.This_win = Toplevel()
         self.This_win.title('Dice roller')
-        self.This_win.geometry('450x200')
+        self.This_win.geometry('415x85')
         ##widgets
         Diceroller_LF = LabelFrame(self.This_win)
         Diceroller_DXX_LBL = Label(Diceroller_LF,text = 'select a dice').grid(row=0,column=0)
@@ -1101,7 +1117,7 @@ class dicewin:
         Diceroller_DX7_RAD = Radiobutton(Diceroller_LF,variable = self.Diceroller_DX1_RAD_VAR,value = 20,text = 'D20').grid(row=1,column=6)
         Diceroller_RTD_BTN = Button(Diceroller_LF,text = 'Roll!',command = self.roll_die).grid(row=2,column=0)
         Diceroller_RDR_LBL = Label(Diceroller_LF,textvariable = self.Diceroller_RDR_LBL_VAR,text = 'you rolled a |').grid(row=2,column=1)
-        Diceroller_LF.place(x=50,y=50)
+        Diceroller_LF.place(x=5,y=5)
         
         ## post widget code
         self.This_win.after(1500,self.Alt_loop)
@@ -1123,7 +1139,7 @@ class dicewin:
             r = 'No dice Selected!'
         else:
             r= self.internal_roller(int(d))
-        self.set_rollerlabel(r)
+        self.set_rollerlabel(str(r)+'  ')
         
     def internal_roller(self,number):
         return random.randint(0,number)
@@ -1131,6 +1147,7 @@ class dicewin:
         return self.Diceroller_DX1_RAD_VAR.get()
     def set_rollerlabel(self,data):
         self.Diceroller_RDR_LBL_VAR.set('you rolled a |'+str(data))
+        
 class createcharwin(main_win):
     def __init__(self):
         self.This_win = Toplevel()
