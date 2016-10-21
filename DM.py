@@ -369,7 +369,7 @@ class main_win:
         attackplusspells_DT2_BOX = Entry(attackplusspells_LF,width = 9,textvariable = self.attackplusspells_DT2_BOX_VAR)             .grid(row=2,column=2)#.pack()
         attackplusspells_DT3_BOX = Entry(attackplusspells_LF,width = 9,textvariable = self.attackplusspells_DT3_BOX_VAR)             .grid(row=3,column=2)#.pack()
         attackplusspells_NTS_LF =  LabelFrame(self.This_win,text = 'atk/mag notes')#position by magic/stats
-        self.attackplusspells_MSC_TXT = Text(attackplusspells_NTS_LF,height = 25,width = 25)#add scrollbar to list
+        self.attackplusspells_MSC_TXT = Text(attackplusspells_NTS_LF,height = 25,width = 22)#add scrollbar to list
         self.attackplusspells_MSC_TXT                                                                                                .grid(row=4,column=0)#.pack() ##was height 10
         attackplusspells_NTS_LF.place(x=400,y=400)
         #add txt to fill spaces
@@ -383,7 +383,7 @@ class main_win:
         equipmain_LF = LabelFrame(self.This_win,text = 'inventory')
         self.equipmain_TBX_TXT = Text(equipmain_LF,height = 25,width = 25)#add scrollbar to list
         self.equipmain_TBX_TXT.grid(row=0,column=0)
-        #equipmain_LF.place(x=0,y=0)
+        equipmain_LF.place(x=0,y=0)
 
         #personalinfo_basic
         personalinfo_traits_LF = LabelFrame(self.This_win,text = 'personality traits')
@@ -425,6 +425,7 @@ class main_win:
         Menu_main = Menu(self.This_win)
         
         Menu_FileIO = Menu(Menu_main,tearoff = 0)
+        Menu_FileIO.add_command(label="New", command=self.sub_button_newfile)
         Menu_FileIO.add_command(label="Load", command=self.sub_button_loadfile)
         Menu_FileIO.add_command(label="Save", command=self.sub_button_savefile)
         Menu_FileIO.add_command(label="Save As", command=self.sub_button_savefile_as)
@@ -445,14 +446,14 @@ class main_win:
         ##additional event loop code here
         #print(self.get_attackplusspells())
         #print(self.get_secondaryskills())
-##        print(self.get_ALL())
+        print(self.get_ALL())
 ##        self.set_primaryattributes([random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random()])
-        if self.d == '1':
-            self.d = '0'
-            self.set_ALL([['1', '2', '3', '4', '5', '6', '7'], ['1', '2', '3', '4', '5', '6'], ['1', '2', '3', '4', '5', '6'], 'qwerty', 'asdfgh', 'zxcvbn', [(1, 'aa'), (1, 'bb'), (1, 'cc'), (1, 'dd'), (1, 'ee'), (1, 'ff')], [['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]], ['q', 'w', 'e', 'r', 't', 'y'], ['a', 's', 1, 1, 1, 1, 1, 1], [[['1a', '2a', '3a'], ['1b', '2b', '3b'], ['1c', '2c', '3c']], 'dat text'], 'qwert', 'www', ['o', 'p', 'k', 'l', 'nm']])
-        else:
-            self.d='1'
-            self.set_ALL([['', '', '', '', '', '', ''], ['', '', '', '', '', ''], ['', '', '', '', '', ''], '', '', '', [(0, ''), (0, ''), (0, ''), (0, ''), (0, ''), (0, '')], [['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], ['', '', '', '', '', ''], ['', '', 0, 0, 0, 0, 0, 0], [[['', '', ''], ['', '', ''], ['', '', '']], ''], '', '', ['', '', '', '', '']])
+##        if self.d == '1':
+##            self.d = '0'
+##            self.set_ALL([['1', '2', '3', '4', '5', '6', '7'], ['1', '2', '3', '4', '5', '6'], ['1', '2', '3', '4', '5', '6'], 'qwerty', 'asdfgh', 'zxcvbn', [(1, 'aa'), (1, 'bb'), (1, 'cc'), (1, 'dd'), (1, 'ee'), (1, 'ff')], [['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]], ['q', 'w', 'e', 'r', 't', 'y'], ['a', 's', 1, 1, 1, 1, 1, 1], [[['1a', '2a', '3a'], ['1b', '2b', '3b'], ['1c', '2c', '3c']], 'dat text'], 'qwert', 'www', ['o', 'p', 'k', 'l', 'nm']])
+##        else:
+##            self.d='1'
+##            self.set_ALL([['', '', '', '', '', '', ''], ['', '', '', '', '', ''], ['', '', '', '', '', ''], '', '', '', [(0, ''), (0, ''), (0, ''), (0, ''), (0, ''), (0, '')], [['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], ['', '', '', '', '', ''], ['', '', 0, 0, 0, 0, 0, 0], [[['', '', ''], ['', '', ''], ['', '', '']], ''], '', '', ['', '', '', '', '']])
         ##end
 
         ##end
@@ -606,7 +607,40 @@ class main_win:
             file_data.append(str(x))
 
         return file_data
+    def internal_savefile2(self,dat):##prepares file data for saving
+        file_data = []
+        temp = []
+        file_data.append(self.array2csv(dat[0]))
+        file_data.append(self.array2csv(dat[1]))
+        file_data.append(self.array2csv(dat[2]))
+        file_data.append(dat[3])
+        file_data.append(dat[4])
+        file_data.append(dat[5])
+        
+        for x in dat[6]:
+            temp.append(self.csv2dot(self.array2csv(x)))
+        file_data.append(self.array2csv(temp))
+        temp =[]
+        
+        for x in dat[7]:
+            temp.append(self.csv2dot(self.array2csv(x)))
+        file_data.append(self.array2csv(temp))
+        temp =[]
+        
+        file_data.append(self.array2csv(dat[8]))
+        file_data.append(self.array2csv(dat[9]))
 
+        for x in dat[10][0]:
+            temp.append(self.csv2dot(self.array2csv(x)))
+        file_data.append(self.array2csv(temp))
+        temp =[]
+        
+        file_data.append(dat[10][1])
+        file_data.append(dat[11])
+        file_data.append(dat[12])
+        file_data.append(self.array2csv(dat[13]))
+
+        return file_data
                          
         
     def internal_savefileaskchecker(self):##returns name and true if file exists
@@ -622,6 +656,33 @@ class main_win:
 ##    def internal_update_Charsheet(self,data):
 ##        self.set_ALL(data)
         
+    def sub_button_newfile(self):
+        Fpath = self.internal_savefileaskchecker()
+        print(Fpath)
+        dat = [['1', '1', '', '', '', '', ''],
+               ['', '', '', '', '', ''],
+               ['', '', '', '', '', ''],
+               '', '', '',
+               [(0, ''), (0, ''), (0, ''), (0, ''), (0, ''), (0, '')],
+               [['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+               ['', '', '', '', '', ''],
+               ['', '', 0, 0, 0, 0, 0, 0],
+               [[['', '', ''],
+                 ['', '', ''],
+                 ['', '', '']],
+                '']
+               , '', '',
+               ['', '', '', '', '']]
+        if Fpath[1] == True:
+            if messagebox.askokcancel(title = 'confirm',message = 'this will OVERWRITE the selected file with data\nare you sure?'):
+                #self.writefile(Fpath,self.array2csv(self.internal_savefile(dat)),ARRAY = False)##temp
+                self.writefile(str(Fpath)+'.ADV',self.internal_savefile2(dat))
+            else:
+                pass
+        else:
+            print(self.internal_savefile2(dat))
+            self.writefile(Fpath,self.internal_savefile2(dat))
     
     def sub_button_loadfile(self):##load file menubutton
         FPath = filedialog.askopenfilename(defaultextension=".ADV", filetypes=(("D&D character sheet", "*.ADV"),("All Files", "*.*") ))
