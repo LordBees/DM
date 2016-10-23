@@ -533,6 +533,10 @@ class main_win:
         pass
     def savefile(self):
         pass
+    def internal_write_ADV(self,fname,dat):
+        pass
+    def internal_read_ADV(self,fname):
+        pass
     def internal_resolve_ADV(self,FN):
         if FN[-4:].upper() == '.ADV':
             pass
@@ -690,16 +694,17 @@ class main_win:
                 'Enter\ncharacter bonds here.',
                 'Enter Personality flaws here.',
                 'enter additional \nfeatures,traits and other\ninformation such as \nbackground traits here.']]
-        if Fpath[1] == True:
-            if messagebox.askokcancel(title = 'confirm',message = 'this will OVERWRITE the selected file with data\nare you sure?'):
-                #self.writefile(Fpath,self.array2csv(self.internal_savefile(dat)),ARRAY = False)##temp
-                self.writefile(str(Fpath[1]),self.internal_savefile2(dat))
+        if messagebox.askokcancel(title = 'confirm save',message = 'save the file: '+str(Fpath[0])+'\nare you sure?'):
+            if Fpath[1] == True:
+                if messagebox.askokcancel(title = 'confirm',message = 'this will OVERWRITE the selected file with data\nare you sure?'):
+                    #self.writefile(Fpath,self.array2csv(self.internal_savefile(dat)),ARRAY = False)##temp
+                    self.writefile(str(Fpath[1]),self.internal_savefile2(dat))
+                else:
+                    pass
             else:
-                pass
-        else:
-            print(self.internal_savefile2(dat))
-            self.writefile(str(Fpath[0]),self.internal_savefile2(dat))
-    
+                print(self.internal_savefile2(dat))
+                self.writefile(str(Fpath[0]),self.internal_savefile2(dat))
+        dat
     def sub_button_loadfile(self):##load file menubutton
         FPath = filedialog.askopenfilename(defaultextension=".ADV", filetypes=(("D&D character sheet", "*.ADV"),("All Files", "*.*") ))
         dat = self.readfile(FPath)
@@ -1149,23 +1154,242 @@ class dicewin:
         self.Diceroller_RDR_LBL_VAR.set('you rolled a |'+str(data))
         
 class createcharwin(main_win):
+    ##setup
+    #primaryattributes_setup_DRL_LBX = None
+
+    #primary attribute allocation
+    primaryattributes_STR_BTN_VAR = StringVar()
+    primaryattributes_DEX_BTN_VAR = StringVar()
+    primaryattributes_CON_BTN_VAR = StringVar()
+    primaryattributes_INT_BTN_VAR = StringVar()
+    primaryattributes_WIS_BTN_VAR = StringVar()
+    primaryattributes_CHR_BTN_VAR = StringVar()
+
+    primaryattributes_STR_LBL_VAR = StringVar()
+    primaryattributes_DEX_LBL_VAR = StringVar()
+    primaryattributes_CON_LBL_VAR = StringVar()
+    primaryattributes_INT_LBL_VAR = StringVar()
+    primaryattributes_WIS_LBL_VAR = StringVar()
+    primaryattributes_CHR_LBL_VAR = StringVar()
+
+
+    
     def __init__(self):
         self.This_win = Toplevel()
         self.This_win.title('Character Creation Setup')
         self.This_win.geometry('640x720')
         ##widgets
+        primaryattributes_setup_LF = LabelFrame(self.This_win,text= 'primary atributes dice roller')
+        primaryattributes_setup_RTD_BTN = Button(primaryattributes_setup_LF,text = 'randomize values',command = self.sub_button_rollprimary).grid(row=0,column=0)
+        primaryattributes_setup_RSV_BTN = Button(primaryattributes_setup_LF,text = 'Clear values',command = self.sub_button_resetvalues).grid(row=0,column=1)
+        self.primaryattributes_setup_DRL_LBX = Listbox(primaryattributes_setup_LF)
+        self.primaryattributes_setup_DRL_LBX.grid(row=1,column=0)
+        primaryattributes_setup_LF.place(x=0,y=0)
         
+
+        #primaryattributes_LF
+        #buttons display 'SEt Value' then when clicked change to the selected diceroll on a listbox eg 'assigned:'+str(droll[x])
+        #text = 'Set Value!'
+        primaryattributes_LF = LabelFrame(self.This_win,text = 'primary\nattributes')
+        primaryattributes_HAD_LBL = Label(primaryattributes_LF,text = 'attribute\nname').grid(row=0,column=0)
+        primaryattributes_HAS_LBL = Label(primaryattributes_LF,text = 'attribute\nvalue').grid(row=0,column=1)
+        primaryattributes_HRM_LBL = Label(primaryattributes_LF,text = 'roll modifier').grid(row=0,column=2)
+        
+        primaryattributes_STR_LBL = Label(primaryattributes_LF,text = 'Strength').grid(row=1,column=0)
+        primaryattributes_STR_BTN = Button(primaryattributes_LF,width = 10,textvariable = self.primaryattributes_STR_BTN_VAR,command = self.sub_button_STR,).grid(row=1,column=1)#.pack()##was width = 3
+        primaryattributes_STR_LBL = Label(primaryattributes_LF,width = 4,textvariable = self.primaryattributes_STR_LBL_VAR).grid(row=1,column=2)
+        primaryattributes_DEX_LBL = Label(primaryattributes_LF,text = 'Dexterity').grid(row=2,column=0)
+        primaryattributes_DEX_BTN = Button(primaryattributes_LF,width = 10,textvariable = self.primaryattributes_DEX_BTN_VAR,command = self.sub_button_DEX).grid(row=2,column=1)
+        primaryattributes_DEX_LBL = Label(primaryattributes_LF,width = 4,textvariable = self.primaryattributes_DEX_LBL_VAR).grid(row=2,column=2)
+        primaryattributes_CON_LBL = Label(primaryattributes_LF,text = 'Constitution').grid(row=3,column=0)      
+        primaryattributes_CON_BTN = Button(primaryattributes_LF,width = 10,textvariable = self.primaryattributes_CON_BTN_VAR,command = self.sub_button_CON).grid(row=3,column=1)
+        primaryattributes_CON_LBL = Label(primaryattributes_LF,width = 4,textvariable = self.primaryattributes_CON_LBL_VAR).grid(row=3,column=2)
+        primaryattributes_INT_LBL = Label(primaryattributes_LF,text = 'Intelligence').grid(row=4,column=0)
+        primaryattributes_INT_BTN = Button(primaryattributes_LF,width = 10,textvariable = self.primaryattributes_INT_BTN_VAR,command = self.sub_button_INT).grid(row=4,column=1)
+        primaryattributes_INT_LBL = Label(primaryattributes_LF,width = 4,textvariable = self.primaryattributes_INT_LBL_VAR).grid(row=4,column=2)
+        primaryattributes_WIS_LBL = Label(primaryattributes_LF,text = 'Wisdom').grid(row=5,column=0)
+        primaryattributes_WIS_BTN = Button(primaryattributes_LF,width = 10,textvariable = self.primaryattributes_WIS_BTN_VAR,command = self.sub_button_WIS).grid(row=5,column=1)
+        primaryattributes_WIS_LBL = Label(primaryattributes_LF,width = 4,textvariable = self.primaryattributes_WIS_LBL_VAR).grid(row=5,column=2)
+        primaryattributes_CHR_LBL = Label(primaryattributes_LF,text = 'Charisma').grid(row=6,column=0)
+        primaryattributes_CHR_BTN = Button(primaryattributes_LF,width = 10,textvariable = self.primaryattributes_CHR_BTN_VAR,command = self.sub_button_CHR).grid(row=6,column=1)
+        primaryattributes_CHR_LBL = Label(primaryattributes_LF,width = 4,textvariable = self.primaryattributes_CHR_LBL_VAR).grid(row=6,column=2)
+        primaryattributes_LF.place(x=50,y=250)##was w3
+        self.internal_button_primary_Resetvalues()
+        primaryattributes_setup_LF.place(x=0,y=0)
+
+
+
+        finalizechar_setup_LF = LabelFrame(self.This_win,text = 'primary\nattributes')
+        finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'create character',command = self.sub_button_FIN).grid(row=0,column=0)
+        finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'reset character',command = self.sub_button_CLR).grid(row=1,column=0)
+        finalizechar_setup_LF.place(x=200,y=0)
+        #print('x',self.primaryattributes_setup_DRL_LBX)
         ## post widget code
         self.This_win.after(1500,self.Alt_loop)
         self.This_win.mainloop() 
         
-
-    def Alt_loop(self):
+        
+    def Alt_loop(self):##runs every 1.5 seconds
         ##additional event loop code here
-
+        self.internal_calcrollmod_primary_LBL()
         ##end
         self.This_win.after(1500,self.Alt_loop)
 
+    ###############
+    ##button subs
+    def sub_button_rollprimary(self):
+        x = self.internal_rollprimary()
+        print(x)
+        self.internal_refresh_DRL_listbox(x)
+    def sub_button_resetvalues(self):
+        self.internal_clear_DRL_listbox()
+        self.internal_button_primary_Resetvalues()
+    #primary attributes
+    def sub_button_STR(self):
+        x = self.internal_get_DRL_currselection_listbox()
+        if x != False:
+            self.primaryattributes_STR_BTN_VAR.set('set as| '+str(x))
+        else:
+            messagebox.showwarning('ERROR!','please select a value!')
+    def sub_button_DEX(self):
+        x = self.internal_get_DRL_currselection_listbox()
+        if x != False:
+            self.primaryattributes_DEX_BTN_VAR.set('set as| '+str(x))
+        else:
+            messagebox.showwarning('ERROR!','please select a value!')
+    def sub_button_CON(self):
+        x = self.internal_get_DRL_currselection_listbox()
+        if x != False:
+            self.primaryattributes_CON_BTN_VAR.set('set as| '+str(x))
+        else:
+            messagebox.showwarning('ERROR!','please select a value!')
+    def sub_button_INT(self):
+        x = self.internal_get_DRL_currselection_listbox()
+        if x != False:
+            self.primaryattributes_INT_BTN_VAR.set('set as| '+str(x))
+        else:
+            messagebox.showwarning('ERROR!','please select a value!')
+    def sub_button_WIS(self):
+        x = self.internal_get_DRL_currselection_listbox()
+        if x != False:
+            self.primaryattributes_WIS_BTN_VAR.set('set as| '+str(x))
+        else:
+            messagebox.showwarning('ERROR!','please select a value!')
+    def sub_button_CHR(self):
+        x = self.internal_get_DRL_currselection_listbox()
+        if x != False:
+            self.primaryattributes_CHR_BTN_VAR.set('set as| '+str(x))
+        else:
+            messagebox.showwarning('ERROR!','please select a value!')
+
+    def sub_button_FIN(self):
+        pass
+    def sub_button_CLR(self):##reset all values
+        if messagebox.askokcancel('Are You Sure?','reset all values to default\nAre you sure'):
+            self.This_win.destroy()
+            createcharwin()
+    ##get
+    def get_primaryattributes_BTN(self):##get button content
+        return[
+            self.primaryattributes_STR_BTN_VAR.get(),
+            self.primaryattributes_DEX_BTN_VAR.get(),
+            self.primaryattributes_CON_BTN_VAR.get(),
+            self.primaryattributes_INT_BTN_VAR.get(),
+            self.primaryattributes_WIS_BTN_VAR.get(),
+            self.primaryattributes_CHR_BTN_VAR.get()
+            ]
+    ##set
+    def set_primaryattributes_LBL(self,data):##set rollmod label
+        self.primaryattributes_STR_LBL_VAR.set(data[0])
+        self.primaryattributes_DEX_LBL_VAR.set(data[1])
+        self.primaryattributes_CON_LBL_VAR.set(data[2])
+        self.primaryattributes_INT_LBL_VAR.set(data[3])
+        self.primaryattributes_WIS_LBL_VAR.set(data[4])
+        self.primaryattributes_CHR_LBL_VAR.set(data[5])
+    ##internal
+    def internal_calcrollmod_primary_LBL(self):
+        rollmod = []
+        Bcontents = self.get_primaryattributes_BTN()##button text
+        for x in range(len(Bcontents)):
+            if Bcontents[x] == 'Set Value!':
+                #Bcontents[x] = Bcontents[x].strip('Set Value!')
+                Bcontents[x] = 100
+            else:
+                Bcontents[x] = int(Bcontents[x].strip('set as| '))
+
+            if Bcontents[x] == 1:##max score = 18
+                rollmod.append('-5')
+            elif Bcontents[x] <= 3:
+                rollmod.append('-4')
+            elif Bcontents[x] <= 5:
+                rollmod.append('-3')
+            elif Bcontents[x] <= 7:
+                rollmod.append('-2')
+            elif Bcontents[x] <= 9:
+                rollmod.append('-1')
+            elif Bcontents[x] <= 11:
+                rollmod.append('0')
+            elif Bcontents[x] <= 13:
+                rollmod.append('+1')
+            elif Bcontents[x] <= 15:
+                rollmod.append('+2')
+            elif Bcontents[x] <= 17:
+                rollmod.append('+3')
+            elif Bcontents[x] <= 19:
+                rollmod.append('+4')
+            else:
+                rollmod.append('NA')
+        self.set_primaryattributes_LBL(rollmod)
+            
+            
+                
+        
+    def internal_button_primary_Resetvalues(self):
+        self.primaryattributes_STR_BTN_VAR.set('Set Value!')
+        self.primaryattributes_DEX_BTN_VAR.set('Set Value!')
+        self.primaryattributes_CON_BTN_VAR.set('Set Value!')
+        self.primaryattributes_INT_BTN_VAR.set('Set Value!')
+        self.primaryattributes_WIS_BTN_VAR.set('Set Value!')
+        self.primaryattributes_CHR_BTN_VAR.set('Set Value!')
+        
+    def internal_rollprimary(self):##rolls dice for primary attributes then returns them
+        #4d6-lowest
+        rolls = []
+        for Pattr in range(0,6):
+            temp = []
+            tint = 0
+            for droll in range(0,4):
+                #print(random.randint(1,6))
+                temp.append(random.randint(1,6))
+            print(temp)
+            temp.sort()
+            #temp.remove(temp[0])
+            for x in range(1,len(temp)-1):
+                tint+=temp[x]
+            rolls.append(tint)
+        return rolls
+                
+            
+    def internal_get_DRL_currselection_listbox(self):
+        try:
+            return self.primaryattributes_setup_DRL_LBX.get(self.primaryattributes_setup_DRL_LBX.curselection())
+
+        except:
+            return False
+            
+    def internal_refresh_DRL_listbox(self,dat):##for diceroll listbox
+        self.internal_clear_DRL_listbox()
+        self.internal_addlist_DRL_listbox(dat)
+        
+    def internal_clear_DRL_listbox(self):#clear roll box
+        self.primaryattributes_setup_DRL_LBX.delete(0,self.primaryattributes_setup_DRL_LBX.size())
+        
+    def internal_additem_DRL_listbox(self,Litem):#add item to listbox
+        self.primaryattributes_setup_DRL_LBX.insert(END,Litem)
+        
+    def internal_addlist_DRL_listbox(self,Listitems):#add list of items to listbox
+        for x in Listitems:
+            self.internal_additem_DRL_listbox(x)
 class optwin:
     def __init__(self):
         self.This_win = Toplevel()
@@ -1173,6 +1397,9 @@ class optwin:
         self.This_win.geometry('600x200')
         ##widgets
         
+        load_LF = LabelFrame(self.This_win)
+        load_RCL_BTN = Checkbutton(load_LF,text = 'resume last loaded character sheet').grid(row=0,column=0) 
+        load_LF.place(x=5,y=5)
         ## post widget code
         self.This_win.after(1500,self.Alt_loop)
         self.This_win.mainloop() 
@@ -1183,7 +1410,7 @@ class optwin:
 
         ##end
         self.This_win.after(1500,self.Alt_loop)
-        
+
 class fileIO:##unused atm
     Dat_Main_Path = '' 
             
