@@ -554,13 +554,33 @@ class main_win:
     
 ##    def internal_update_Charsheet(self,data):
 ##        self.set_ALL(data)
+    
     def internal_prepsave(self,GotData):##handles conversion for data to save in megafile
         ##doublecheck this vs
-        Fn = ['charbase','primary','rollmod','perception','inspiration','profbonus','inspiration','savingthrows','secondary','hpmisc','dicesaves','attackspells','attackspells_text','langskills','equipmain','pinfo_base','pinfo_ideals','pinfo_bonds','pinfo_flaws','pinfo_addit']
+        Fn = ['charbase',
+              'primary',
+              'rollmod',
+              'perception',
+              'inspiration',
+              'profbonus',
+              'savingthrows',
+              'secondary',
+              'hpmisc',
+              'dicesavemisc',
+              'attackspells',
+              'attackspells_text',
+              'langskills',
+              'equipmain',
+              'pinfo_base',
+              'pinfo_ideals',
+              'pinfo_bonds',
+              'pinfo_flaws',
+              'pinfo_addditfeatures']
         print(len(Fn))
-        print(Fn)
+        print(Fn,'\n')
         dat2rt = ['']*20
         temp = []
+        
         ##1
         print(GotData[0])
         for x in range(len(GotData[0])):
@@ -600,48 +620,48 @@ class main_win:
         #8 a,b
         for x in range(len(GotData[7][1])):##convert 8b to str from int
             GotData[7][1][x] = str(GotData[7][1][x])
-        dat2rt[8] = [Fn[8],[self.array2csv(GotData[7][0]),self.array2csv(GotData[7][1])]]
+        dat2rt[7] = [Fn[7],[self.array2csv(GotData[7][0]),self.array2csv(GotData[7][1])]]
         
         #9
-        dat2rt[9] = [Fn[9],[self.array2csv(GotData[8])]]
+        dat2rt[8] = [Fn[8],[self.array2csv(GotData[8])]]
         
         #10
         for x in range(len(GotData[9])):
             GotData[9][x] = str(GotData[9][x])
-        dat2rt[10] = [Fn[10],[self.array2csv(GotData[9])]]
+        dat2rt[9] = [Fn[9],[self.array2csv(GotData[9])]]
         
         #11
-        print(GotData[11])
-        dat2rt[11] = [Fn[11], [self.array2csv(GotData[10][0][0]),self.array2csv(GotData[10][0][1]),self.array2csv(GotData[10][0][2])] ]
+        print(GotData[10])
+        dat2rt[10] = [Fn[10], [self.array2csv(GotData[10][0][0]),self.array2csv(GotData[10][0][1]),self.array2csv(GotData[10][0][2])] ]
         
         #12
-##        for x in range(len(GotData[7][2])-1):
-##            if GotData[7][2][x] == '\\'
-        dat2rt[12] = [Fn[12],GotData[10][1].split('\n')]
+##              for x in range(len(GotData[7][2])-1):
+##                  if GotData[7][2][x] == '\\'
+        dat2rt[11] = [Fn[11],GotData[10][1].split('\n')]
         
         #13
-        dat2rt[13] = [Fn[13],GotData[11].split('\n')]
+        dat2rt[12] = [Fn[12],GotData[11].split('\n')]
         
         #14
-        dat2rt[14] = [Fn[14],GotData[12].split('\n')]
+        dat2rt[13] = [Fn[13],GotData[12].split('\n')]
         
         #15
-        dat2rt[15] = [Fn[15],GotData[13][0].split('\n')]
+        dat2rt[14] = [Fn[14],GotData[13][0].split('\n')]
         
         #16
         print('\n\n')
         print(Fn[16],'\n')
         print(GotData[13][1].split('\n'))
-        dat2rt[16] = [Fn[16],GotData[13][1].split('\n')]
+        dat2rt[15] = [Fn[15],GotData[13][1].split('\n')]
         
         #17
-        dat2rt[17] = [Fn[17],GotData[13][2].split('\n')]
+        dat2rt[16] = [Fn[16],GotData[13][2].split('\n')]
         
         #18
-        dat2rt[18] = [Fn[18],GotData[13][3].split('\n')]
+        dat2rt[17] = [Fn[17],GotData[13][3].split('\n')]
 
         #19
-        dat2rt[19] = [Fn[19],GotData[13][4].split('\n')]
+        dat2rt[18] = [Fn[18],GotData[13][4].split('\n')]
         
         return dat2rt#GotData#dat2rt
         
