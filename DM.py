@@ -1,28 +1,30 @@
 ##d&d char she
-import os,sys,random
-from tkinter import *
+import os,sys,random##packages
+from tkinter import *#tk
 from tkinter import messagebox,filedialog
+import MEGA
 
 ##tkclass##
-class basewin:
-    winsizexy = '800x600'
-    wintitle = 'base title'
-    def __init__(self):
-        pass
-
-class basemaster(basewin):
-    def __init__(self):
-        This_win = Tk()
-        This_win.title(self.wintitle)
-        This_win.geometry(self.winsizexy)
-        This_win.mainloop()
-
-class basetoplevel(basewin):
-    def __init__(self):
-        This_win = Toplevel()
-        This_win.title(self.wintitle)
-        This_win.geometry(self.winsizexy)
-        This_win.mainloop()
+#inheritance testing
+##class basewin:
+##    winsizexy = '800x600'
+##    wintitle = 'base title'
+##    def __init__(self):
+##        pass
+##
+##class basemaster(basewin):
+##    def __init__(self):
+##        This_win = Tk()
+##        This_win.title(self.wintitle)
+##        This_win.geometry(self.winsizexy)
+##        This_win.mainloop()
+##
+##class basetoplevel(basewin):
+##    def __init__(self):
+##        This_win = Toplevel()
+##        This_win.title(self.wintitle)
+##        This_win.geometry(self.winsizexy)
+##        This_win.mainloop()
 
 class main_win:
     ##class related variables
@@ -30,7 +32,7 @@ class main_win:
     ##TK start
     This_win = Tk()
     ##variables
-    d='1'
+    d='1'##testing of boxes
 
     ##charbase_name
     charbase_name_CNM_BOX_VAR = StringVar()
@@ -462,7 +464,7 @@ class main_win:
     def array2csv(self,array):##from beelib
         temp = ''
         for fl in array:
-            print(fl)
+            #print(fl)
             temp += str(fl)+','
         temp+=','
         return temp
@@ -528,136 +530,7 @@ class main_win:
                 f.close()
             except:
                 print('error/file already closed!')
-                
-    def loadfile(self):
-        pass
-    def savefile(self):
-        pass
-    def internal_write_ADV(self,fname,dat):
-        pass
-    def internal_read_ADV(self,fname):
-        pass
-    def internal_resolve_ADV(self,FN):
-        if FN[-4:].upper() == '.ADV':
-            pass
-        else:
-            FN += '.ADV'
-        return FN
-    def internal_save_current(self):
-        pass #self.QS_path_currfile
-    def internal_loadfile(self,fname):
-        file_data = []
-        fname = self.internal_resolve_ADV(fname)
-        print(fname)
-        dat = self.readfile(fname)
-        ##special cases for unpacking
-        #dat 6
-        dat[6] = self.csv2array(dat[6])
-        for x in range(len(dat[6])):
-            dat[6][x] = self.csv2array(self.dot2csv(dat[6][x]))
-        print(dat[6])
-
-        #dat 7
-        dat[7] =  self.csv2array(dat[7])
-        for x in range(len(dat[7])):
-            dat[7][x] = self.csv2array(self.dot2csv(dat[7][x]))
-
-        #dat 10
-        dat[10] =  self.csv2array(dat[10])
-        for x in range(len(dat[10])):
-            dat[10][x] = self.csv2array(self.dot2csv(dat[10][x]))
-            
-        return_data =[self.csv2array(dat[0]),
-         self.csv2array(dat[1]),
-         self.csv2array(dat[2]),
-         dat[3].strip('\n'),dat[4].strip('\n'),dat[5].strip('\n'),
-         dat[6],
-         [dat[7]],
-         csv2array(dat[8]),
-         csv2array(dat[9]),
-         [dat[10],
-          dat[11]], dat[12], dat[13],
-         ['', '', '', '', '']]
-        return return_data
-        
-    def internal_savefile(self,dat):##prepares file data for saving
-        file_data = []##mega instead?
-        
-        for x in dat[0]:
-            file_data.append(str(x))
-        for x in dat[1]:
-            file_data.append(str(x))
-        for x in dat[2]:
-            file_data.append(str(x))
-        file_data.append(str(dat[3]))
-        file_data.append(str(dat[4]))
-        file_data.append(str(dat[5]))
-        
-        for x in dat[6]:
-            file_data.append(str(x[0]))
-            file_data.append(str(x[1]))
-        for x in range(len(dat[7])):
-            for y in range(len(dat[7][x])):
-                file_data.append(str(dat[7][x][y]))
-        for x in dat[8]:
-            file_data.append(str(x))
-        for x in dat[9]:
-            file_data.append(str(x))
-        
-
-        for x in range(len(dat[10][0])):
-            for y in range(len(dat[10][0][x])):
-                file_data.append(str(dat[10][0][x][y]))
-        
-        file_data.append(str(dat[10][1]))
-        file_data.append(str(dat[11]))
-        file_data.append(str(dat[12]))
-        for x in dat[13]:
-            file_data.append(str(x))
-
-        return file_data
-    def internal_savefile2(self,dat):##prepares file data for saving
-        file_data = []
-        temp = []
-        file_data.append(self.array2csv(dat[0]))
-        file_data.append(self.array2csv(dat[1]))
-        file_data.append(self.array2csv(dat[2]))
-        file_data.append(dat[3])
-        file_data.append(dat[4])
-        file_data.append(dat[5])
-        
-        for x in dat[6]:
-            temp.append(self.csv2dot(self.array2csv(x)))
-        file_data.append(self.array2csv(temp))
-        temp =[]
-        
-        for x in dat[7]:
-            temp.append(self.csv2dot(self.array2csv(x)))
-        file_data.append(self.array2csv(temp))
-        temp =[]
-        
-        file_data.append(self.array2csv(dat[8]))
-        file_data.append(self.array2csv(dat[9]))
-
-        for x in dat[10][0]:
-            temp.append(self.csv2dot(self.array2csv(x)))
-        file_data.append(self.array2csv(temp))
-        temp =[]
-        
-        file_data.append(dat[10][1])
-        file_data.append(dat[11])
-        file_data.append(dat[12])
-        print('~~~~~~~~')
-        print(dat[13])
-        print('####')
-        print(self.array2csv(dat[13]))
-        print('~~~~~~~~')
-        #file_data.append(self.array2csv(dat[13]))
-        for x in dat[13]:
-            file_data.append(x)
-
-        return file_data
-                         
+                                   
         
     def internal_savefileaskchecker(self):##returns name and true if file exists
         FPath = filedialog.asksaveasfilename(filetypes=(("D&D character sheet", "*.ADV"),("All Files", "*.*") ))##adv extention is forced onto ##EDIT took out this defaultextension=".ADV", 
@@ -669,31 +542,137 @@ class main_win:
         print(os.path.isfile(FPath))
         return[FPath,EXISTS_FLAG]
     
+    def internal_loadfileaskchecker(self):##returns name and true if file exists
+        FPath = filedialog.askopenfilename(defaultextension=".MEGA", filetypes=(("D&D character sheet", "*.MEGA"),("All Files", "*.*") ))
+        EXISTS_FLAG = False
+        if os.path.isfile(FPath):# or os.path.isfile(FPath.strip('.ADV')):##hack to get around
+            EXISTS_FLAG = True
+        else:
+            EXISTS_FLAG = False
+        print(os.path.isfile(FPath))
+        return[FPath,EXISTS_FLAG]
+    
 ##    def internal_update_Charsheet(self,data):
 ##        self.set_ALL(data)
+    def internal_prepsave(self,GotData):##handles conversion for data to save in megafile
+        ##doublecheck this vs
+        Fn = ['charbase','primary','rollmod','perception','inspiration','profbonus','inspiration','savingthrows','secondary','hpmisc','dicesaves','attackspells','attackspells_text','langskills','equipmain','pinfo_base','pinfo_ideals','pinfo_bonds','pinfo_flaws','pinfo_addit']
+        print(len(Fn))
+        print(Fn)
+        dat2rt = ['']*20
+        temp = []
+        ##1
+        print(GotData[0])
+        for x in range(len(GotData[0])):
+            GotData[0][x] = GotData[0][x].strip('\n')
+        dat2rt[0] = [Fn[0],[self.array2csv(GotData[0])]]
+        print(dat2rt[0])
+        ##2
+        print(GotData[1])
+        dat2rt[1] = [Fn[1],[self.array2csv(GotData[1])]]
+        print(dat2rt[1])
         
+        #3
+        print(GotData[2])
+        dat2rt[2] = [Fn[2],[self.array2csv(GotData[2])]]
+        
+##        #4,5,6
+##        #temp = [GotData[3],GotData[5],GotData[6]]
+##        dat2rt[3] = [Fn[3],[self.array2csv(temp)]]
+##        temp = []
+
+        #4
+        print(GotData[3])
+        dat2rt[3] = [Fn[3],[self.array2csv([GotData[3]])]]
+
+        #5
+        dat2rt[4] = [Fn[4],[self.array2csv([GotData[4]])]]
+
+        #6
+        dat2rt[5] = [Fn[5],[self.array2csv([GotData[5]])]]
+        
+        #7
+        for x in range(len(GotData[6])):#checkbox value is always 1 or 0 so can just apppend as string
+            temp.append(str(GotData[6][x][0])+str(GotData[6][x][1]))
+        dat2rt[6] = [Fn[6],[self.array2csv(temp)]]
+        temp = []
+        
+        #8 a,b
+        for x in range(len(GotData[7][1])):##convert 8b to str from int
+            GotData[7][1][x] = str(GotData[7][1][x])
+        dat2rt[8] = [Fn[8],[self.array2csv(GotData[7][0]),self.array2csv(GotData[7][1])]]
+        
+        #9
+        dat2rt[9] = [Fn[9],[self.array2csv(GotData[8])]]
+        
+        #10
+        for x in range(len(GotData[9])):
+            GotData[9][x] = str(GotData[9][x])
+        dat2rt[10] = [Fn[10],[self.array2csv(GotData[9])]]
+        
+        #11
+        print(GotData[11])
+        dat2rt[11] = [Fn[11], [self.array2csv(GotData[10][0][0]),self.array2csv(GotData[10][0][1]),self.array2csv(GotData[10][0][2])] ]
+        
+        #12
+##        for x in range(len(GotData[7][2])-1):
+##            if GotData[7][2][x] == '\\'
+        dat2rt[12] = [Fn[12],GotData[10][1].split('\n')]
+        
+        #13
+        dat2rt[13] = [Fn[13],GotData[11].split('\n')]
+        
+        #14
+        dat2rt[14] = [Fn[14],GotData[12].split('\n')]
+        
+        #15
+        dat2rt[15] = [Fn[15],GotData[13][0].split('\n')]
+        
+        #16
+        print('\n\n')
+        print(Fn[16],'\n')
+        print(GotData[13][1].split('\n'))
+        dat2rt[16] = [Fn[16],GotData[13][1].split('\n')]
+        
+        #17
+        dat2rt[17] = [Fn[17],GotData[13][2].split('\n')]
+        
+        #18
+        dat2rt[18] = [Fn[18],GotData[13][3].split('\n')]
+
+        #19
+        dat2rt[19] = [Fn[19],GotData[13][4].split('\n')]
+        
+        return dat2rt#GotData#dat2rt
+        
+            
+    def internal_prepload(self,GotData):
+        pass
     def sub_button_newfile(self):##Testcharacter1
         Fpath = self.internal_savefileaskchecker()
         Fpath[0] = self.internal_resolve_ADV(Fpath[0])
-        print(Fpath)
-        dat = [['New Character', 'New Player', 'None', '0', 'None', 'None', '0XP'],
-               ['0', '0', '0', '0', '0', '0'],
-               ['-+0', '-+0', '-+0', '-+0', '-+0', '-+0'],
-               '-+0', '0', '-+0',
-               [(0, '-+0'), (0, '-+0'), (0, '-+0'), (0, '-+0'), (0, '-+0'), (0, '-+0')],
-               [['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], ['0', '-+0', '0', '0', '0', '0'],
-               ['-+0', '0', 0, 0, 0, 0, 0, 0],
-               [[['name', 'name', 'name'],
-                 ['-+0', '-+0', '-+0'],
-                 ['None', 'None', 'None']],
-                'enter weapon notes here'],
-               'Enter proficiences and languages here', 'enter inventory information here',
-               ['Enter Personality Traits here.',
-                'Enter character ideals here.',
-                'Enter\ncharacter bonds here.',
-                'Enter Personality flaws here.',
-                'enter additional \nfeatures,traits and other\ninformation such as \nbackground traits here.']]
+        print(Fpath)                                                                                            #list address
+        dat = [['New Character', 'New Player', 'None', '0', 'None', 'None', '0XP'],#1                               0
+               ['0', '0', '0', '0', '0', '0'],#2                                                                    1
+               ['-+0', '-+0', '-+0', '-+0', '-+0', '-+0'],#3                                                        2
+               '-+0', '0', '-+0',#4,5,6                                                                             3,4,5
+               [(0, '-+0'), (0, '-+0'), (0, '-+0'), (0, '-+0'), (0, '-+0'), (0, '-+0')],#7                          6
+               [['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],#8a      7[0]
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],#8b                                         7[1]
+               ['0', '-+0', '0', '0', '0', '0'],#9                                                                  8
+               ['-+0', '0', 0, 0, 0, 0, 0, 0],#10                                                                   9
+               [[['name', 'name', 'name'],#11a                                                                      10[0][0]
+                 ['-+0', '-+0', '-+0'],#11b                                                                         10[0][1]
+                 ['None', 'None', 'None']],#11c                                                                     10[0][2]
+                'enter weapon notes here'],#12 /11[1]                                                               10[1]
+               'Enter proficiences and languages here',#13                                                          11
+               'enter inventory information here',#14                                                               12
+               ['Enter Personality Traits here.',#15                                                                13[0]
+                'Enter character ideals here.',#16                                                                  13[1]
+                'Enter\ncharacter bonds here.',#17                                                                  13[2]
+                'Enter Personality flaws here.',#18                                                                 13[3]
+                'enter additional \nfeatures,traits and other\ninformation such as \nbackground traits here.']]#19  13[4]
+        
         if messagebox.askokcancel(title = 'confirm save',message = 'save the file: '+str(Fpath[0])+'\nare you sure?'):
             if Fpath[1] == True:
                 if messagebox.askokcancel(title = 'confirm',message = 'this will OVERWRITE the selected file with data\nare you sure?'):
@@ -704,10 +683,19 @@ class main_win:
             else:
                 print(self.internal_savefile2(dat))
                 self.writefile(str(Fpath[0]),self.internal_savefile2(dat))
-        dat
+        #dat
+##    def sub_button_loadfile(self):##load file menubutton
+##        FPath = filedialog.askopenfilename(defaultextension=".ADV", filetypes=(("D&D character sheet", "*.ADV"),("All Files", "*.*") ))
+##        #dat = self.readfile(FPath)
+##        self.QS_path_currfile = FPath##sets var for quicksaving
     def sub_button_loadfile(self):##load file menubutton
-        FPath = filedialog.askopenfilename(defaultextension=".ADV", filetypes=(("D&D character sheet", "*.ADV"),("All Files", "*.*") ))
-        dat = self.readfile(FPath)
+        FPath = self.internal_loadfileaskchecker()
+        if FPath[1] == True:
+            FPath[0] = self.QS_path_currfile
+        else:
+            pass
+        
+        #dat = self.readfile(FPath)
         self.QS_path_currfile = FPath##sets var for quicksaving
 
     def sub_button_savefile(self):##save file menubutton
@@ -723,6 +711,8 @@ class main_win:
         else:
             pass
         #self.internal_savefile(FP[0])
+        
+    ##get
     def get_charbase_name(self):
         return[
             self.charbase_name_CNM_BOX_VAR.get(),
@@ -1153,7 +1143,7 @@ class dicewin:
     def set_rollerlabel(self,data):
         self.Diceroller_RDR_LBL_VAR.set('you rolled a |'+str(data))
         
-class createcharwin(main_win):
+class createcharwin:#(main_win):##better to create new window form,from scratch
     ##setup
     #primaryattributes_setup_DRL_LBX = None
 
@@ -1179,10 +1169,10 @@ class createcharwin(main_win):
         self.This_win.title('Character Creation Setup')
         self.This_win.geometry('640x720')
         ##widgets
-        primaryattributes_setup_LF = LabelFrame(self.This_win,text= 'primary atributes dice roller')
+        primaryattributes_setup_LF = LabelFrame(self.This_win,text= 'primary attributes dice roller')
         primaryattributes_setup_RTD_BTN = Button(primaryattributes_setup_LF,text = 'randomize values',command = self.sub_button_rollprimary).grid(row=0,column=0)
         primaryattributes_setup_RSV_BTN = Button(primaryattributes_setup_LF,text = 'Clear values',command = self.sub_button_resetvalues).grid(row=0,column=1)
-        self.primaryattributes_setup_DRL_LBX = Listbox(primaryattributes_setup_LF)
+        self.primaryattributes_setup_DRL_LBX = Listbox(primaryattributes_setup_LF,height = 6,width = 5)
         self.primaryattributes_setup_DRL_LBX.grid(row=1,column=0)
         primaryattributes_setup_LF.place(x=0,y=0)
         
@@ -1219,7 +1209,7 @@ class createcharwin(main_win):
 
 
 
-        finalizechar_setup_LF = LabelFrame(self.This_win,text = 'primary\nattributes')
+        finalizechar_setup_LF = LabelFrame(self.This_win,text = 'options')
         finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'create character',command = self.sub_button_FIN).grid(row=0,column=0)
         finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'reset character',command = self.sub_button_CLR).grid(row=1,column=0)
         finalizechar_setup_LF.place(x=200,y=0)
@@ -1390,7 +1380,14 @@ class createcharwin(main_win):
     def internal_addlist_DRL_listbox(self,Listitems):#add list of items to listbox
         for x in Listitems:
             self.internal_additem_DRL_listbox(x)
+            
 class optwin:
+    #CHANGED= True
+    OPTIONSNAME = 'OPTIONS.CFF'
+    optionssnapshot = []
+    optionsmain=[]
+
+    load_RCL_BTN_VAR = IntVar()
     def __init__(self):
         self.This_win = Toplevel()
         self.This_win.title('Options Menu')
@@ -1398,44 +1395,74 @@ class optwin:
         ##widgets
         
         load_LF = LabelFrame(self.This_win)
-        load_RCL_BTN = Checkbutton(load_LF,text = 'resume last loaded character sheet').grid(row=0,column=0) 
+        load_RCL_BTN = Checkbutton(load_LF,text = 'resume last loaded character sheet',variable = self.load_RCL_BTN_VAR).grid(row=0,column=0) 
         load_LF.place(x=5,y=5)
+
+        main_SAV_BTN = Button(Self.This_win,text = 'save changes',command = self.savedata).place(x=50,y=50)
         ## post widget code
         self.This_win.after(1500,self.Alt_loop)
-        self.This_win.mainloop() 
+        self.This_win.mainloop()
         
+    def __del__(self):##checks for changes to the options when closed so user can save if they want to if changes not saved
+        self.Alt_loop()##forces update check
+        for x in range(len(self.optionsmain)):
+            if self.optionsmain[x] == self.optionssnapshot[x]:
+                if askokcancel('unsaved changes','some changes are unsaved\ndo you want to save?'):
+                    datamain.replacedata([OPTIONSNAME,self.savedata])
 
     def Alt_loop(self):
         ##additional event loop code here
 
         ##end
         self.This_win.after(1500,self.Alt_loop)
+    def get_load(self):
+        return load_RCL_BTN_VAR.get()
+    def get_ALL(self):
+        return[
+            self.get_load()
+            ]
+    def savedata(self):
+        retdata = []
+        temp = []
 
+        ##loadoptions
+        temp.append(str(load_RCL_BTN_VAR.get()))
+        retdata.append(array2csv(temp))
+        temp=[]
+        return retdata
+        
+
+###
+def genbasemega():
+    base_config  = ['OPTIONS.CFF',['testing','entry']]
+    datamain.adddata(base_config)
+    datamain.save()
 class fileIO:##unused atm
     Dat_Main_Path = '' 
-            
-#datastructs#
-##heroclass##
-class entity:## root class for any interaction classes
-    def __init__(self):
-        pass
-class enemytype(entity):##enemies
-    def __init__(self):
-        pass
-class characterhero(entity):
-    def __init__(self):
-        pass
-class shopkeeper(entity):
-    def __init__(self):
-        pass
-##itemclass##
-class shop:
-    def __init__(self):
-        pass
+
+##testing for expansion later            
+###datastructs#
+####heroclass##
+##class entity:## root class for any interaction classes
+##    def __init__(self):
+##        pass
+##class enemytype(entity):##enemies
+##    def __init__(self):
+##        pass
+##class characterhero(entity):
+##    def __init__(self):
+##        pass
+##class shopkeeper(entity):
+##    def __init__(self):
+##        pass
+####itemclass##
+##class shop:
+##    def __init__(self):
+##        pass
 ##class person:
 ##    def __init__(self):
 ##        pass
     
-    
+datamain = MEGA.mega2('DATA')    
 m = main_win()
 
