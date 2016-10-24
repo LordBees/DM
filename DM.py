@@ -32,6 +32,7 @@ class main_win:
     ##TK start
     This_win = Tk()
     ##variables
+    Base_ADV = None
     d='1'##testing of boxes
 
     ##charbase_name
@@ -533,7 +534,7 @@ class main_win:
                                    
         
     def internal_savefileaskchecker(self):##returns name and true if file exists
-        FPath = filedialog.asksaveasfilename(filetypes=(("D&D character sheet", "*.ADV"),("All Files", "*.*") ))##adv extention is forced onto ##EDIT took out this defaultextension=".ADV", 
+        FPath = filedialog.asksaveasfilename(filetypes=(("D&D character sheet", "*.MEGA"),("All Files", "*.*") ))##adv extention is forced onto ##EDIT took out this defaultextension=".ADV", 
         EXISTS_FLAG = False
         if os.path.isfile(FPath):# or os.path.isfile(FPath.strip('.ADV')):##hack to get around
             EXISTS_FLAG = True
@@ -670,7 +671,7 @@ class main_win:
         pass
     def sub_button_newfile(self):##Testcharacter1
         Fpath = self.internal_savefileaskchecker()
-        Fpath[0] = self.internal_resolve_ADV(Fpath[0])
+        #Fpath[0] = self.internal_resolve_ADV(Fpath[0])
         print(Fpath)                                                                                            #list address
         dat = [['New Character', 'New Player', 'None', '0', 'None', 'None', '0XP'],#1                               0
                ['0', '0', '0', '0', '0', '0'],#2                                                                    1
@@ -693,16 +694,34 @@ class main_win:
                 'Enter Personality flaws here.',#18                                                                 13[3]
                 'enter additional \nfeatures,traits and other\ninformation such as \nbackground traits here.']]#19  13[4]
         
-        if messagebox.askokcancel(title = 'confirm save',message = 'save the file: '+str(Fpath[0])+'\nare you sure?'):
+        if messagebox.askokcancel(title = 'confirm save',message = 'save the file: '+str(Fpath[0])+'\nare you sure?'):##could use flag
             if Fpath[1] == True:
                 if messagebox.askokcancel(title = 'confirm',message = 'this will OVERWRITE the selected file with data\nare you sure?'):
                     #self.writefile(Fpath,self.array2csv(self.internal_savefile(dat)),ARRAY = False)##temp
-                    self.writefile(str(Fpath[1]),self.internal_savefile2(dat))
+                    #self.writefile(str(Fpath[1]),self.internal_savefile2(dat))
+                    dat = self.internal_prepsave(dat)
+                    self.base_ADV = MEGA.mega2(Fpath[0])
+                    for x in dat:
+                        print(x)
+                    for x in range(len(dat)-1):
+                        print(dat[x],end='')
+                        self.base_ADV.adddata(dat[x])
+                        print('Done')
+                    self.base_ADV.save()
+                        
                 else:
                     pass
             else:
-                print(self.internal_savefile2(dat))
-                self.writefile(str(Fpath[0]),self.internal_savefile2(dat))
+                dat = self.internal_prepsave(dat)
+                self.base_ADV = MEGA.mega2(Fpath[0])
+                for x in range(len(dat)-1):
+                    print(dat[x],end='')
+                    self.base_ADV.adddata(dat[x])
+                    print('Done')
+                self.base_ADV.save()
+##                print(self.internal_savefile2(dat))
+##                self.writefile(str(Fpath[0]),self.internal_savefile2(dat))
+                
         #dat
 ##    def sub_button_loadfile(self):##load file menubutton
 ##        FPath = filedialog.askopenfilename(defaultextension=".ADV", filetypes=(("D&D character sheet", "*.ADV"),("All Files", "*.*") ))
@@ -720,6 +739,10 @@ class main_win:
 
     def sub_button_savefile(self):##save file menubutton
         FPath = self.QS_path_currfile
+        dat = self.internal_prepsave
+        for x in dat:
+            datamain.replacedata(x)
+        datamain.save()
     def sub_button_savefile_as(self):
         FP = self.internal_savefileaskchecker()
         print(FP)
