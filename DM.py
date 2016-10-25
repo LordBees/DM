@@ -712,7 +712,8 @@ class main_win:
         return dat2rt#GotData#dat2rt
         
             
-    def internal_prepload(self,GotData):
+    def internal_prepload(self,xdat):
+        print('x'+str(xdat))
         Fn = ['charbase',
               'primary',
               'rollmod',
@@ -733,7 +734,132 @@ class main_win:
               'pinfo_flaws',
               'pinfo_addditfeatures']
         ##de csv etc...
+        if xdat[0] == Fn[0]:
+            return self.csv2array(xdat[1][0])
+        elif xdat[0] == Fn[1]:
+            return self.csv2array(xdat[1][0])
+        elif xdat[0] == Fn[2]:
+            return self.csv2array(xdat[1][0])#removed[]
         
+        elif xdat[0] == Fn[3]:
+            return self.csv2array(xdat[1][0])
+        elif xdat[0] == Fn[4]:
+            return self.csv2array(xdat[1][0])
+        elif xdat[0] == Fn[5]:
+            return self.csv2array(xdat[1][0])
+        
+        elif xdat[0] == Fn[6]:
+            xdat[1] = self.csv2array(xdat[1][0])
+            for x in range(len(xdat[1])):
+                xdat[1][x] = [int(xdat[1][x][:1]),xdat[1][x][1:]]##splits into tuples (intcbox,strdat)
+            return xdat[1]
+        
+        elif xdat[0] == Fn[7]:
+            xdat[1][1] = self.csv2array(xdat[1][1])
+            for x in range(len(xdat[1][1])):##reconstruct type
+                xdat[1][1][x] = int(xdat[1][1][x])
+            return [self.csv2array(xdat[1][0]),xdat[1][1]]
+        
+        elif xdat[0] == Fn[8]:
+            return self.csv2array(xdat[1][0])
+        elif xdat[0] == Fn[9]:
+            xdat[1][0] = self.csv2array(xdat[1][0])
+            #print(xdat[1][0])
+            for x in range(2,len(xdat[1][0])):
+                xdat[1][0][x] = int(xdat[1][0][x])##reconstructing ints
+            return xdat[1][0]
+        
+        elif xdat[0] == Fn[10]:
+            for x in range(len(xdat[1])):
+                xdat[1][x]= self.csv2array(xdat[1][x])
+            return xdat[1]
+        
+        elif xdat[0] == Fn[11]:
+            temp = []
+            if len(xdat[1]) == 1:
+                return xdat[1]
+            else:
+                for x in range(len(xdat[1])):
+                    temp.append(xdat[1][x]+'\n')
+                return temp
+            
+        elif xdat[0] == Fn[12]:
+            temp = []
+            if len(xdat[1]) == 1:
+                return xdat[1]
+            else:
+                for x in range(len(xdat[1])):
+                    temp.append(xdat[1][x]+'\n')
+                return temp
+        elif xdat[0] == Fn[13]:
+            temp = []
+            if len(xdat[1]) == 1:
+                return xdat[1]
+            else:
+                for x in range(len(xdat[1])):
+                    temp.append(xdat[1][x]+'\n')
+                return temp
+        elif xdat[0] == Fn[14]:
+            temp = []
+            if len(xdat[1]) == 1:
+                return xdat[1]
+            else:
+                for x in range(len(xdat[1])):
+                    temp.append(xdat[1][x]+'\n')
+                return temp
+        elif xdat[0] == Fn[15]:
+            temp = []
+            if len(xdat[1]) == 1:
+                return xdat[1]
+            else:
+                for x in range(len(xdat[1])):
+                    temp.append(xdat[1][x]+'\n')
+                return temp
+        elif xdat[0] == Fn[16]:
+            temp = []
+            if len(xdat[1]) == 1:
+                return xdat[1]
+            else:
+                for x in range(len(xdat[1])):
+                    temp.append(xdat[1][x]+'\n')
+                return temp
+        elif xdat[0] == Fn[17]:
+            temp = []
+            if len(xdat[1]) == 1:
+                return xdat[1]
+            else:
+                for x in range(len(xdat[1])):
+                    temp.append(xdat[1][x]+'\n')
+                return temp
+        elif xdat[0] == Fn[18]:
+            temp = []
+            if len(xdat[1]) == 1:
+                return xdat[1]
+            else:
+                for x in range(len(xdat[1])):
+                    temp.append(xdat[1][x]+'\n')
+                return temp
+            
+        
+        else:
+            print('unused file in loading')#,xdat[0])
+    def internal_loadRC(self,xdat):
+        temp = []
+        temp.append(xdat[0])
+        temp.append(xdat[1])
+        temp.append(xdat[2])
+        temp.append(xdat[3][0])
+        temp.append(xdat[4][0])
+        temp.append(xdat[5][0])
+        temp.append(xdat[6])
+        temp.append(xdat[7])
+        temp.append(xdat[8])
+        temp.append(xdat[9])
+        temp.append([xdat[10],xdat[11][0]])
+        temp.append(xdat[12])
+        temp.append(xdat[13])
+        temp.append([xdat[14],xdat[15],xdat[16],xdat[17],xdat[18]])
+        return temp
     def sub_button_newfile(self):##Testcharacter1
         Fpath = self.internal_savefileaskchecker()
         #Fpath[0] = self.internal_resolve_ADV(Fpath[0])
@@ -794,27 +920,61 @@ class main_win:
 ##        self.QS_path_currfile = FPath##sets var for quicksaving
     def sub_button_loadfile(self):##load file menubutton
         FPath = self.internal_loadfileaskchecker()
+        print(FPath)
+        postprocess_DAT = []
         if messagebox.askokcancel(title = 'load',message = '\nare you sure?'):
             
             if FPath[1] == True:
                 self.IS_LOADED = True
-                FPath[0] = self.QS_path_currfile
-                self.baseADV = MEGA.mega2(Fpath[0])
+                #FPath[0] = self.QS_path_currfile
+                self.base_ADV = MEGA.mega2(FPath[0])
+                Mfiles = self.base_ADV.peek()
+##                print(Mfiles)
+##                for x in range(len(Mfiles)):
+##                    print(self.base_ADV.fetch(Mfiles[x]))
+                for x in Mfiles:
+                    print('fetching'+str(self.base_ADV.fetch(x)))
+                    postprocess_DAT.append(self.internal_prepload([x,self.base_ADV.fetch(x)]))
+                    print(self.internal_prepload([x,self.base_ADV.fetch(x)]))
+                print('\n\n\n',postprocess_DAT,'\n\n\n')
+                ##final reconstruction
+                postprocess_DAT = self.internal_loadRC(postprocess_DAT)
+                self.set_ALL(postprocess_DAT)
+                self.QS_path_currfile = FPath[0]##sets var for quicksaving
                 
             else:
                 messagebox.showwarning('error!','no file selected!')
         
         #dat = self.readfile(FPath)
-        self.QS_path_currfile = FPath##sets var for quicksaving
+        #self.QS_path_currfile = FPath##sets var for quicksaving
 
     def sub_button_savefile(self):##save file menubutton
         if self.IS_LOADED == True:
             dat = self.get_ALL()
             FPath = self.QS_path_currfile
             dat = self.internal_prepsave(dat)
+            #dat = dat[0]
+            self.base_ADV.close()
+            self.base_ADV.LOADED = True##hack to open so megafile thinks can be read
+            #self.base_ADV.save()
+            #self.base_ADV = None
+            #self.base_ADV = MEGA.mega2(FPath)
+            
+            #self.base_ADV
+##            for x in range(len(dat)):
+##                print(dat[x])
+##                self.base_ADV.replacedata([dat[x][0],dat[x][1][0]])
+            print('dat\n\n',dat)
             for x in dat:
-                self.base_ADV.replacedata(x)
+                print(x)
+            print('\n\n')
+            for x in range(len(dat)-1):
+                print('adding',dat[x])
+                self.base_ADV.adddata(dat[x])
             self.base_ADV.save()
+            print('saved!\n\n====')
+            self.base_ADV.dumpall(DATA=True)
+            print('====\n\n')
         else:
             #pass
             self.sub_button_savefile_as()#hack for moment
@@ -830,6 +990,7 @@ class main_win:
                 if messagebox.askokcancel(title = 'confirm',message = 'this will OVERWRITE the selected file with data\nare you sure?'):
                     self.base_ADV = MEGA.mega2(FP[0])
                     self.base_ADV.close()##clear file
+                    self.base_ADV.LOADED = True##hack to open so megafile thinks can be read
                     for x in dat:
                         print(x)
                     for x in range(len(dat)-1):
