@@ -1529,6 +1529,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     ###############
     ##button subs
     def sub_button_rollprimary(self):
+        self.internal_button_primary_Resetvalues()
         x = self.internal_rollprimary()
         print(x)
         self.internal_refresh_DRL_listbox(x)
