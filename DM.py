@@ -29,10 +29,11 @@ import MEGA
 class main_win:
     ##class related variables
     QS_path_currfile = ''
+    Base_ADV = None
     ##TK start
     This_win = Tk()
     ##variables
-    Base_ADV = None
+    IS_LOADED = False
     d='1'##testing of boxes
 
     ##charbase_name
@@ -453,7 +454,7 @@ class main_win:
 ##        self.set_primaryattributes([random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random()])
 ##        if self.d == '1':
 ##            self.d = '0'
-##            self.set_ALL([['1', '2', '3', '4', '5', '6', '7'], ['1', '2', '3', '4', '5', '6'], ['1', '2', '3', '4', '5', '6'], 'qwerty', 'asdfgh', 'zxcvbn', [(1, 'aa'), (1, 'bb'), (1, 'cc'), (1, 'dd'), (1, 'ee'), (1, 'ff')], [['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]], ['q', 'w', 'e', 'r', 't', 'y'], ['a', 's', 1, 1, 1, 1, 1, 1], [[['1a', '2a', '3a'], ['1b', '2b', '3b'], ['1c', '2c', '3c']], 'dat text'], 'qwert', 'www', ['o', 'p', 'k', 'l', 'nm']])
+##      self.set_ALL([['1', '2', '3', '4', '5', '6', '7'], ['1', '2', '3', '4', '5', '6'], ['1', '2', '3', '4', '5', '6'], 'qwerty', 'asdfgh', 'zxcvbn', [(1, 'aa'), (1, 'bb'), (1, 'cc'), (1, 'dd'), (1, 'ee'), (1, 'ff')], [['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]], ['q', 'w', 'e', 'r', 't', 'y'], ['a', 's', 1, 1, 1, 1, 1, 1], [[['1a', '2a', '3a'], ['1b', '2b', '3b'], ['1c', '2c', '3c']], 'dat text'], 'qwert', 'www', ['o', 'p', 'k', 'l', 'nm']])
 ##        else:
 ##            self.d='1'
 ##            self.set_ALL([['', '', '', '', '', '', ''], ['', '', '', '', '', ''], ['', '', '', '', '', ''], '', '', '', [(0, ''), (0, ''), (0, ''), (0, ''), (0, ''), (0, '')], [['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], ['', '', '', '', '', ''], ['', '', 0, 0, 0, 0, 0, 0], [[['', '', ''], ['', '', ''], ['', '', '']], ''], '', '', ['', '', '', '', '']])
@@ -586,15 +587,25 @@ class main_win:
         print(GotData[0])
         for x in range(len(GotData[0])):
             GotData[0][x] = GotData[0][x].strip('\n')
+            if GotData[0][x] == '':##add spaces for csvising 
+                GotData[0][x] = ' '
         dat2rt[0] = [Fn[0],[self.array2csv(GotData[0])]]
         print(dat2rt[0])
+        
         ##2
         print(GotData[1])
+        for x in range(len(GotData[1])):
+            print(GotData[1][x])
+            if GotData[1][x] == '':
+                GotData[1][x] = ' '
         dat2rt[1] = [Fn[1],[self.array2csv(GotData[1])]]
         print(dat2rt[1])
         
         #3
         print(GotData[2])
+        for x in range(len(GotData[2])):
+            if GotData[2][x] == '':
+                GotData[2][x] = ' ' 
         dat2rt[2] = [Fn[2],[self.array2csv(GotData[2])]]
         
 ##        #4,5,6
@@ -604,49 +615,83 @@ class main_win:
 
         #4
         print(GotData[3])
+        if GotData[3] == '':
+            GotData[3] = ' '
         dat2rt[3] = [Fn[3],[self.array2csv([GotData[3]])]]
 
         #5
+        if GotData[4] == '':
+            GotData[4] = ' '
         dat2rt[4] = [Fn[4],[self.array2csv([GotData[4]])]]
 
         #6
+        if GotData[5] == '':
+            GotData[5] = ' '
         dat2rt[5] = [Fn[5],[self.array2csv([GotData[5]])]]
         
         #7
         for x in range(len(GotData[6])):#checkbox value is always 1 or 0 so can just apppend as string
+            if GotData[6][1] == '':
+                GotData[6][1] = ' '
             temp.append(str(GotData[6][x][0])+str(GotData[6][x][1]))
         dat2rt[6] = [Fn[6],[self.array2csv(temp)]]
         temp = []
         
         #8 a,b
         for x in range(len(GotData[7][1])):##convert 8b to str from int
+            if GotData[7][0][x] == '':##put here because checkbox list is the same size
+                GotData[7][0][x] = ' '
             GotData[7][1][x] = str(GotData[7][1][x])
         dat2rt[7] = [Fn[7],[self.array2csv(GotData[7][0]),self.array2csv(GotData[7][1])]]
         
         #9
+        for x in range(len(GotData[8])):##could function this
+            if GotData[8][x] == '':
+                GotData[8][x] = ' ' 
         dat2rt[8] = [Fn[8],[self.array2csv(GotData[8])]]
         
         #10
         for x in range(len(GotData[9])):
             GotData[9][x] = str(GotData[9][x])
+            if GotData[9][x] == '':
+                GotData[9][x] = ' ' 
         dat2rt[9] = [Fn[9],[self.array2csv(GotData[9])]]
         
         #11
         print(GotData[10])
+        for x in range(len(GotData[10][0])):#always same entries length for block
+            if GotData[10][0][0][x] == '':
+                GotData[10][0][0][x] = ' '
+                
+            if GotData[10][0][1][x] == '':
+                GotData[10][0][1][x] = ' '
+                
+            if GotData[10][0][2][x] == '':
+                GotData[10][0][2][x] = ' '
         dat2rt[10] = [Fn[10], [self.array2csv(GotData[10][0][0]),self.array2csv(GotData[10][0][1]),self.array2csv(GotData[10][0][2])] ]
         
         #12
 ##              for x in range(len(GotData[7][2])-1):
 ##                  if GotData[7][2][x] == '\\'
+        
+        if GotData[10][1] == '':
+                GotData[10][1] = ' '
         dat2rt[11] = [Fn[11],GotData[10][1].split('\n')]
         
         #13
+        if GotData[11] == '':
+                GotData[11] = ' '
         dat2rt[12] = [Fn[12],GotData[11].split('\n')]
         
         #14
+        if GotData[12] == '':
+                GotData[12] = ' '
         dat2rt[13] = [Fn[13],GotData[12].split('\n')]
         
         #15
+        for x in range(len(GotData[13])):##does all 5 below as in a list together
+            if GotData[13][x] == '':
+                GotData[13][x] = ' '
         dat2rt[14] = [Fn[14],GotData[13][0].split('\n')]
         
         #16
@@ -668,7 +713,27 @@ class main_win:
         
             
     def internal_prepload(self,GotData):
-        pass
+        Fn = ['charbase',
+              'primary',
+              'rollmod',
+              'perception',
+              'inspiration',
+              'profbonus',
+              'savingthrows',
+              'secondary',
+              'hpmisc',
+              'dicesavemisc',
+              'attackspells',
+              'attackspells_text',
+              'langskills',
+              'equipmain',
+              'pinfo_base',
+              'pinfo_ideals',
+              'pinfo_bonds',
+              'pinfo_flaws',
+              'pinfo_addditfeatures']
+        ##de csv etc...
+        
     def sub_button_newfile(self):##Testcharacter1
         Fpath = self.internal_savefileaskchecker()
         #Fpath[0] = self.internal_resolve_ADV(Fpath[0])
@@ -729,31 +794,63 @@ class main_win:
 ##        self.QS_path_currfile = FPath##sets var for quicksaving
     def sub_button_loadfile(self):##load file menubutton
         FPath = self.internal_loadfileaskchecker()
-        if FPath[1] == True:
-            FPath[0] = self.QS_path_currfile
-        else:
-            pass
+        if messagebox.askokcancel(title = 'load',message = '\nare you sure?'):
+            
+            if FPath[1] == True:
+                self.IS_LOADED = True
+                FPath[0] = self.QS_path_currfile
+                self.baseADV = MEGA.mega2(Fpath[0])
+                
+            else:
+                messagebox.showwarning('error!','no file selected!')
         
         #dat = self.readfile(FPath)
         self.QS_path_currfile = FPath##sets var for quicksaving
 
     def sub_button_savefile(self):##save file menubutton
-        FPath = self.QS_path_currfile
-        dat = self.internal_prepsave
-        for x in dat:
-            datamain.replacedata(x)
-        datamain.save()
-    def sub_button_savefile_as(self):
+        if self.IS_LOADED == True:
+            dat = self.get_ALL()
+            FPath = self.QS_path_currfile
+            dat = self.internal_prepsave(dat)
+            for x in dat:
+                self.base_ADV.replacedata(x)
+            self.base_ADV.save()
+        else:
+            #pass
+            self.sub_button_savefile_as()#hack for moment
+            #self.
+            
+    def sub_button_savefile_as(self):##save as separate file ##later add :if no file is loaded load file as existing
         FP = self.internal_savefileaskchecker()
         print(FP)
-        if FP[1] == True:
-            if messagebox.askokcancel(title = 'confirm',message = 'this will OVERWRITE the selected file with data\nare you sure?'):
-                pass
+        if messagebox.askokcancel(title = 'saveas',message = '\nare you sure?'):
+            dat = self.get_ALL()
+            dat = self.internal_prepsave(dat)
+            if FP[1] == True:
+                if messagebox.askokcancel(title = 'confirm',message = 'this will OVERWRITE the selected file with data\nare you sure?'):
+                    self.base_ADV = MEGA.mega2(FP[0])
+                    self.base_ADV.close()##clear file
+                    for x in dat:
+                        print(x)
+                    for x in range(len(dat)-1):
+                        print(dat[x],end='')
+                        #self.base_ADV.replacedata(dat[x])#fix for problem will work out later
+                        self.base_ADV.adddata(dat[x])
+                        print('Done')
+                    self.base_ADV.save()
+                else:
+                    pass
             else:
-                pass
-        else:
-            pass
-        #self.internal_savefile(FP[0])
+                #dat = self.internal_prepsave(dat)
+                self.base_ADV = MEGA.mega2(FP[0])
+                for x in dat:
+                    print(x)
+                for x in range(len(dat)-1):
+                    print(dat[x],end='')
+                    self.base_ADV.adddata(dat[x])
+                    print('Done')
+                self.base_ADV.save()
+            #self.internal_savefile(FP[0])
         
     ##get
     def get_charbase_name(self):
