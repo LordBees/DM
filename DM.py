@@ -1512,6 +1512,10 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.internal_button_primary_Resetvalues()
         primaryattributes_setup_LF.place(x=0,y=0)
 
+        Backgrounds_LF = LabelFrame(self.This_win,text = 'background selection')
+        Backgrounds_BGS_MBT = MenuButton(Backgrounds_LF).grid(row=0,column
+        Backgrounds_LF.place(x=0,y=0)
+
 
 
         finalizechar_setup_LF = LabelFrame(self.This_win,text = 'options')
@@ -1723,6 +1727,13 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             
     def internal_get_DRL_listbox(self):
             return self.primaryattributes_setup_DRL_LBX.get(0,self.primaryattributes_setup_DRL_LBX.size())
+
+    def internal_process_backgrounddata(self):
+        Files_dat = datamain.peek()
+        if 'Races.txt' in names:
+            loaded_races = datamain.fetch('Races.txt')
+        
+            
 class optwin:
     #CHANGED= True
     OPTIONSNAME = 'OPTIONS.CFF'
