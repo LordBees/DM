@@ -1445,6 +1445,8 @@ class dicewin:
         self.Diceroller_RDR_LBL_VAR.set('you rolled a |'+str(data))
         
 class createcharwin:#(main_win):##better to create new window form,from scratch
+    #vars
+    char_BG_NAMES = []
     ##setup
     #primaryattributes_setup_DRL_LBX = None
 
@@ -1469,6 +1471,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.This_win = Toplevel()
         self.This_win.title('Character Creation Setup')
         self.This_win.geometry('640x720')
+        ##preload
+        self.internal_preload()
         ##widgets
         primaryattributes_setup_LF = LabelFrame(self.This_win,text= 'primary attributes dice roller')
         primaryattributes_setup_RTD_BTN = Button(primaryattributes_setup_LF,text = 'randomize values',command = self.sub_button_rollprimary).grid(row=0,column=0)
@@ -1523,9 +1527,11 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def Alt_loop(self):##runs every 1.5 seconds
         ##additional event loop code here
         self.internal_calcrollmod_primary_LBL()
+        print(self.internal_validaterolls())
         ##end
         self.This_win.after(1500,self.Alt_loop)
-
+    def internal_preload(self):
+        pass
     ###############
     ##button subs
     def sub_button_rollprimary(self):
@@ -1574,7 +1580,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         else:
             messagebox.showwarning('ERROR!','please select a value!')
 
-    def sub_button_FIN(self):
+    def sub_button_FIN(self):##finalize and export character creation to existing character sheet and save
         pass
     def sub_button_CLR(self):##reset all values
         if messagebox.askokcancel('Are You Sure?','reset all values to default\nAre you sure'):
@@ -1632,7 +1638,38 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             else:
                 rollmod.append('NA')
         self.set_primaryattributes_LBL(rollmod)
-            
+
+    def internal_validaterolls(self):
+        VALID = True
+        listvalues = self.internal_get_DRL_listbox()
+        if len(listvalues) == 0:
+            listvalues = [-1]*6
+        else:
+            listvalues = list(listvalues)
+        
+        btndat = self.get_primaryattributes_BTN()
+        for x in range(len(btndat)):
+            if btndat[x] == 'Set Value!':
+                btndat[x] = -2##stops false positive in validation as listvalues invalid value is -1
+            else:
+                btndat[x] = int(btndat[x].strip('set as| '))
+        print('|\n')
+        print(listvalues)
+        print(btndat)
+        listvalues.sort()
+        btndat.sort()
+##        for x in range(len(btndat)):##sort list and compare against sorted list of the rng values
+##            if listvalues[x] == 'Set Value!':
+##                VALID = False
+##            elif listvalues[x] == btndat[x]:
+##                VALID = True
+##            else:
+##                VALID = False
+##        return VALID
+        for x in range(len(btndat)):##sort list and compare against sorted list of the rng values
+            if listvalues[x] != btndat[x]:
+                VALID = False
+        return VALID
             
                 
         
@@ -1666,8 +1703,9 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         try:
             return self.primaryattributes_setup_DRL_LBX.get(self.primaryattributes_setup_DRL_LBX.curselection())
 
-        except:
+        except:#catches exeption thrown by  null selection
             return False
+            #return ['']*6
             
     def internal_refresh_DRL_listbox(self,dat):##for diceroll listbox
         self.internal_clear_DRL_listbox()
@@ -1683,6 +1721,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         for x in Listitems:
             self.internal_additem_DRL_listbox(x)
             
+    def internal_get_DRL_listbox(self):
+            return self.primaryattributes_setup_DRL_LBX.get(0,self.primaryattributes_setup_DRL_LBX.size())
 class optwin:
     #CHANGED= True
     OPTIONSNAME = 'OPTIONS.CFF'
