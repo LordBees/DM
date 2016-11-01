@@ -1,31 +1,31 @@
 [BASE]
-[1]
+1
 CON=+2
 [HILL]
-[1]
+1
 WIS=+1
 [MOUNTAIN]
-[1]
+1
 STR=+2
 [END]
 
 [TRAITS]
 [BASE]
-[5]
+5
 DarkVision
 Dwarven Resillience
 Dwarven Combat Training
 Tool Proficiency
 StoneCunning
 [HILL]
-[1]
+1
 Dwarven Toughness
 [MOUNTAIN]
-[1]
+1
 Dwarven armour training
 [END]
 
 [LANG]
-[1]
+1
 Common Dwarvish
 [END]
