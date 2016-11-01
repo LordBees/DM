@@ -1,5 +1,6 @@
-[]
-[]
+1,6,6,6,7,,
+Races.txt,Dwarf.txt,Elf.txt,Halfling.txt,Human.txt,,
+Dwarf,Elf,Halfling,Human,,
 [BASE]
 CON=+2
 [HILL]
@@ -13,10 +14,15 @@ INT=+1
 [WOOD]
 WIS=+1
 [BASE]
+DEX=+2
+[STOUT]
+CON=+1
+[LIGHTFOOT]
+CHR=+1
+[BASE]
 STR=+1
 DEX=+1
 CON=+1
 INT=+1
 WIS=+1
 CHR=+1
-Dwarf,Elf,Halfling,Human,,

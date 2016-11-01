@@ -1,0 +1,7 @@
+[BASE]
+DEX=+2
+[HIGH]
+INT=+1
+[WOOD]
+WIS=+1
+[TRAITS]

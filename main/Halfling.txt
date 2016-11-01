@@ -1,0 +1,6 @@
+[BASE]
+DEX=+2
+[STOUT]
+CON=+1
+[LIGHTFOOT]
+CHR=+1

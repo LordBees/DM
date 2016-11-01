@@ -1416,6 +1416,8 @@ class dicewin:
         Diceroller_LF.place(x=5,y=5)
         
         ## post widget code
+
+        ##tkloop
         self.This_win.after(1500,self.Alt_loop)
         self.This_win.mainloop() 
         
@@ -1479,7 +1481,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         primaryattributes_setup_RSV_BTN = Button(primaryattributes_setup_LF,text = 'Clear values',command = self.sub_button_resetvalues).grid(row=0,column=1)
         self.primaryattributes_setup_DRL_LBX = Listbox(primaryattributes_setup_LF,height = 6,width = 5)
         self.primaryattributes_setup_DRL_LBX.grid(row=1,column=0)
-        primaryattributes_setup_LF.place(x=0,y=0)
+        primaryattributes_setup_LF.place(x=5,y=5)
         
 
         #primaryattributes_LF
@@ -1508,13 +1510,27 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         primaryattributes_CHR_LBL = Label(primaryattributes_LF,text = 'Charisma').grid(row=6,column=0)
         primaryattributes_CHR_BTN = Button(primaryattributes_LF,width = 10,textvariable = self.primaryattributes_CHR_BTN_VAR,command = self.sub_button_CHR).grid(row=6,column=1)
         primaryattributes_CHR_LBL = Label(primaryattributes_LF,width = 4,textvariable = self.primaryattributes_CHR_LBL_VAR).grid(row=6,column=2)
-        primaryattributes_LF.place(x=50,y=250)##was w3
+        primaryattributes_LF.place(x=5,y=150)##was w3
         self.internal_button_primary_Resetvalues()
-        primaryattributes_setup_LF.place(x=0,y=0)
+        #primaryattributes_setup_LF.place(x=0,y=0)
 
-        Backgrounds_LF = LabelFrame(self.This_win,text = 'background selection')
-        Backgrounds_BGS_MBT = MenuButton(Backgrounds_LF).grid(row=0,column
-        Backgrounds_LF.place(x=0,y=0)
+        #character background
+        Backgrounds_setup_LF = LabelFrame(self.This_win,text = 'background selection')
+        Backgrounds_setup_CBG_LBL = Label(Backgrounds_setup_LF,text = 'Pick a race!').grid(row=0,column=0) 
+        self.Backgrounds_setup_CBG_LBX = Listbox(Backgrounds_setup_LF,width=10,height = 5)
+        self.Backgrounds_setup_CBG_LBX.grid(row=1,column=0)
+        Backgrounds_setup_CBS_LBL = Label(Backgrounds_setup_LF,text = 'Pick a subrace!').grid(row=0,column=1)
+        self.Backgrounds_setup_CBS_LBX = Listbox(Backgrounds_setup_LF,width=10,height = 5)
+        self.Backgrounds_setup_CBS_LBX.grid(row=1,column=1)
+        Backgrounds_setup_LF.place(x=500,y=0)
+
+        Backgrounds_LF = LabelFrame(self.This_win,text = 'background information')
+        self.Backgrounds_CBG_LBX = Listbox(Backgrounds_LF,width=10,height = 5)
+        self.Backgrounds_CBG_LBX.grid(row=0,column=0)
+        Backgrounds_LF.place(x=500,y=150)
+
+        HPMISC_SETUP_LF = LabelFrame(self.This_win,text = 'armour class\nhealth stats selection')
+        HPMISC_SETUP_LF.place(x=0,y=0)
 
 
 
@@ -1523,7 +1539,12 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'reset character',command = self.sub_button_CLR).grid(row=1,column=0)
         finalizechar_setup_LF.place(x=200,y=0)
         #print('x',self.primaryattributes_setup_DRL_LBX)
+        
         ## post widget code
+        self.internal_preload_data()#loads listbox
+
+        #tkloop
+        
         self.This_win.after(1500,self.Alt_loop)
         self.This_win.mainloop() 
         
@@ -1531,11 +1552,37 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def Alt_loop(self):##runs every 1.5 seconds
         ##additional event loop code here
         self.internal_calcrollmod_primary_LBL()
+        self.internal_process_backgrounddata()
         print(self.internal_validaterolls())
         ##end
         self.This_win.after(1500,self.Alt_loop)
-    def internal_preload(self):
+    def internal_preload(self):##for loading background info
         pass
+    ##temp
+    def array2csv(self,array):##from beelib
+        temp = ''
+        for fl in array:
+            #print(fl)
+            temp += str(fl)+','
+        temp+=','
+        return temp
+    
+    def csv2array(self,csvstr):##may need os.isfile() or whatever it is to check file is in dir before declaring eofsame for array2csv      ##from beelib
+        arrayreturn = []
+        temp = ''
+        flag = False
+        for x in csvstr:#range(len(csvnames)):
+            if flag and (x==','):## ,, delimiter
+                break
+            if x ==',':
+                arrayreturn.append(temp)
+                temp = ''
+                flag = True
+            else:
+                temp+=x
+                flag = False
+        return arrayreturn
+    
     ###############
     ##button subs
     def sub_button_rollprimary(self):
@@ -1702,7 +1749,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             rolls.append(tint)
         return rolls
                 
-            
+    #dice roller listbox functions        
     def internal_get_DRL_currselection_listbox(self):
         try:
             return self.primaryattributes_setup_DRL_LBX.get(self.primaryattributes_setup_DRL_LBX.curselection())
@@ -1728,12 +1775,62 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def internal_get_DRL_listbox(self):
             return self.primaryattributes_setup_DRL_LBX.get(0,self.primaryattributes_setup_DRL_LBX.size())
 
-    def internal_process_backgrounddata(self):
-        Files_dat = datamain.peek()
-        if 'Races.txt' in names:
-            loaded_races = datamain.fetch('Races.txt')
+    
+    def internal_preload_data(self):##populates listbox with values
+        print('loading')
+        bgs = self.internal_process_getBG()
+        print('bgs\n',bgs)
+        self.internal_refresh_CBG_listbox(bgs)
         
+    def internal_process_getBG(self):##gets preset character backgrounds
+        Files_dat = datamain.peek()
+        #print('fdats\n',Files_dat)
+        loaded_races =[]
+        if 'Races.txt' in Files_dat:
+            loaded_races = self.csv2array(datamain.fetch('Races.txt')[0])
+        return loaded_races
+
+    #CharacterBackGround listbox functions
+    def internal_get_CBG_currselection_listbox(self):
+        try:
+            return self.primaryattributes_setup_CBG_LBX.get(self.primaryattributes_setup_CBG_LBX.curselection())
+
+        except:#catches exeption thrown by  null selection
+            return False
+        
+    def internal_refresh_CBG_listbox(self,dat):##for character background listbox
+        self.internal_clear_CBG_listbox()
+        self.internal_addlist_CBG_listbox(dat)
+        
+    def internal_clear_CBG_listbox(self):#clear box
+        self.Backgrounds_setup_CBG_LBX.delete(0,self.Backgrounds_setup_CBG_LBX.size())
+        
+    def internal_additem_CBG_listbox(self,Litem):#add item to listbox
+        self.Backgrounds_setup_CBG_LBX.insert(END,Litem)
+        
+    def internal_addlist_CBG_listbox(self,Listitems):#add list of items to listbox
+        for x in Listitems:
+            self.internal_additem_CBG_listbox(x)
             
+    def internal_get_CBG_listbox(self):
+            return self.Backgrounds_setup_CBG_LBX.get(0,self.Backgrounds_setup_CBG_LBX.size())
+    def internal_stripbrackets(self,strng):
+        return strng[:-1].strip('[')
+    def internal_process_backgrounddata(self):#process backgroundform refreshing for character background
+        readingdata = [False,'',0]##reading,reader,linesleft
+        if self.internal_get_CBG_currselection_listbox() !=  False:
+            racemain = self.internal_get_CBG_currselection_listbox()
+            data = datamain.fetch((lst+str('.txt')))
+            for x in range(len(data)):#[:-1].strip('[')
+                if '[' in data[x]:
+                    if data[x] == '[BASE]':
+                        readingdata[1] = 'base'
+                        readingdata = self.internal_stripbrackets(data[x+1])
+                    elif data[x] == '[TRAITS]':
+                        pass
+                    elif data[x] == '[END]':
+                        pass
+            racesub = self.internal_get_CBS_currselection_listbox()
 class optwin:
     #CHANGED= True
     OPTIONSNAME = 'OPTIONS.CFF'
