@@ -1579,6 +1579,11 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.Backgrounds_traits_TRT_TXT = Text(Backgrounds_traits_LF,height = 15,width = 25)#add scrollbar to list
         self.Backgrounds_traits_TRT_TXT .grid(row=0,column=0)#.pack() ##was height 10
         Backgrounds_traits_LF.place(x=675,y=250)
+        
+        Backgrounds_LANG_LF = LabelFrame(self.This_win,text = 'BG\nLanguages')
+        self.Backgrounds_LANG_TRT_TXT = Text(Backgrounds_LANG_LF,height = 6,width = 25)#add scrollbar to list
+        self.Backgrounds_LANG_TRT_TXT .grid(row=0,column=0)#.pack() ##was height 10
+        Backgrounds_LANG_LF.place(x=800,y=400)
 
         HPMISC_SETUP_LF = LabelFrame(self.This_win,text = 'armour class\nhealth stats selection')
         HPMISC_SETUP_LF.place(x=0,y=0)
@@ -1738,6 +1743,10 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def get_Backgrounds_traits_TRT_TXT(self):
         return self.Backgrounds_traits_TRT_TXT.get(1.0, 'end-1c')
     
+    def get_Backgrounds_LANG_TRT_TXT(self):
+        return self.Backgrounds_LANG_TRT_TXT.get(1.0, 'end-1c')
+
+    
     ##set
     def set_primaryattributes_LBL(self,data):##set rollmod label
         self.primaryattributes_STR_LBL_VAR.set(data[0])
@@ -1759,6 +1768,15 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.Backgrounds_traits_TRT_TXT.delete(1.0, 'end-1c')
         for x in Larray:
             self.Backgrounds_traits_TRT_TXT.insert(INSERT,x)
+    def set_Backgrounds_traits_TRT_TXT_CLR(self):
+        self.Backgrounds_traits_TRT_TXT.delete(1.0, 'end-1c')
+        
+    def set_Backgrounds_LANG_TRT_TXT(self,Larray):
+        self.Backgrounds_LANG_TRT_TXT.delete(1.0, 'end-1c')
+        for x in Larray:
+            self.Backgrounds_LANG_TRT_TXT.insert(INSERT,x)
+    def set_Backgrounds_LANG_TRT_TXT_CLR(self):
+        self.Backgrounds_LANG_TRT_TXT.delete(1.0, 'end-1c')
 
     
     ##internal
@@ -1957,6 +1975,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             
     def internal_get_CBS_listbox(self):
             return self.Backgrounds_setup_CBS_LBX.get(0,self.Backgrounds_setup_CBS_LBX.size())
+        
     def internal_currselection_RAW_CBS_listbox(self):
         try:
             return self.Backgrounds_setup_CBS_LBX.curselection()
@@ -1969,6 +1988,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         return strng[:-1].strip('[')
 
     def button_sub_confirmbackground(self):
+        lang_temp = []
         if self.internal_get_CBG_currselection_listbox() ==  False:
             pass
         else:
@@ -1979,9 +1999,31 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             subraces.remove('[BGS]')
             self.internal_refresh_CBS_listbox(subraces)
             
+            self.set_Backgrounds_traits_TRT_TXT_CLR()##clears traits
+            self.set_Backgrounds_rollmod_LBL(##clears roll modifiers
+                ['STR modifier|+-0',##default values
+                       'DEX modifier|+-0',
+                       'CON modifier|+-0',
+                       'INT modifier|+-0',
+                       'WIS modifier|+-0',
+                       'CHR modifier|+-0'])#*6
+            ##processing race languages
+            for x in range(len(data)):
+                    data[x] = self.csv2array(data[x])#arrays each entry
+            for x in range(len(data)):
+                if data[x][0] == '[LANG]':
+                    data[x].remove('[LANG]')
+                    for y in range(len(data[x])):
+                        lang_temp.append(data[x][y]+'\n')
+                        print(data[x][y])
+            print(lang_temp)
+            self.set_Backgrounds_LANG_TRT_TXT(lang_temp)##clears textbox then adds
+            
+            
             
     def button_sub_confirmsubrace(self):
         traits_temp = []
+        lang_temp=[]
         if self.internal_get_CBS_currselection_listbox() ==  False or (self.Backgrounds_setup_CBG_CURR_LBL_VAR.get() =='None Selected!'):
             pass
         else:
@@ -2061,8 +2103,10 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                         traits_temp.append(data[x][y]+'\n')
 
 
-                elif data[x][0] == '[LANG]':
-                    pass
+##                elif data[x][0] == '[LANG]':##in wrong section
+##                    data[x].remove('[LANG]')
+##                    for y in range(len(data[x])):
+##                        lang_temp.append(data[x][y]+'\n')
                 
                 
                             
@@ -2073,6 +2117,9 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
 
             ##setting traits menu
             self.set_Backgrounds_traits_TRT_TXT(traits_temp)
+
+            #setting languages
+            #self.set_Backgrounds_LANG_TRT_TXT(lang_temp)
             
             
     def internal_process_backgrounddata(self):#process backgroundform refreshing for character background
