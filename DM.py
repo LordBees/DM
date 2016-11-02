@@ -1450,6 +1450,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     #vars
     char_BG_NAMES = []
     ##setup
+    charbase_name_IRL_BOX_VAR = StringVar()
+    charbase_name_CHR_BOX_VAR = StringVar()
     #primaryattributes_setup_DRL_LBX = None
 
     #primary attribute allocation
@@ -1505,12 +1507,19 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         ##preload
         self.internal_preload()
         ##widgets
+        ##scharbase_name
+        charbase_name_LF = LabelFrame(self.This_win,text = 'character\ninformation')
+        charbase_name_IRL_LBL = Label(charbase_name_LF,text = 'player name').grid(row=0,column=0)
+        charbase_name_IRL_BOX = Entry(charbase_name_LF,textvariable = self.charbase_name_IRL_BOX_VAR).grid(row=1,column=0)
+        charbase_name_CHR_LBL = Label(charbase_name_LF,text = 'character name').grid(row=0,column=1)
+        charbase_name_CHR_BOX = Entry(charbase_name_LF,textvariable = self.charbase_name_IRL_BOX_VAR).grid(row=1,column=1)
+        charbase_name_LF.place(x=5,y=5)
         primaryattributes_setup_LF = LabelFrame(self.This_win,text= 'primary attributes dice roller')
         primaryattributes_setup_RTD_BTN = Button(primaryattributes_setup_LF,text = 'randomize values',command = self.sub_button_rollprimary).grid(row=0,column=0)
         primaryattributes_setup_RSV_BTN = Button(primaryattributes_setup_LF,text = 'Clear values',command = self.sub_button_resetvalues).grid(row=0,column=1)
         self.primaryattributes_setup_DRL_LBX = Listbox(primaryattributes_setup_LF,height = 6,width = 5)
         self.primaryattributes_setup_DRL_LBX.grid(row=1,column=0)
-        primaryattributes_setup_LF.place(x=5,y=5)
+        primaryattributes_setup_LF.place(x=5,y=150)
         
 
         #primaryattributes_LF
@@ -1539,7 +1548,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         primaryattributes_CHR_LBL = Label(primaryattributes_LF,text = 'Charisma').grid(row=6,column=0)
         primaryattributes_CHR_BTN = Button(primaryattributes_LF,width = 10,textvariable = self.primaryattributes_CHR_BTN_VAR,command = self.sub_button_CHR).grid(row=6,column=1)
         primaryattributes_CHR_LBL = Label(primaryattributes_LF,width = 4,textvariable = self.primaryattributes_CHR_LBL_VAR).grid(row=6,column=2)
-        primaryattributes_LF.place(x=5,y=150)##was w3
+        primaryattributes_LF.place(x=5,y=300)##was w3
         self.internal_button_primary_Resetvalues()
         #primaryattributes_setup_LF.place(x=0,y=0)
 
@@ -1557,11 +1566,11 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_setup_CBS_CURR_LBL = Label(Backgrounds_setup_LF,textvariable = self.Backgrounds_setup_CBS_CURR_LBL_VAR).grid(row=2,column=1)
         Backgrounds_setup_CBS_CNF_BTN = Button(Backgrounds_setup_LF,command = self.button_sub_confirmsubrace,text = 'Pick!').grid(row=3,column=1)
         
-        Backgrounds_setup_CBO_LBL = Label(Backgrounds_setup_LF,text = 'Pick a Background!').grid(row=0,column=2)
+        Backgrounds_setup_CBO_LBL = Label(Backgrounds_setup_LF,text = 'Pick a Class!').grid(row=0,column=2)##was 'Pick a Background!'
         self.Backgrounds_setup_CBO_LBX = Listbox(Backgrounds_setup_LF,width=10,height = 5)
-        self.Backgrounds_setup_CBO_LBX.grid(row=1,column=2)#choosebackgroundorigin
+        self.Backgrounds_setup_CBO_LBX.grid(row=1,column=2)#choosebackgroundorigin  #Edit:now class
         Backgrounds_setup_CBO_CURR_LBL = Label(Backgrounds_setup_LF,textvariable = self.Backgrounds_setup_CBO_CURR_LBL_VAR).grid(row=2,column=2)
-        Backgrounds_setup_CBO_CNF_BTN = Button(Backgrounds_setup_LF,command = self.button_sub_confirmbackground,text = 'Pick!').grid(row=3,column=2)
+        Backgrounds_setup_CBO_CNF_BTN = Button(Backgrounds_setup_LF,command = self.sub_button_confirmclass,text = 'Pick!').grid(row=3,column=2)
         Backgrounds_setup_LF.place(x=500,y=0)
 
 
@@ -1576,14 +1585,14 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_rollmod_LF.place(x=500,y=200)
 
         Backgrounds_traits_LF = LabelFrame(self.This_win,text = 'BG\ntrait modifiers')
-        self.Backgrounds_traits_TRT_TXT = Text(Backgrounds_traits_LF,height = 15,width = 25)#add scrollbar to list
+        self.Backgrounds_traits_TRT_TXT = Text(Backgrounds_traits_LF,height = 15,width = 25)#add scrollbar to list##alt height = 10,width = 20
         self.Backgrounds_traits_TRT_TXT .grid(row=0,column=0)#.pack() ##was height 10
-        Backgrounds_traits_LF.place(x=675,y=250)
+        Backgrounds_traits_LF.place(x=500,y=390)
         
         Backgrounds_LANG_LF = LabelFrame(self.This_win,text = 'BG\nLanguages')
-        self.Backgrounds_LANG_TRT_TXT = Text(Backgrounds_LANG_LF,height = 6,width = 25)#add scrollbar to list
+        self.Backgrounds_LANG_TRT_TXT = Text(Backgrounds_LANG_LF,height = 6,width = 10)#add scrollbar to list
         self.Backgrounds_LANG_TRT_TXT .grid(row=0,column=0)#.pack() ##was height 10
-        Backgrounds_LANG_LF.place(x=800,y=400)
+        Backgrounds_LANG_LF.place(x=675,y=200)
 
         HPMISC_SETUP_LF = LabelFrame(self.This_win,text = 'armour class\nhealth stats selection')
         HPMISC_SETUP_LF.place(x=0,y=0)
@@ -1983,6 +1992,42 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             return False
     def internal_setindex_CBS_listbox(self,Iitem):#change index in listbox
         self.Backgrounds_setup_CBS_LBX.activate(Iitem)
+
+    #Characterclasslistbox functions
+    #Backgrounds_setup_CBO_LBX
+    def internal_get_CBO_currselection_listbox(self):
+        #print(self.Backgrounds_setup_CBO_LBX.get(self.Backgrounds_setup_CBO_LBX.curselection()))
+        try:
+            return self.Backgrounds_setup_CBO_LBX.get(self.Backgrounds_setup_CBO_LBX.curselection())
+
+        except:#catches exeption thrown by  null selection
+            return False
+        
+    def internal_refresh_CBO_listbox(self,dat):##for character background listbox
+        self.internal_clear_CBO_listbox()
+        self.internal_addlist_CBO_listbox(dat)
+        
+    def internal_clear_CBO_listbox(self):#clear box
+        self.Backgrounds_setup_CBO_LBX.delete(0,self.Backgrounds_setup_CBO_LBX.size())
+        
+    def internal_additem_CBO_listbox(self,Litem):#add item to listbox
+        self.Backgrounds_setup_CBO_LBX.insert(END,Litem)
+        
+    def internal_addlist_CBO_listbox(self,Listitems):#add list of items to listbox
+        for x in Listitems:
+            self.internal_additem_CBO_listbox(x)
+            
+    def internal_get_CBO_listbox(self):
+            return self.Backgrounds_setup_CBO_LBX.get(0,self.Backgrounds_setup_CBO_LBX.size())
+        
+    def internal_currselection_RAW_CBO_listbox(self):
+        try:
+            return self.Backgrounds_setup_CBO_LBX.curselection()
+        except:
+            return False
+    def internal_setindex_CBO_listbox(self,Iitem):#change index in listbox
+        self.Backgrounds_setup_CBO_LBX.activate(Iitem)
+        
         
     def internal_stripbrackets(self,strng):
         return strng[:-1].strip('[')
@@ -2121,7 +2166,14 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             #setting languages
             #self.set_Backgrounds_LANG_TRT_TXT(lang_temp)
             
-            
+
+    def sub_button_confirmclass(self):
+        if self.internal_get_CBO_currselection_listbox() ==  False:
+            pass
+        else:
+            charclass = self.internal_get_CBO_currselection_listbox()
+
+    ##not used anymore split up within button functions
     def internal_process_backgrounddata(self):#process backgroundform refreshing for character background
         #readingdata = [False,'',0]##reading,reader,linesleft
         #print('::::::::::::::',self.internal_get_CBG_currselection_listbox())
