@@ -1483,6 +1483,17 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     Backgrounds_rollmod_CHR_LBL_VAR.set('CHR modifier|+-0')
 
     ##inventory
+    ##bg setup
+    Backgrounds_setup_CBG_CURR_LBL_VAR = StringVar()
+    Backgrounds_setup_CBS_CURR_LBL_VAR = StringVar()
+    Backgrounds_setup_CBO_CURR_LBL_VAR = StringVar()
+    
+    Backgrounds_setup_CBG_CURR_LBL_VAR.set('None selected!')#.set('CBG')
+    Backgrounds_setup_CBS_CURR_LBL_VAR.set('None selected!')#.set('CBS')
+    Backgrounds_setup_CBO_CURR_LBL_VAR.set('None selected!')#.set('CBO')
+    ##race variable
+   #Backgrounds_setup_CBS_RACE_VAR = ''
+   #Backgrounds_setup_CBG_RACE_VAR = 'None'
     
 
 
@@ -1537,12 +1548,20 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_setup_CBG_LBL = Label(Backgrounds_setup_LF,text = 'Pick a race!').grid(row=0,column=0) 
         self.Backgrounds_setup_CBG_LBX = Listbox(Backgrounds_setup_LF,width=10,height = 5)
         self.Backgrounds_setup_CBG_LBX.grid(row=1,column=0)##choosebackground
+        Backgrounds_setup_CBG_CURR_LBL = Label(Backgrounds_setup_LF,textvariable = self.Backgrounds_setup_CBG_CURR_LBL_VAR).grid(row=2,column=0)
+        Backgrounds_setup_CBG_CNF_BTN = Button(Backgrounds_setup_LF,command = self.button_sub_confirmbackground,text = 'Pick!').grid(row=3,column=0)
+        
         Backgrounds_setup_CBS_LBL = Label(Backgrounds_setup_LF,text = 'Pick a subrace!').grid(row=0,column=1)
         self.Backgrounds_setup_CBS_LBX = Listbox(Backgrounds_setup_LF,width=10,height = 5)
         self.Backgrounds_setup_CBS_LBX.grid(row=1,column=1)#choosebackgroundsub
-        Backgrounds_setup_CBO_LBL = Label(Backgrounds_setup_LF,text = 'Pick a Background!').grid(row=0,column=1)
+        Backgrounds_setup_CBS_CURR_LBL = Label(Backgrounds_setup_LF,textvariable = self.Backgrounds_setup_CBS_CURR_LBL_VAR).grid(row=2,column=1)
+        Backgrounds_setup_CBS_CNF_BTN = Button(Backgrounds_setup_LF,command = self.button_sub_confirmsubrace,text = 'Pick!').grid(row=3,column=1)
+        
+        Backgrounds_setup_CBO_LBL = Label(Backgrounds_setup_LF,text = 'Pick a Background!').grid(row=0,column=2)
         self.Backgrounds_setup_CBO_LBX = Listbox(Backgrounds_setup_LF,width=10,height = 5)
-        self.Backgrounds_setup_CBO_LBX.grid(row=1,column=1)#choosebackgroundorigin
+        self.Backgrounds_setup_CBO_LBX.grid(row=1,column=2)#choosebackgroundorigin
+        Backgrounds_setup_CBO_CURR_LBL = Label(Backgrounds_setup_LF,textvariable = self.Backgrounds_setup_CBO_CURR_LBL_VAR).grid(row=2,column=2)
+        Backgrounds_setup_CBO_CNF_BTN = Button(Backgrounds_setup_LF,command = self.button_sub_confirmbackground,text = 'Pick!').grid(row=3,column=2)
         Backgrounds_setup_LF.place(x=500,y=0)
 
 
@@ -1554,12 +1573,12 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_rollmod_INT_LBL = Label(Backgrounds_rollmod_LF,width = 16,textvariable = self.Backgrounds_rollmod_INT_LBL_VAR).grid(row=4,column=0)
         Backgrounds_rollmod_WIS_LBL = Label(Backgrounds_rollmod_LF,width = 16,textvariable = self.Backgrounds_rollmod_WIS_LBL_VAR).grid(row=5,column=0)
         Backgrounds_rollmod_CHR_LBL = Label(Backgrounds_rollmod_LF,width = 16,textvariable = self.Backgrounds_rollmod_CHR_LBL_VAR).grid(row=6,column=0)
-        Backgrounds_rollmod_LF.place(x=500,y=150)
+        Backgrounds_rollmod_LF.place(x=500,y=200)
 
         Backgrounds_traits_LF = LabelFrame(self.This_win,text = 'BG\ntrait modifiers')
-        self.Backgrounds_traits_TRT_TXT = Text(Backgrounds_traits_LF,height = 15,width = 22)#add scrollbar to list
+        self.Backgrounds_traits_TRT_TXT = Text(Backgrounds_traits_LF,height = 15,width = 25)#add scrollbar to list
         self.Backgrounds_traits_TRT_TXT .grid(row=0,column=0)#.pack() ##was height 10
-        Backgrounds_traits_LF.place(x=675,y=150)
+        Backgrounds_traits_LF.place(x=675,y=250)
 
         HPMISC_SETUP_LF = LabelFrame(self.This_win,text = 'armour class\nhealth stats selection')
         HPMISC_SETUP_LF.place(x=0,y=0)
@@ -1578,7 +1597,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.Backgrounds_setup_misctraits_DPF_LBX = Listbox(Backgrounds_setup_misctraits_LF,width=10,height = 5)
         self.Backgrounds_setup_misctraits_DPF_LBX.grid(row=1,column=4)
         Backgrounds_setup_misctraits_RNG_BTN = Button(Backgrounds_setup_misctraits_LF,text = 'Randomize\nall selections!').grid(row=2,column=1)
-        Backgrounds_setup_misctraits_LF.place(x=800,y=0)#.grid(row=0,column=0)
+        Backgrounds_setup_misctraits_LF.place(x=825,y=0)#.grid(row=0,column=0)
 
         Backgrounds_misctraits_LF = LabelFrame(self.This_win,text = 'MISC\nBackground traits setup')
         Backgrounds_misctraits_DPT_LBL_LBL = Label(Backgrounds_misctraits_LF,text = '==personailty trait==').grid(row=0,column=0)##displaypersonalitytrait
@@ -1590,7 +1609,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_misctraits_DPI_LBL = Label(Backgrounds_misctraits_LF).grid(row=1,column=1)##displaypersonalityideal
         Backgrounds_misctraits_DPB_LBL = Label(Backgrounds_misctraits_LF).grid(row=3,column=0)##displaypersonalitybond
         Backgrounds_misctraits_DPF_LBL = Label(Backgrounds_misctraits_LF).grid(row=3,column=1)##displaypersonalityflaw
-        Backgrounds_misctraits_LF.place(x=800,y=175)#.grid(row=0,column=0)
+        Backgrounds_misctraits_LF.place(x=825,y=200)#.grid(row=0,column=0)
 
 
 
@@ -1612,7 +1631,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def Alt_loop(self):##runs every 1.5 seconds
         ##additional event loop code here
         self.internal_calcrollmod_primary_LBL()
-        self.internal_process_backgrounddata()
+        #self.internal_process_backgrounddata()
         print(self.internal_validaterolls())
         ##end
         self.This_win.after(1500,self.Alt_loop)
@@ -1707,6 +1726,18 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             self.primaryattributes_WIS_BTN_VAR.get(),
             self.primaryattributes_CHR_BTN_VAR.get()
             ]
+    def get_Backgrounds_rollmod_LBL(self):##get button content
+        return[
+            self.Backgrounds_rollmod_STR_LBL_VAR.get(),
+            self.Backgrounds_rollmod_DEX_LBL_VAR.get(),
+            self.Backgrounds_rollmod_CON_LBL_VAR.get(),
+            self.Backgrounds_rollmod_INT_LBL_VAR.get(),
+            self.Backgrounds_rollmod_WIS_LBL_VAR.get(),
+            self.Backgrounds_rollmod_CHR_LBL_VAR.get()
+            ]
+    def get_Backgrounds_traits_TRT_TXT(self):
+        return self.Backgrounds_traits_TRT_TXT.get(1.0, 'end-1c')
+    
     ##set
     def set_primaryattributes_LBL(self,data):##set rollmod label
         self.primaryattributes_STR_LBL_VAR.set(data[0])
@@ -1715,8 +1746,23 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.primaryattributes_INT_LBL_VAR.set(data[3])
         self.primaryattributes_WIS_LBL_VAR.set(data[4])
         self.primaryattributes_CHR_LBL_VAR.set(data[5])
+        
+    def set_Backgrounds_rollmod_LBL(self,data):##set rollmod label
+        self.Backgrounds_rollmod_STR_LBL_VAR.set(data[0])
+        self.Backgrounds_rollmod_DEX_LBL_VAR.set(data[1])
+        self.Backgrounds_rollmod_CON_LBL_VAR.set(data[2])
+        self.Backgrounds_rollmod_INT_LBL_VAR.set(data[3])
+        self.Backgrounds_rollmod_WIS_LBL_VAR.set(data[4])
+        self.Backgrounds_rollmod_CHR_LBL_VAR.set(data[5])
+        
+    def set_Backgrounds_traits_TRT_TXT(self,Larray):
+        self.Backgrounds_traits_TRT_TXT.delete(1.0, 'end-1c')
+        for x in Larray:
+            self.Backgrounds_traits_TRT_TXT.insert(INSERT,x)
+
+    
     ##internal
-    def internal_calcrollmod_primary_LBL(self):
+    def internal_calcrollmod_primary_LBL(self):##calculates the values for the roll modifers in the primary attribute window
         rollmod = []
         Bcontents = self.get_primaryattributes_BTN()##button text
         for x in range(len(Bcontents)):
@@ -1750,7 +1796,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 rollmod.append('NA')
         self.set_primaryattributes_LBL(rollmod)
 
-    def internal_validaterolls(self):
+    def internal_validaterolls(self):##checks rolls are valid when finalizing character
         VALID = True
         listvalues = self.internal_get_DRL_listbox()
         if len(listvalues) == 0:
@@ -1836,8 +1882,12 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def internal_get_DRL_listbox(self):
             return self.primaryattributes_setup_DRL_LBX.get(0,self.primaryattributes_setup_DRL_LBX.size())
 
+    ##end diceroller##
+    ##################
+
+
     
-    def internal_preload_data(self):##populates listbox with values
+    def internal_preload_data(self):##populates class listbox with values
         print('loading')
         bgs = self.internal_process_getBG()
         print('bgs\n',bgs)
@@ -1880,10 +1930,11 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def internal_get_CBG_listbox(self):
             return self.Backgrounds_setup_CBG_LBX.get(0,self.Backgrounds_setup_CBG_LBX.size())
 
+
     #Charactersubracelistbox functions
     #Backgrounds_setup_CBS_LBX
     def internal_get_CBS_currselection_listbox(self):
-       #print(self.Backgrounds_setup_CBS_LBX.get(self.Backgrounds_setup_CBS_LBX.curselection()))
+        #print(self.Backgrounds_setup_CBS_LBX.get(self.Backgrounds_setup_CBS_LBX.curselection()))
         try:
             return self.Backgrounds_setup_CBS_LBX.get(self.Backgrounds_setup_CBS_LBX.curselection())
 
@@ -1906,35 +1957,242 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             
     def internal_get_CBS_listbox(self):
             return self.Backgrounds_setup_CBS_LBX.get(0,self.Backgrounds_setup_CBS_LBX.size())
+    def internal_currselection_RAW_CBS_listbox(self):
+        try:
+            return self.Backgrounds_setup_CBS_LBX.curselection()
+        except:
+            return False
+    def internal_setindex_CBS_listbox(self,Iitem):#change index in listbox
+        self.Backgrounds_setup_CBS_LBX.activate(Iitem)
         
     def internal_stripbrackets(self,strng):
         return strng[:-1].strip('[')
-    
-    def internal_process_backgrounddata(self):#process backgroundform refreshing for character background
-        #readingdata = [False,'',0]##reading,reader,linesleft
-        print('::::::::::::::',self.internal_get_CBG_currselection_listbox())
-        if self.internal_get_CBG_currselection_listbox() !=  False:
+
+    def button_sub_confirmbackground(self):
+        if self.internal_get_CBG_currselection_listbox() ==  False:
+            pass
+        else:
             racemain = self.internal_get_CBG_currselection_listbox()
+            self.Backgrounds_setup_CBG_CURR_LBL_VAR.set(racemain)
             data = datamain.fetch((racemain+str('.txt')))
-            print('DATA##################\n',data)
-            for x in range(len(data[0])):##gets the subraces
-                pass
-            if self.internal_get_CBS_currselection_listbox() != False:
-                racesub = self.internal_get_CBS_currselection_listbox()
-            else:
-                racesub = 'None'##allows for loading of default class values without a specific selection
+            subraces = self.csv2array(data[0])
+            subraces.remove('[BGS]')
+            self.internal_refresh_CBS_listbox(subraces)
+            
+            
+    def button_sub_confirmsubrace(self):
+        traits_temp = []
+        if self.internal_get_CBS_currselection_listbox() ==  False or (self.Backgrounds_setup_CBG_CURR_LBL_VAR.get() =='None Selected!'):
+            pass
+        else:
+            subrace = self.internal_get_CBS_currselection_listbox()
+            self.Backgrounds_setup_CBS_CURR_LBL_VAR.set(subrace)
+            data = datamain.fetch((self.Backgrounds_setup_CBG_CURR_LBL_VAR.get()+str('.txt')))
+            #subraces = self.csv2array(data[0])
+            for x in range(len(data)):
+                data[x] = self.csv2array(data[x])
+            
+            print('done\n',data,'\n=========')
+            dat2set = ['STR modifier|+-0',##default values
+                       'DEX modifier|+-0',
+                       'CON modifier|+-0',
+                       'INT modifier|+-0',
+                       'WIS modifier|+-0',
+                       'CHR modifier|+-0']#*6
+            print(len(dat2set))
+
             
             for x in range(len(data)):
-                if data[x][0] == '[SBASE]':
+                if data[x][0] == '[SBASE]':##stats decode
+                    print('sbase//')
+                    data[x].remove('[SBASE]')
+                    #print(data[x])
+                    for y in range(len(data[x])):
+                        #print(data[x][y])
+                        data[x][y] = data[x][y].split('=')
+                        print(data[x][y])
+                        #print(data)
+                        if data[x][y][0] == 'STR':
+                            dat2set[0] = 'STR modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'DEX':
+                            dat2set[1] = 'DEX modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'CON':
+                            dat2set[2] = 'CON modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'INT':
+                            dat2set[3] = 'INT modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'WIS':
+                            dat2set[4] = 'WIS modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'CHR':
+                            dat2set[5] = 'CHR modifier|'+data[x][y][1]
+
+                        
+                elif data[x][0] == '[S'+subrace.upper()+']':
+                    #data[x].remove(data[x][0])#(str('[S'+subrace.upper()+']'))##always the first entry to be removed
+                    data[x].remove('[S'+subrace.upper()+']')
+                    #input()
+                    #print(data[x])
+                    for y in range(len(data[x])):
+                        #print(data[x][y])
+                        data[x][y] = data[x][y].split('=')
+                        print(data[x][y])
+                        #print(data)
+                        if data[x][y][0] == 'STR':
+                            dat2set[0] = 'STR modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'DEX':
+                            dat2set[1] = 'DEX modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'CON':
+                            dat2set[2] = 'CON modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'INT':
+                            dat2set[3] = 'INT modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'WIS':
+                            dat2set[4] = 'WIS modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'CHR':
+                            dat2set[5] = 'CHR modifier|'+data[x][y][1]
+
+                    
+                elif data [x][0] == '[TBASE]':##traits
+                    data[x].remove('[TBASE]')
+                    for y in range(len(data[x])):
+                        traits_temp.append(data[x][y]+'\n')
+                                   
+                elif data[x][0] == '[T'+subrace.upper()+']':
+                    data[x].remove('[T'+subrace.upper()+']')
+                    for y in range(len(data[x])):
+                        traits_temp.append(data[x][y]+'\n')
+
+
+                elif data[x][0] == '[LANG]':
                     pass
-                elif data [x][0] == '[TBASE]':
+                
+                
+                            
+            ##setting roll modifiers
+            #dat2set[0] = 'aaa'
+            print('setting',dat2set)
+            self.set_Backgrounds_rollmod_LBL(dat2set)
+
+            ##setting traits menu
+            self.set_Backgrounds_traits_TRT_TXT(traits_temp)
+            
+            
+    def internal_process_backgrounddata(self):#process backgroundform refreshing for character background
+        #readingdata = [False,'',0]##reading,reader,linesleft
+        #print('::::::::::::::',self.internal_get_CBG_currselection_listbox())
+        print('<><><><>cbs',self.internal_get_CBS_currselection_listbox())
+        CBS_TEMP = self.internal_currselection_RAW_CBS_listbox()
+        
+        print(self.internal_get_CBG_currselection_listbox() !=  False,self.Backgrounds_setup_CBG_RACE_VAR != '')
+        
+        if (self.internal_get_CBG_currselection_listbox() !=  False) or(self.Backgrounds_setup_CBG_RACE_VAR != ''):
+            if self.internal_get_CBG_currselection_listbox() ==  False:##works around the listbox not having a value but having a background chosen
+                racemain = self.Backgrounds_setup_CBG_RACE_VAR
+            else:
+                racemain = self.internal_get_CBG_currselection_listbox()
+                self.Backgrounds_setup_CBG_RACE_VAR = racemain
+            print('race|'+racemain+'@@@@@@@@')
+            #self.Backgrounds_setup_CBG_RACE_VAR = racemain
+            racemain = self.Backgrounds_setup_CBG_RACE_VAR
+            data = datamain.fetch((racemain+str('.txt')))
+            #print('DATA##################\n',data)            
+##            for x in range(len(data[0])):##gets the subraces
+##                pass
+
+            if CBS_TEMP == False:
+                pass
+            else:
+                self.internal_setindex_CBS_listbox(CBS_TEMP)
+                
+            if self.internal_get_CBS_currselection_listbox() == False:
+                subrace = self.Backgrounds_setup_CBS_RACE_VAR #subrace = 'None'##allows for loading of default class values without a specific selection  
+            else:
+                subrace = self.internal_get_CBS_currselection_listbox()
+                subrace = self.Backgrounds_setup_CBS_RACE_VAR
+            self.Backgrounds_setup_CBS_RACE_VAR = subrace
+
+
+            
+            
+                
+            self.Backgrounds_setup_CBG_CURR_LBL_VAR.set(racemain)
+            self.Backgrounds_setup_CBS_CURR_LBL_VAR.set(self.Backgrounds_setup_CBS_RACE_VAR)
+
+            #assign subraces to data 
+            subraces = self.csv2array(data[0])#.remove('[BGS]')
+            #subraces = subraces.remove('[BGS]')##doesnt like being on a single line
+            subraces.remove('[BGS]')##EDIT:fixed
+            print(subraces)
+            self.internal_refresh_CBS_listbox(subraces)
+            #racesub = None
+            print('############cbs',self.internal_get_CBS_currselection_listbox())
+            
+            ##turn to array
+            for x in range(len(data)):
+                data[x] = self.csv2array(data[x])
+                
+            print('done\n',data,'\n=========')
+            dat2set = ['STR modifier|+-0',##default values
+                       'DEX modifier|+-0',
+                       'CON modifier|+-0',
+                       'INT modifier|+-0',
+                       'WIS modifier|+-0',
+                       'CHR modifier|+-0']#*6
+            print(len(dat2set))
+            
+            for x in range(len(data)):
+                if data[x][0] == '[SBASE]':##stats decode
+                    data[x].remove('[SBASE]')
+                    #print(data[x])
+                    for y in range(len(data[x])):
+                        #print(data[x][y])
+                        data[x][y] = data[x][y].split('=')
+                        print(data[x][y])
+                        #print(data)
+                        if data[x][y][0] == 'STR':
+                            dat2set[0] = 'STR modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'DEX':
+                            dat2set[1] = 'DEX modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'CON':
+                            dat2set[2] = 'CON modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'INT':
+                            dat2set[3] = 'INT modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'WIS':
+                            dat2set[4] = 'WIS modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'CHR':
+                            dat2set[5] = 'CHR modifier|'+data[x][y][1]
+                        
+                        
+                elif data [x][0] == '[TBASE]':##traits
                     pass
                 elif data[x][0] == '[LANG]':
                     pass
                 elif data[x][0] == '[S'+subrace+']':
-                    pass
+                    data[x].remove('[S'+subrace+']')
+                    #print(data[x])
+                    for y in range(len(data[x])):
+                        #print(data[x][y])
+                        data[x][y] = data[x][y].split('=')
+                        print(data[x][y])
+                        #print(data)
+                        if data[x][y][0] == 'STR':
+                            dat2set[0] = 'STR modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'DEX':
+                            dat2set[1] = 'DEX modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'CON':
+                            dat2set[2] = 'CON modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'INT':
+                            dat2set[3] = 'INT modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'WIS':
+                            dat2set[4] = 'WIS modifier|'+data[x][y][1]
+                        elif data[x][y][0] == 'CHR':
+                            dat2set[5] = 'CHR modifier|'+data[x][y][1]
+                            
                 elif data[x][0] == '[T'+subrace+']':
                     pass
+            #dat2set[0] = 'aaa'
+            print('setting',dat2set)
+            self.set_Backgrounds_rollmod_LBL(dat2set)
+            #set_Backgrounds_rollmod_LBL
+                
 ##            if racemain == 'Dwarf':
 ##                pass
 ##            elif racemain == 'Elf':
@@ -1946,6 +2204,9 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
 ##            else:
 ##                #pass
 ##                print('no race selected')
+            
+
+            
             
 class optwin:
     #CHANGED= True
