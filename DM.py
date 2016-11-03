@@ -1,8 +1,9 @@
-##d&d char she
+##d&d char sheet
+##imports
 import os,sys,random##packages
 from tkinter import *#tk
-from tkinter import messagebox,filedialog
-import MEGA
+from tkinter import messagebox,filedialog##specific imports
+import MEGA##custom lib
 
 ##tkclass##
 #inheritance testing
@@ -171,7 +172,7 @@ class main_win:
 
     def __init__(self):
         
-        self.This_win.title('Dungeon Master v1')
+        self.This_win.title('Dungeon Master v1')##title and window dimensions
         self.This_win.geometry('640x720')
         ##widgets
 
@@ -324,7 +325,8 @@ class main_win:
         secondaryskills_SRV_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_SRV_BOX_VAR).grid(row=17,column=1)#.pack()
         secondaryskills_SRV_LBL = Label(secondaryskills_LF,text = 'survival').grid(row=17,column=2)#.pack()
         secondaryskills_LF.place(x=225,y=300)        
-        
+
+        ##hpmiscskills_LF
         HPmiscskills_LF = LabelFrame(self.This_win,text = 'HP/misc')
         HPmiscskills_AMC_BOX = Entry(HPmiscskills_LF,width = 5,textvariable = self.HPmiscskills_AMC_BOX_VAR)             .grid(row=1,column=0)#.pack()
         HPmiscskills_AMC_LBL = Label(HPmiscskills_LF,text = 'armour class') .grid(row=0,column=0)#.pack()
@@ -358,7 +360,7 @@ class main_win:
         diceandsavesmisc_DF3_CHK = Checkbutton(diceandsavesmisc_LF,variable = self.diceandsavesmisc_DF3_CHK_VAR)        .grid(row=2,column=4)#.pack()
         diceandsavesmisc_LF.place(x=400,y=175)
 
-        
+        ##attackplusspells_LF
         attackplusspells_LF = LabelFrame(self.This_win,text = 'attack/magic stats')
         attackplusspells_WNM_LBL = Label(attackplusspells_LF,text = 'name') .grid(row=0,column=0)#.pack()
         attackplusspells_WN1_BOX = Entry(attackplusspells_LF,width = 7,textvariable = self.attackplusspells_WN1_BOX_VAR)             .grid(row=1,column=0)#.pack()
@@ -394,22 +396,26 @@ class main_win:
         self.personalinfo_traits_TBX_TXT = Text(personalinfo_traits_LF,height = 5,width = 25)#add scrollbar to list
         self.personalinfo_traits_TBX_TXT.grid(row=0,column=0)
         personalinfo_traits_LF.place(x=600,y=50)
-        
+
+        #ideals
         personalinfo_ideals_LF = LabelFrame(self.This_win,text = 'ideals')
         self.personalinfo_ideals_TBX_TXT = Text(personalinfo_ideals_LF,height = 5,width = 25)#add scrollbar to list
         self.personalinfo_ideals_TBX_TXT.grid(row=0,column=0)
         personalinfo_ideals_LF.place(x=600,y=100)
-        
+
+        #bond
         personalinfo_bonds_LF = LabelFrame(self.This_win,text = 'bonds')
         self.personalinfo_bonds_TBX_TXT = Text(personalinfo_bonds_LF,height = 5,width = 25)#add scrollbar to list
         self.personalinfo_bonds_TBX_TXT.grid(row=0,column=0)
         personalinfo_bonds_LF.place(x=600,y=200)
-        
+
+        #personailty flaw
         personalinfo_flaws_LF = LabelFrame(self.This_win,text = 'flaws')
         self.personalinfo_flaws_TBX_TXT = Text(personalinfo_flaws_LF,height = 5,width = 25)#add scrollbar to list
         self.personalinfo_flaws_TBX_TXT.grid(row=0,column=0)
         personalinfo_flaws_LF.place(x=600,y=300)
 
+        #other personailty feature
         personalinfo_features_LF = LabelFrame(self.This_win,text = 'personality traits')
         self.personalinfo_features_TBX_TXT = Text(personalinfo_features_LF,height = 25,width = 25)#add scrollbar to list
         self.personalinfo_features_TBX_TXT.grid(row=0,column=0)
@@ -426,27 +432,33 @@ class main_win:
         ###print(self.get_primaryattributes())
         ##print(self.get_savingthrows())
         #print(self.attackplusspells_MSC_TXT)
+        
+        ##defining topbar menu on the top of the main window
         Menu_main = Menu(self.This_win)
         
-        Menu_FileIO = Menu(Menu_main,tearoff = 0)
+        Menu_FileIO = Menu(Menu_main,tearoff = 0)##file tab
         Menu_FileIO.add_command(label="New", command=self.sub_button_newfile)
         Menu_FileIO.add_command(label="Load", command=self.sub_button_loadfile)
         Menu_FileIO.add_command(label="Save", command=self.sub_button_savefile)
         Menu_FileIO.add_command(label="Save As", command=self.sub_button_savefile_as)
         
-        Menu_settings = Menu(Menu_main,tearoff = 0)
+        Menu_settings = Menu(Menu_main,tearoff = 0)##tools tab
         #Menu_settings = Menu(menubar, tearoff=0)
         Menu_settings.add_command(label="dice roller", command=dicewin)
         Menu_settings.add_command(label="combat helper")#, command=Menu_customchoose_window)
 
+        ##define menu tearoffs
         Menu_main.add_cascade(label = '|File|',menu = Menu_FileIO)
         Menu_main.add_cascade(label = '|Tools|',menu = Menu_settings)
         Menu_main.add_command(label="|Options|",command = optwin)#, command=Menu_preview_window)
         Menu_main.add_command(label="|create new preset character|",command = createcharwin)#, command=Menu_preview_window)
-        self.This_win.config(menu=Menu_main)#title = 'Link Roulette'
-        self.This_win.after(1500,self.Alt_loop)
-        self.This_win.mainloop()
-    def Alt_loop(self):
+
+        ##post widget code
+        self.This_win.config(menu=Menu_main)##attach menu to window
+        self.This_win.after(1500,self.Alt_loop)##alternate event loop for other parts of code(seperate event loop hooked intotkinters primary event loop)
+        self.This_win.mainloop()##start window event loop
+        
+    def Alt_loop(self):##alt event loop code
         ##additional event loop code here
         #print(self.get_attackplusspells())
         #print(self.get_secondaryskills())
@@ -463,6 +475,7 @@ class main_win:
         ##end
         self.This_win.after(1500,self.Alt_loop)
 
+    #useful functions
     def array2csv(self,array):##from beelib
         temp = ''
         for fl in array:
@@ -505,7 +518,7 @@ class main_win:
                 temp += strng[x]
         return temp
 
-    def readfile(self,fname):
+    def readfile(self,fname):##file io
         try:
             f = open(fname,'r')
             data = f.readlines()
@@ -517,7 +530,7 @@ class main_win:
                 print('error/file already closed!')
         return data
 
-    def writefile(self,fname,dat,ARRAY = True):
+    def writefile(self,fname,dat,ARRAY = True):##file io
         try:
             f = open(fname,'w')
             if ARRAY == True:
@@ -533,7 +546,7 @@ class main_win:
             except:
                 print('error/file already closed!')
                                    
-        
+     ## askfiledialog used here   
     def internal_savefileaskchecker(self):##returns name and true if file exists
         FPath = filedialog.asksaveasfilename(filetypes=(("D&D character sheet", "*.MEGA"),("All Files", "*.*") ))##adv extention is forced onto ##EDIT took out this defaultextension=".ADV", 
         EXISTS_FLAG = False
@@ -553,10 +566,12 @@ class main_win:
             EXISTS_FLAG = False
         print(os.path.isfile(FPath))
         return[FPath,EXISTS_FLAG]
+    ####
     
 ##    def internal_update_Charsheet(self,data):
 ##        self.set_ALL(data)
     
+    ##mega file save prep
     def internal_prepsave(self,GotData):##handles conversion for data to save in megafile
         ##doublecheck this vs
         Fn = ['charbase',
@@ -711,7 +726,7 @@ class main_win:
         
         return dat2rt#GotData#dat2rt
         
-            
+    ##prepares for loading        
     def internal_prepload(self,xdat):
         print('x'+str(xdat))
         Fn = ['charbase',
@@ -843,6 +858,7 @@ class main_win:
         
         else:
             print('unused file in loading')#,xdat[0])
+    ##additional data manipulation to ensure data is fromatted properly        
     def internal_loadRC(self,xdat):
         temp = []
         temp.append(xdat[0])
@@ -860,6 +876,9 @@ class main_win:
         temp.append(xdat[13])
         temp.append([xdat[14],xdat[15],xdat[16],xdat[17],xdat[18]])
         return temp
+    
+    ##button commands
+    ##new file button on menubar file
     def sub_button_newfile(self):##Testcharacter1
         Fpath = self.internal_savefileaskchecker()
         #Fpath[0] = self.internal_resolve_ADV(Fpath[0])
@@ -918,6 +937,8 @@ class main_win:
 ##        FPath = filedialog.askopenfilename(defaultextension=".ADV", filetypes=(("D&D character sheet", "*.ADV"),("All Files", "*.*") ))
 ##        #dat = self.readfile(FPath)
 ##        self.QS_path_currfile = FPath##sets var for quicksaving
+                
+    ## load file button on menubar file
     def sub_button_loadfile(self):##load file menubutton
         FPath = self.internal_loadfileaskchecker()
         print(FPath)
@@ -948,6 +969,7 @@ class main_win:
         #dat = self.readfile(FPath)
         #self.QS_path_currfile = FPath##sets var for quicksaving
 
+    #save file button on menubar file
     def sub_button_savefile(self):##save file menubutton
         if self.IS_LOADED == True:
             dat = self.get_ALL()
@@ -979,7 +1001,8 @@ class main_win:
             #pass
             self.sub_button_savefile_as()#hack for moment
             #self.
-            
+
+    #save file as button on menubar file        
     def sub_button_savefile_as(self):##save as separate file ##later add :if no file is loaded load file as existing
         FP = self.internal_savefileaskchecker()
         print(FP)
@@ -1012,7 +1035,8 @@ class main_win:
                     print('Done')
                 self.base_ADV.save()
             #self.internal_savefile(FP[0])
-        
+
+    #get functions for returning variables by section(easier than calling individually)   
     ##get
     def get_charbase_name(self):
         return[
@@ -1192,6 +1216,7 @@ class main_win:
 
 
     ##SETTING DATA
+    ##set functions for setting by area(easier then individually)
     #base stats
     def set_charbase_name(self,data):
         self.charbase_name_CNM_BOX_VAR.set(data[0])
@@ -1388,7 +1413,7 @@ class main_win:
     def get_a():
         pass
             
-            
+#dice roller window(instanced from menubar tools/dice roller)            
 class dicewin:
     #This_win = Toplevel
     #print('init')
@@ -1428,6 +1453,7 @@ class dicewin:
         ##end
         self.This_win.after(1500,self.Alt_loop)
 
+    #rolls dice
     def roll_die(self):##maybe problem
         d = self.get_diceroller()
         r = 0##random roll
@@ -1438,14 +1464,20 @@ class dicewin:
         else:
             r= self.internal_roller(int(d))
         self.set_rollerlabel(str(r)+'  ')
-        
+
+    ##returns random number    
     def internal_roller(self,number):
         return random.randint(0,number)
+
+    ##gets dice type
     def get_diceroller(self):
         return self.Diceroller_DX1_RAD_VAR.get()
+    
+    ##sets label of output and formats
     def set_rollerlabel(self,data):
         self.Diceroller_RDR_LBL_VAR.set('you rolled a |'+str(data))
         
+##creation of custom character window class(instanced from menubar create new preset character)        
 class createcharwin:#(main_win):##better to create new window form,from scratch
     #vars
     char_BG_NAMES = []
@@ -1496,7 +1528,67 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     ##race variable
    #Backgrounds_setup_CBS_RACE_VAR = ''
    #Backgrounds_setup_CBG_RACE_VAR = 'None'
+    ##hpmiscskills
+    HPmiscskills_AMC_BOX_VAR = StringVar()
+    HPmiscskills_INI_BOX_VAR = StringVar()
+    HPmiscskills_SPD_BOX_VAR = StringVar()
+    HPmiscskills_HMX_BOX_VAR = StringVar()
+    HPmiscskills_HTP_BOX_VAR = StringVar()
+    HPmiscskills_HCR_BOX_VAR = StringVar()
+
+    ##saving throws
+    savingthrows_STR_CHK_VAR = IntVar()##chkboxes
+    savingthrows_DEX_CHK_VAR = IntVar()
+    savingthrows_CON_CHK_VAR = IntVar()
+    savingthrows_INT_CHK_VAR = IntVar()
+    savingthrows_WIS_CHK_VAR = IntVar()
+    savingthrows_CHR_CHK_VAR = IntVar()
     
+    savingthrows_STR_BOX_VAR = StringVar()##entries
+    savingthrows_DEX_BOX_VAR = StringVar()
+    savingthrows_CON_BOX_VAR = StringVar()
+    savingthrows_INT_BOX_VAR = StringVar()
+    savingthrows_WIS_BOX_VAR = StringVar()
+    savingthrows_CHR_BOX_VAR = StringVar()
+
+    
+    ##secondary skills
+    secondaryskills_ACR_CHK_VAR = IntVar()
+    secondaryskills_ACR_BOX_VAR = StringVar()
+    secondaryskills_ANH_CHK_VAR = IntVar()
+    secondaryskills_ANH_BOX_VAR = StringVar()
+    secondaryskills_ARC_CHK_VAR = IntVar()
+    secondaryskills_ARC_BOX_VAR = StringVar()
+    secondaryskills_ATH_CHK_VAR = IntVar()
+    secondaryskills_ATH_BOX_VAR = StringVar()
+    secondaryskills_DEC_CHK_VAR = IntVar()
+    secondaryskills_DEC_BOX_VAR = StringVar()
+    secondaryskills_HIS_CHK_VAR = IntVar()
+    secondaryskills_HIS_BOX_VAR = StringVar()
+    secondaryskills_CHR_CHK_VAR = IntVar()
+    secondaryskills_CHR_BOX_VAR = StringVar()
+    secondaryskills_IDT_CHK_VAR = IntVar()
+    secondaryskills_IDT_BOX_VAR = StringVar()
+    secondaryskills_INV_CHK_VAR = IntVar()
+    secondaryskills_INV_BOX_VAR = StringVar()
+    secondaryskills_MED_CHK_VAR = IntVar()
+    secondaryskills_MED_BOX_VAR = StringVar()
+    secondaryskills_NAT_CHK_VAR = IntVar()
+    secondaryskills_NAT_BOX_VAR = StringVar()
+    secondaryskills_PER_CHK_VAR = IntVar()
+    secondaryskills_PER_BOX_VAR = StringVar()
+    secondaryskills_PRF_CHK_VAR = IntVar()
+    secondaryskills_PRF_BOX_VAR = StringVar()
+    secondaryskills_PRS_CHK_VAR = IntVar()
+    secondaryskills_PRS_BOX_VAR = StringVar()
+    secondaryskills_REL_CHK_VAR = IntVar()
+    secondaryskills_REL_BOX_VAR = StringVar()
+    secondaryskills_SOH_CHK_VAR = IntVar()
+    secondaryskills_SOH_BOX_VAR = StringVar()
+    secondaryskills_STE_CHK_VAR = IntVar()
+    secondaryskills_STE_BOX_VAR = StringVar()
+    secondaryskills_SRV_CHK_VAR = IntVar()
+    secondaryskills_SRV_BOX_VAR = StringVar()
 
 
     
@@ -1594,8 +1686,24 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.Backgrounds_LANG_TRT_TXT .grid(row=0,column=0)#.pack() ##was height 10
         Backgrounds_LANG_LF.place(x=675,y=200)
 
-        HPMISC_SETUP_LF = LabelFrame(self.This_win,text = 'armour class\nhealth stats selection')
-        HPMISC_SETUP_LF.place(x=0,y=0)
+        ##hp misc stuff
+##        HPMISC_SETUP_LF = LabelFrame(self.This_win,text = 'armour class\nhealth stats selection')
+##        HPMISC_SETUP_LF.place(x=0,y=0)
+        HPmiscskills_LF = LabelFrame(self.This_win,text = 'BG\nHP/misc')
+        HPmiscskills_AMC_BOX = Entry(HPmiscskills_LF,width = 5,textvariable = self.HPmiscskills_AMC_BOX_VAR)             .grid(row=1,column=0)#.pack()
+        HPmiscskills_AMC_LBL = Label(HPmiscskills_LF,text = 'armour class') .grid(row=0,column=0)#.pack()
+        HPmiscskills_INI_BOX = Entry(HPmiscskills_LF,width = 5,textvariable = self.HPmiscskills_INI_BOX_VAR)             .grid(row=1,column=1)#.pack()
+        HPmiscskills_INI_LBL = Label(HPmiscskills_LF,text = 'initiative')   .grid(row=0,column=1)#.pack()
+        HPmiscskills_SPD_BOX = Entry(HPmiscskills_LF,width = 5,textvariable = self.HPmiscskills_SPD_BOX_VAR)             .grid(row=1,column=2)#.pack()
+        HPmiscskills_SPD_LBL = Label(HPmiscskills_LF,text = 'Speed')        .grid(row=0,column=2)#.pack()
+        
+        HPmiscskills_HMX_BOX = Entry(HPmiscskills_LF,width = 4,textvariable = self.HPmiscskills_HMX_BOX_VAR)             .grid(row=4,column=1)#.pack()
+        HPmiscskills_HMX_LBL = Label(HPmiscskills_LF,text = 'MAX HP')        .grid(row=4,column=0)#.pack()
+        HPmiscskills_HTP_BOX = Entry(HPmiscskills_LF,width = 4,textvariable = self.HPmiscskills_HTP_BOX_VAR,state = DISABLED)              .grid(row=5,column=1)#.pack()
+        HPmiscskills_HTP_LBL = Label(HPmiscskills_LF,text = 'temp HP')        .grid(row=5,column=0)#.pack()
+        HPmiscskills_HCR_BOX = Entry(HPmiscskills_LF,width = 4,textvariable = self.HPmiscskills_HCR_BOX_VAR)              .grid(row=6,column=1)#.pack()
+        HPmiscskills_HCR_LBL = Label(HPmiscskills_LF,text = 'current HP')        .grid(row=6,column=0)#.pack()
+        HPmiscskills_LF.place(x=500,y=675)##was 375
 
         Backgrounds_setup_misctraits_LF = LabelFrame(self.This_win,text = 'MISC\nBackground traits setup')
         Backgrounds_setup_misctraits_DPT_LBL = Label(Backgrounds_setup_misctraits_LF,text = 'Pick a personailty trait!').grid(row=0,column=1)
@@ -1612,6 +1720,86 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.Backgrounds_setup_misctraits_DPF_LBX.grid(row=1,column=4)
         Backgrounds_setup_misctraits_RNG_BTN = Button(Backgrounds_setup_misctraits_LF,text = 'Randomize\nall selections!').grid(row=2,column=1)
         Backgrounds_setup_misctraits_LF.place(x=825,y=0)#.grid(row=0,column=0)
+
+        #savingthrows_LF
+        savingthrows_LF = LabelFrame(self.This_win,text = 'BG\nSaving Throws')
+        savingthrows_STR_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_STR_CHK_VAR).grid(row = 0,column=0)#.pack()
+        savingthrows_STR_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_STR_BOX_VAR).grid(row = 0,column=1)#.pack()
+        savingthrows_STR_LBL = Label(savingthrows_LF,text = 'Strength')                                     .grid(row = 0,column=2)#.pack()
+        savingthrows_DEX_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_DEX_CHK_VAR).grid(row = 1,column=0)#.pack()
+        savingthrows_DEX_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_DEX_BOX_VAR).grid(row = 1,column=1)#.pack()
+        savingthrows_DEX_LBL = Label(savingthrows_LF,text = 'Dexterity')                                    .grid(row = 1,column=2)#.pack()
+        savingthrows_CON_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_CON_CHK_VAR).grid(row = 2,column=0)#.pack()
+        savingthrows_CON_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_CON_BOX_VAR).grid(row = 2,column=1)#.pack()
+        savingthrows_CON_LBL = Label(savingthrows_LF,text = 'Constitution')                                 .grid(row = 2,column=2)#.pack()
+        savingthrows_INT_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_INT_CHK_VAR).grid(row = 3,column=0)#.pack()
+        savingthrows_INT_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_INT_BOX_VAR).grid(row = 3,column=1)#.pack()
+        savingthrows_INT_LBL = Label(savingthrows_LF,text = 'Intelligence')                                 .grid(row = 3,column=2)#.pack()
+        savingthrows_WIS_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_WIS_CHK_VAR).grid(row = 4,column=0)#.pack()
+        savingthrows_WIS_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_WIS_BOX_VAR).grid(row = 4,column=1)#.pack()
+        savingthrows_WIS_LBL = Label(savingthrows_LF,text = 'Wisdom')                                       .grid(row = 4,column=2)#.pack()
+        savingthrows_CHR_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_CHR_CHK_VAR).grid(row = 5,column=0)#.pack()
+        savingthrows_CHR_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_CHR_BOX_VAR).grid(row = 5,column=1)#.pack()
+        savingthrows_CHR_LBL = Label(savingthrows_LF,text = 'Charisma')                                     .grid(row = 5,column=2)#.pack()
+        savingthrows_LF.place(x=325,y=130)
+
+        #secondaryskills_LF
+        secondaryskills_LF = LabelFrame(self.This_win,text = 'BG\nskills')
+        secondaryskills_ACR_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_ACR_CHK_VAR).grid(row=0,column=0)#).pack(side=LEFT)
+        secondaryskills_ACR_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ACR_BOX_VAR).grid(row=0,column=1)#.pack()
+        secondaryskills_ACR_LBL = Label(secondaryskills_LF,text = 'acrobatics').grid(row=0,column=2)#.pack()
+        secondaryskills_ANH_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_ANH_CHK_VAR).grid(row=1,column=0)#.pack()
+        secondaryskills_ANH_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ANH_BOX_VAR).grid(row=1,column=1)#.pack()
+        secondaryskills_ANH_LBL = Label(secondaryskills_LF,text = 'animal handling').grid(row=1,column=2)#.pack()
+        secondaryskills_ARC_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_ARC_CHK_VAR).grid(row=2,column=0)#.pack()
+        secondaryskills_ARC_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ARC_BOX_VAR).grid(row=2,column=1)#.pack()
+        secondaryskills_ARC_LBL = Label(secondaryskills_LF,text = 'arcana').grid(row=2,column=2)#.pack()
+        secondaryskills_ATH_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_ATH_CHK_VAR).grid(row=3,column=0)#.pack()
+        secondaryskills_ATH_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ATH_BOX_VAR).grid(row=3,column=1)#.pack()
+        secondaryskills_ATH_LBL = Label(secondaryskills_LF,text = 'athletics').grid(row=3,column=2)#.pack()
+        secondaryskills_DEC_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_DEC_CHK_VAR).grid(row=4,column=0)#.pack()
+        secondaryskills_DEC_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_DEC_BOX_VAR).grid(row=4,column=1)#.pack()
+        secondaryskills_DEC_LBL = Label(secondaryskills_LF,text = 'deception').grid(row=4,column=2)#.pack()
+        secondaryskills_HIS_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_HIS_CHK_VAR).grid(row=5,column=0)#.pack()
+        secondaryskills_HIS_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_HIS_BOX_VAR).grid(row=5,column=1)#.pack()
+        secondaryskills_HIS_LBL = Label(secondaryskills_LF,text = 'history').grid(row=5,column=2)#.pack()
+        secondaryskills_CHR_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_CHR_CHK_VAR).grid(row=6,column=0)#.pack()
+        secondaryskills_CHR_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_CHR_BOX_VAR).grid(row=6,column=1)#.pack()
+        secondaryskills_CHR_LBL = Label(secondaryskills_LF,text = 'insight').grid(row=6,column=2)#.pack()
+        secondaryskills_IDT_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_IDT_CHK_VAR).grid(row=7,column=0)#.pack()
+        secondaryskills_IDT_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_IDT_BOX_VAR).grid(row=7,column=1)#.pack()
+        secondaryskills_IDT_LBL = Label(secondaryskills_LF,text = 'intimidation').grid(row=7,column=2)#.pack()
+        secondaryskills_INV_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_INV_CHK_VAR).grid(row=8,column=0)#.pack()
+        secondaryskills_INV_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_INV_BOX_VAR).grid(row=8,column=1)#.pack()
+        secondaryskills_INV_LBL = Label(secondaryskills_LF,text = 'investigation').grid(row=8,column=2)#.pack()
+        secondaryskills_MED_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_MED_CHK_VAR).grid(row=9,column=0)#.pack()
+        secondaryskills_MED_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_MED_BOX_VAR).grid(row=9,column=1)#.pack()
+        secondaryskills_MED_LBL = Label(secondaryskills_LF,text = 'medicine').grid(row=9,column=2)#.pack()
+        secondaryskills_NAT_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_NAT_CHK_VAR).grid(row=10,column=0)#.pack()
+        secondaryskills_NAT_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_NAT_BOX_VAR).grid(row=10,column=1)#.pack()
+        secondaryskills_NAT_LBL = Label(secondaryskills_LF,text = 'nature').grid(row=10,column=2)#.pack()
+        secondaryskills_PER_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_PER_CHK_VAR).grid(row=11,column=0)#.pack()
+        secondaryskills_PER_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_PER_BOX_VAR).grid(row=11,column=1)#.pack()
+        secondaryskills_PER_LBL = Label(secondaryskills_LF,text = 'perception').grid(row=11,column=2)#.pack()
+        secondaryskills_PRF_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_PRF_CHK_VAR).grid(row=12,column=0)#.pack()
+        secondaryskills_PRF_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_PRF_BOX_VAR).grid(row=12,column=1)#.pack()
+        secondaryskills_PRF_LBL = Label(secondaryskills_LF,text = 'performance').grid(row=12,column=2)#.pack()
+        secondaryskills_PRS_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_PRS_CHK_VAR).grid(row=13,column=0)#.pack()
+        secondaryskills_PRS_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_PRS_BOX_VAR).grid(row=13,column=1)#.pack()
+        secondaryskills_PRS_LBL = Label(secondaryskills_LF,text = 'persuasion').grid(row=13,column=2)#.pack()
+        secondaryskills_REL_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_REL_CHK_VAR).grid(row=14,column=0)#.pack()
+        secondaryskills_REL_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_REL_BOX_VAR).grid(row=14,column=1)#.pack()
+        secondaryskills_REL_LBL = Label(secondaryskills_LF,text = 'religion').grid(row=14,column=2)#.pack()
+        secondaryskills_SOH_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_SOH_CHK_VAR).grid(row=15,column=0)#.pack()
+        secondaryskills_SOH_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_SOH_BOX_VAR).grid(row=15,column=1)#.pack()
+        secondaryskills_SOH_LBL = Label(secondaryskills_LF,text = 'sleight of hand').grid(row=15,column=2)#.pack()
+        secondaryskills_STE_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_STE_CHK_VAR).grid(row=16,column=0)#.pack()
+        secondaryskills_STE_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_STE_BOX_VAR).grid(row=16,column=1)#.pack()
+        secondaryskills_STE_LBL = Label(secondaryskills_LF,text = 'stealth').grid(row=16,column=2)#.pack()
+        secondaryskills_SRV_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_SRV_CHK_VAR).grid(row=17,column=0)#.pack()
+        secondaryskills_SRV_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_SRV_BOX_VAR).grid(row=17,column=1)#.pack()
+        secondaryskills_SRV_LBL = Label(secondaryskills_LF,text = 'survival').grid(row=17,column=2)#.pack()
+        secondaryskills_LF.place(x=325,y=315)
 
         Backgrounds_misctraits_LF = LabelFrame(self.This_win,text = 'MISC\nBackground traits setup')
         Backgrounds_misctraits_DPT_LBL_LBL = Label(Backgrounds_misctraits_LF,text = '==personailty trait==').grid(row=0,column=0)##displaypersonalitytrait
@@ -1632,9 +1820,10 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'reset character',command = self.sub_button_CLR).grid(row=1,column=0)
         finalizechar_setup_LF.place(x=200,y=500)
         #print('x',self.primaryattributes_setup_DRL_LBX)
+
         
         ## post widget code
-        self.internal_preload_data()#loads listbox
+        self.internal_preload_data()#loads listboxes
 
         #tkloop
         
@@ -1914,11 +2103,17 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
 
 
     
-    def internal_preload_data(self):##populates class listbox with values
+    def internal_preload_data(self):#pre loads some data
+        #race listbox
+        ##populates class listbox with values
+        
         print('loading')
         bgs = self.internal_process_getBG()
         print('bgs\n',bgs)
         self.internal_refresh_CBG_listbox(bgs)
+        
+        ##class listbox
+        self.internal_refresh_CBO_listbox(['Cleric','Fighter','Rogue','Wizard'])
         
     def internal_process_getBG(self):##gets preset character backgrounds
         Files_dat = datamain.peek()
@@ -1992,7 +2187,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             return False
     def internal_setindex_CBS_listbox(self,Iitem):#change index in listbox
         self.Backgrounds_setup_CBS_LBX.activate(Iitem)
-
+    ########
+        
     #Characterclasslistbox functions
     #Backgrounds_setup_CBO_LBX
     def internal_get_CBO_currselection_listbox(self):
@@ -2028,6 +2224,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def internal_setindex_CBO_listbox(self,Iitem):#change index in listbox
         self.Backgrounds_setup_CBO_LBX.activate(Iitem)
         
+    ########
         
     def internal_stripbrackets(self,strng):
         return strng[:-1].strip('[')
@@ -2061,6 +2258,9 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                     for y in range(len(data[x])):
                         lang_temp.append(data[x][y]+'\n')
                         print(data[x][y])
+                if data[x][0] == '[SPD]':
+                    data[x].remove('[SPD]')
+                    self.HPmiscskills_SPD_BOX_VAR.set(data[x][0])
             print(lang_temp)
             self.set_Backgrounds_LANG_TRT_TXT(lang_temp)##clears textbox then adds
             
@@ -2167,147 +2367,156 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             #self.set_Backgrounds_LANG_TRT_TXT(lang_temp)
             
 
-    def sub_button_confirmclass(self):
+    def sub_button_confirmclass(self):#'Cleric','Fighter','Rogue','Wizard'
         if self.internal_get_CBO_currselection_listbox() ==  False:
             pass
         else:
             charclass = self.internal_get_CBO_currselection_listbox()
-
-    ##not used anymore split up within button functions
-    def internal_process_backgrounddata(self):#process backgroundform refreshing for character background
-        #readingdata = [False,'',0]##reading,reader,linesleft
-        #print('::::::::::::::',self.internal_get_CBG_currselection_listbox())
-        print('<><><><>cbs',self.internal_get_CBS_currselection_listbox())
-        CBS_TEMP = self.internal_currselection_RAW_CBS_listbox()
-        
-        print(self.internal_get_CBG_currselection_listbox() !=  False,self.Backgrounds_setup_CBG_RACE_VAR != '')
-        
-        if (self.internal_get_CBG_currselection_listbox() !=  False) or(self.Backgrounds_setup_CBG_RACE_VAR != ''):
-            if self.internal_get_CBG_currselection_listbox() ==  False:##works around the listbox not having a value but having a background chosen
-                racemain = self.Backgrounds_setup_CBG_RACE_VAR
-            else:
-                racemain = self.internal_get_CBG_currselection_listbox()
-                self.Backgrounds_setup_CBG_RACE_VAR = racemain
-            print('race|'+racemain+'@@@@@@@@')
-            #self.Backgrounds_setup_CBG_RACE_VAR = racemain
-            racemain = self.Backgrounds_setup_CBG_RACE_VAR
-            data = datamain.fetch((racemain+str('.txt')))
-            #print('DATA##################\n',data)            
-##            for x in range(len(data[0])):##gets the subraces
-##                pass
-
-            if CBS_TEMP == False:
+            self.Backgrounds_setup_CBO_CURR_LBL_VAR.set(charclass)
+            if charclass == 'Cleric':
                 pass
-            else:
-                self.internal_setindex_CBS_listbox(CBS_TEMP)
-                
-            if self.internal_get_CBS_currselection_listbox() == False:
-                subrace = self.Backgrounds_setup_CBS_RACE_VAR #subrace = 'None'##allows for loading of default class values without a specific selection  
-            else:
-                subrace = self.internal_get_CBS_currselection_listbox()
-                subrace = self.Backgrounds_setup_CBS_RACE_VAR
-            self.Backgrounds_setup_CBS_RACE_VAR = subrace
+            elif charclass == 'Fighter':
+                pass
+            elif charclass == 'Rogue':
+                pass
+            elif charclass == 'Wizard':
+                pass
 
-
-            
-            
-                
-            self.Backgrounds_setup_CBG_CURR_LBL_VAR.set(racemain)
-            self.Backgrounds_setup_CBS_CURR_LBL_VAR.set(self.Backgrounds_setup_CBS_RACE_VAR)
-
-            #assign subraces to data 
-            subraces = self.csv2array(data[0])#.remove('[BGS]')
-            #subraces = subraces.remove('[BGS]')##doesnt like being on a single line
-            subraces.remove('[BGS]')##EDIT:fixed
-            print(subraces)
-            self.internal_refresh_CBS_listbox(subraces)
-            #racesub = None
-            print('############cbs',self.internal_get_CBS_currselection_listbox())
-            
-            ##turn to array
-            for x in range(len(data)):
-                data[x] = self.csv2array(data[x])
-                
-            print('done\n',data,'\n=========')
-            dat2set = ['STR modifier|+-0',##default values
-                       'DEX modifier|+-0',
-                       'CON modifier|+-0',
-                       'INT modifier|+-0',
-                       'WIS modifier|+-0',
-                       'CHR modifier|+-0']#*6
-            print(len(dat2set))
-            
-            for x in range(len(data)):
-                if data[x][0] == '[SBASE]':##stats decode
-                    data[x].remove('[SBASE]')
-                    #print(data[x])
-                    for y in range(len(data[x])):
-                        #print(data[x][y])
-                        data[x][y] = data[x][y].split('=')
-                        print(data[x][y])
-                        #print(data)
-                        if data[x][y][0] == 'STR':
-                            dat2set[0] = 'STR modifier|'+data[x][y][1]
-                        elif data[x][y][0] == 'DEX':
-                            dat2set[1] = 'DEX modifier|'+data[x][y][1]
-                        elif data[x][y][0] == 'CON':
-                            dat2set[2] = 'CON modifier|'+data[x][y][1]
-                        elif data[x][y][0] == 'INT':
-                            dat2set[3] = 'INT modifier|'+data[x][y][1]
-                        elif data[x][y][0] == 'WIS':
-                            dat2set[4] = 'WIS modifier|'+data[x][y][1]
-                        elif data[x][y][0] == 'CHR':
-                            dat2set[5] = 'CHR modifier|'+data[x][y][1]
-                        
-                        
-                elif data [x][0] == '[TBASE]':##traits
-                    pass
-                elif data[x][0] == '[LANG]':
-                    pass
-                elif data[x][0] == '[S'+subrace+']':
-                    data[x].remove('[S'+subrace+']')
-                    #print(data[x])
-                    for y in range(len(data[x])):
-                        #print(data[x][y])
-                        data[x][y] = data[x][y].split('=')
-                        print(data[x][y])
-                        #print(data)
-                        if data[x][y][0] == 'STR':
-                            dat2set[0] = 'STR modifier|'+data[x][y][1]
-                        elif data[x][y][0] == 'DEX':
-                            dat2set[1] = 'DEX modifier|'+data[x][y][1]
-                        elif data[x][y][0] == 'CON':
-                            dat2set[2] = 'CON modifier|'+data[x][y][1]
-                        elif data[x][y][0] == 'INT':
-                            dat2set[3] = 'INT modifier|'+data[x][y][1]
-                        elif data[x][y][0] == 'WIS':
-                            dat2set[4] = 'WIS modifier|'+data[x][y][1]
-                        elif data[x][y][0] == 'CHR':
-                            dat2set[5] = 'CHR modifier|'+data[x][y][1]
-                            
-                elif data[x][0] == '[T'+subrace+']':
-                    pass
-            #dat2set[0] = 'aaa'
-            print('setting',dat2set)
-            self.set_Backgrounds_rollmod_LBL(dat2set)
-            #set_Backgrounds_rollmod_LBL
-                
-##            if racemain == 'Dwarf':
-##                pass
-##            elif racemain == 'Elf':
-##                pass
-##            elif racemain == 'Halfling':
-##                pass
-##            elif racemain == 'Human':
+##    ##not used anymore split up within button functions
+##    def internal_process_backgrounddata(self):#process backgroundform refreshing for character background
+##        #readingdata = [False,'',0]##reading,reader,linesleft
+##        #print('::::::::::::::',self.internal_get_CBG_currselection_listbox())
+##        print('<><><><>cbs',self.internal_get_CBS_currselection_listbox())
+##        CBS_TEMP = self.internal_currselection_RAW_CBS_listbox()
+##        
+##        print(self.internal_get_CBG_currselection_listbox() !=  False,self.Backgrounds_setup_CBG_RACE_VAR != '')
+##        
+##        if (self.internal_get_CBG_currselection_listbox() !=  False) or(self.Backgrounds_setup_CBG_RACE_VAR != ''):
+##            if self.internal_get_CBG_currselection_listbox() ==  False:##works around the listbox not having a value but having a background chosen
+##                racemain = self.Backgrounds_setup_CBG_RACE_VAR
+##            else:
+##                racemain = self.internal_get_CBG_currselection_listbox()
+##                self.Backgrounds_setup_CBG_RACE_VAR = racemain
+##            print('race|'+racemain+'@@@@@@@@')
+##            #self.Backgrounds_setup_CBG_RACE_VAR = racemain
+##            racemain = self.Backgrounds_setup_CBG_RACE_VAR
+##            data = datamain.fetch((racemain+str('.txt')))
+##            #print('DATA##################\n',data)            
+####            for x in range(len(data[0])):##gets the subraces
+####                pass
+##
+##            if CBS_TEMP == False:
 ##                pass
 ##            else:
-##                #pass
-##                print('no race selected')
-            
+##                self.internal_setindex_CBS_listbox(CBS_TEMP)
+##                
+##            if self.internal_get_CBS_currselection_listbox() == False:
+##                subrace = self.Backgrounds_setup_CBS_RACE_VAR #subrace = 'None'##allows for loading of default class values without a specific selection  
+##            else:
+##                subrace = self.internal_get_CBS_currselection_listbox()
+##                subrace = self.Backgrounds_setup_CBS_RACE_VAR
+##            self.Backgrounds_setup_CBS_RACE_VAR = subrace
+##
+##
+##            
+##            
+##                
+##            self.Backgrounds_setup_CBG_CURR_LBL_VAR.set(racemain)
+##            self.Backgrounds_setup_CBS_CURR_LBL_VAR.set(self.Backgrounds_setup_CBS_RACE_VAR)
+##
+##            #assign subraces to data 
+##            subraces = self.csv2array(data[0])#.remove('[BGS]')
+##            #subraces = subraces.remove('[BGS]')##doesnt like being on a single line
+##            subraces.remove('[BGS]')##EDIT:fixed
+##            print(subraces)
+##            self.internal_refresh_CBS_listbox(subraces)
+##            #racesub = None
+##            print('############cbs',self.internal_get_CBS_currselection_listbox())
+##            
+##            ##turn to array
+##            for x in range(len(data)):
+##                data[x] = self.csv2array(data[x])
+##                
+##            print('done\n',data,'\n=========')
+##            dat2set = ['STR modifier|+-0',##default values
+##                       'DEX modifier|+-0',
+##                       'CON modifier|+-0',
+##                       'INT modifier|+-0',
+##                       'WIS modifier|+-0',
+##                       'CHR modifier|+-0']#*6
+##            print(len(dat2set))
+##            
+##            for x in range(len(data)):
+##                if data[x][0] == '[SBASE]':##stats decode
+##                    data[x].remove('[SBASE]')
+##                    #print(data[x])
+##                    for y in range(len(data[x])):
+##                        #print(data[x][y])
+##                        data[x][y] = data[x][y].split('=')
+##                        print(data[x][y])
+##                        #print(data)
+##                        if data[x][y][0] == 'STR':
+##                            dat2set[0] = 'STR modifier|'+data[x][y][1]
+##                        elif data[x][y][0] == 'DEX':
+##                            dat2set[1] = 'DEX modifier|'+data[x][y][1]
+##                        elif data[x][y][0] == 'CON':
+##                            dat2set[2] = 'CON modifier|'+data[x][y][1]
+##                        elif data[x][y][0] == 'INT':
+##                            dat2set[3] = 'INT modifier|'+data[x][y][1]
+##                        elif data[x][y][0] == 'WIS':
+##                            dat2set[4] = 'WIS modifier|'+data[x][y][1]
+##                        elif data[x][y][0] == 'CHR':
+##                            dat2set[5] = 'CHR modifier|'+data[x][y][1]
+##                        
+##                        
+##                elif data [x][0] == '[TBASE]':##traits
+##                    pass
+##                elif data[x][0] == '[LANG]':
+##                    pass
+##                elif data[x][0] == '[S'+subrace+']':
+##                    data[x].remove('[S'+subrace+']')
+##                    #print(data[x])
+##                    for y in range(len(data[x])):
+##                        #print(data[x][y])
+##                        data[x][y] = data[x][y].split('=')
+##                        print(data[x][y])
+##                        #print(data)
+##                        if data[x][y][0] == 'STR':
+##                            dat2set[0] = 'STR modifier|'+data[x][y][1]
+##                        elif data[x][y][0] == 'DEX':
+##                            dat2set[1] = 'DEX modifier|'+data[x][y][1]
+##                        elif data[x][y][0] == 'CON':
+##                            dat2set[2] = 'CON modifier|'+data[x][y][1]
+##                        elif data[x][y][0] == 'INT':
+##                            dat2set[3] = 'INT modifier|'+data[x][y][1]
+##                        elif data[x][y][0] == 'WIS':
+##                            dat2set[4] = 'WIS modifier|'+data[x][y][1]
+##                        elif data[x][y][0] == 'CHR':
+##                            dat2set[5] = 'CHR modifier|'+data[x][y][1]
+##                            
+##                elif data[x][0] == '[T'+subrace+']':
+##                    pass
+##            #dat2set[0] = 'aaa'
+##            print('setting',dat2set)
+##            self.set_Backgrounds_rollmod_LBL(dat2set)
+##            #set_Backgrounds_rollmod_LBL
+##                
+####            if racemain == 'Dwarf':
+####                pass
+####            elif racemain == 'Elf':
+####                pass
+####            elif racemain == 'Halfling':
+####                pass
+####            elif racemain == 'Human':
+####                pass
+####            else:
+####                #pass
+####                print('no race selected')
+##            
 
             
             
-class optwin:
+class optwin:##options window
     #CHANGED= True
     OPTIONSNAME = 'OPTIONS.CFF'
     optionssnapshot = []
@@ -2358,7 +2567,9 @@ class optwin:
         return retdata
         
 
-###
+
+#unused bits
+##
 def genbasemega():
     base_config  = ['OPTIONS.CFF',['testing','entry']]
     datamain.adddata(base_config)
@@ -2388,7 +2599,8 @@ class fileIO:##unused atm
 ##class person:
 ##    def __init__(self):
 ##        pass
-    
-datamain = MEGA.mega2('DATA')    
-m = main_win()
+
+##actually starts the tkinter programand loads data file 
+datamain = MEGA.mega2('DATA')##loads main data 
+m = main_win()##actually instanciates the window
 
