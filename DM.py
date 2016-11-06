@@ -1589,7 +1589,9 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     secondaryskills_STE_BOX_VAR = StringVar()
     secondaryskills_SRV_CHK_VAR = IntVar()
     secondaryskills_SRV_BOX_VAR = StringVar()
-
+    ##hit dice
+    Backgrounds_hitdie_HTD_BOX_VAR = StringVar()
+    
     ##personality traits
     Backgrounds_misctraits_DPT_LBL_VAR = StringVar()
     Backgrounds_misctraits_DPI_LBL_VAR = StringVar()
@@ -1811,6 +1813,11 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         secondaryskills_SRV_LBL = Label(secondaryskills_LF,text = 'survival').grid(row=17,column=2)#.pack()
         secondaryskills_LF.place(x=325,y=315)
 
+        Backgrounds_hitdie_LF = LabelFrame(self.This_win,text = 'BG\nHit Dice')
+        Backgrounds_hitdie_HTD_BOX = Entry(Backgrounds_hitdie_LF,width = 5,textvariable = self.Backgrounds_hitdie_HTD_BOX_VAR).grid(row=0,column=1)
+        Backgrounds_hitdie_HTD_LBL = Label(Backgrounds_hitdie_LF,text = 'hit die = ').grid(row=0,column=0)
+        Backgrounds_hitdie_LF.place(x=400,y=300)
+        
         Backgrounds_misctraits_LF = LabelFrame(self.This_win,text = 'MISC\nBackground traits setup')
         Backgrounds_misctraits_DPT_LBL_LBL = Label(Backgrounds_misctraits_LF,text = '==personailty trait==').grid(row=0,column=0)##displaypersonalitytrait
         Backgrounds_misctraits_DPI_LBL_LBL = Label(Backgrounds_misctraits_LF,text = '==personailty ideal==').grid(row=0,column=1)##displaypersonalityideal
@@ -1821,14 +1828,14 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_misctraits_DPI_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPI_LBL_VAR).grid(row=1,column=1)##displaypersonalityideal
         Backgrounds_misctraits_DPB_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPB_LBL_VAR).grid(row=3,column=0)##displaypersonalitybond
         Backgrounds_misctraits_DPF_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPF_LBL_VAR).grid(row=3,column=1)##displaypersonalityflaw
-        Backgrounds_misctraits_LF.place(x=825,y=200)#.grid(row=0,column=0)
+        Backgrounds_misctraits_LF.place(x=825,y=225)#.grid(row=0,column=0)
 
 
 
         finalizechar_setup_LF = LabelFrame(self.This_win,text = 'options')
         finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'create character',command = self.sub_button_FIN).grid(row=0,column=0)
         finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'reset character',command = self.sub_button_CLR).grid(row=1,column=0)
-        finalizechar_setup_LF.place(x=200,y=500)
+        finalizechar_setup_LF.place(x=900,y=500)
         #print('x',self.primaryattributes_setup_DRL_LBX)
 
         
@@ -1954,6 +1961,15 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     
     def get_Backgrounds_LANG_TRT_TXT(self):
         return self.Backgrounds_LANG_TRT_TXT.get(1.0, 'end-1c')
+    
+    def get_savingthrows(self):
+        return[
+            (self.savingthrows_STR_CHK_VAR.get(),self.savingthrows_STR_BOX_VAR.get()),
+            (self.savingthrows_DEX_CHK_VAR.get(),self.savingthrows_DEX_BOX_VAR.get()),
+            (self.savingthrows_CON_CHK_VAR.get(),self.savingthrows_CON_BOX_VAR.get()),
+            (self.savingthrows_INT_CHK_VAR.get(),self.savingthrows_INT_BOX_VAR.get()),
+            (self.savingthrows_WIS_CHK_VAR.get(),self.savingthrows_WIS_BOX_VAR.get()),
+            (self.savingthrows_CHR_CHK_VAR.get(),self.savingthrows_CHR_BOX_VAR.get())]##return tuples of each attribute(proficient,throw)
 
     
     ##set
@@ -1987,6 +2003,20 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def set_Backgrounds_LANG_TRT_TXT_CLR(self):
         self.Backgrounds_LANG_TRT_TXT.delete(1.0, 'end-1c')
 
+    def set_savingthrows(self,data):
+        self.savingthrows_STR_BOX_VAR.set(data[0][1])
+        self.savingthrows_DEX_BOX_VAR.set(data[1][1])
+        self.savingthrows_CON_BOX_VAR.set(data[2][1])
+        self.savingthrows_INT_BOX_VAR.set(data[3][1])
+        self.savingthrows_WIS_BOX_VAR.set(data[4][1])
+        self.savingthrows_CHR_BOX_VAR.set(data[5][1])
+        
+        self.savingthrows_STR_CHK_VAR.set(data[0][0])
+        self.savingthrows_DEX_CHK_VAR.set(data[1][0])
+        self.savingthrows_CON_CHK_VAR.set(data[2][0])
+        self.savingthrows_INT_CHK_VAR.set(data[3][0])
+        self.savingthrows_WIS_CHK_VAR.set(data[4][0])
+        self.savingthrows_CHR_CHK_VAR.set(data[5][0])
     
     ##internal
     def internal_calcrollmod_primary_LBL(self):##calculates the values for the roll modifers in the primary attribute window
@@ -2382,21 +2412,38 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         if self.internal_get_CBO_currselection_listbox() ==  False:
             pass
         else:
+            HITDICE = 'Dxx'
+            PRIM_PROF = self.get_savingthrows()##gets proficiency for saving throws and refreshes them after updating
             charclass = self.internal_get_CBO_currselection_listbox()
             self.Backgrounds_setup_CBO_CURR_LBL_VAR.set(charclass)
 
             #fetches data for specific background, loads numbers 1-4 into each listbox
-            #dispaly and populate listbox background table
+            #display and populate listbox background table
+            ##removes all proficienies
+            for x in range(len(PRIM_PROF)):
+                PRIM_PROF[x] = (0,PRIM_PROF[x][1])
                     
             #set specific attributes for each class here
+            #print('charclass',charclass=='Cleric')
             if charclass == 'Cleric':
-                pass
+                HITDICE = 'D8'
+                PRIM_PROF[4] = (1,PRIM_PROF[4][1])
+                PRIM_PROF[5] = (1,PRIM_PROF[5][1])
             elif charclass == 'Fighter':
-                pass
+                HITDICE = 'D10'
+                PRIM_PROF[0] = (1,PRIM_PROF[0][1])
+                PRIM_PROF[2] = (1,PRIM_PROF[2][1])
             elif charclass == 'Rogue':
-                pass
+                HITDICE = 'D8'
+                PRIM_PROF[1] = (1,PRIM_PROF[1][1])
+                PRIM_PROF[3] = (1,PRIM_PROF[3][1])
             elif charclass == 'Wizard':
-                pass
+                HITDICE = 'D6'
+                PRIM_PROF[3] = (1,PRIM_PROF[3][1])
+                PRIM_PROF[4] = (1,PRIM_PROF[4][1])
+
+            self.Backgrounds_hitdie_HTD_BOX_VAR.set(HITDICE)
+            self.set_savingthrows(PRIM_PROF)
             
     def internal_processbgtraitsdata(self,charclass,bgid):##sets up background class data based on background for testing
         data = datamain.fetch(charclass+'.txt')##repurposed as random
@@ -2536,6 +2583,10 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             for x in range(len(data)):
                 if data[x][0] == '[BG4]':
                     data[x].remove('[BG4]')
+                    for y in range(data[x]):
+                        if data[x][y] == '@':
+                            pass
+                            
                     
                     self.Backgrounds_misctraits_DPF_LBL_VAR.set(data[x][bgid])
                 
