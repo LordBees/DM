@@ -1612,7 +1612,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         charbase_name_IRL_LBL = Label(charbase_name_LF,text = 'player name').grid(row=0,column=0)
         charbase_name_IRL_BOX = Entry(charbase_name_LF,textvariable = self.charbase_name_IRL_BOX_VAR).grid(row=1,column=0)
         charbase_name_CHR_LBL = Label(charbase_name_LF,text = 'character name').grid(row=0,column=1)
-        charbase_name_CHR_BOX = Entry(charbase_name_LF,textvariable = self.charbase_name_IRL_BOX_VAR).grid(row=1,column=1)
+        charbase_name_CHR_BOX = Entry(charbase_name_LF,textvariable = self.charbase_name_CHR_BOX_VAR).grid(row=1,column=1)
         charbase_name_LF.place(x=5,y=5)
         primaryattributes_setup_LF = LabelFrame(self.This_win,text= 'primary attributes dice roller')
         primaryattributes_setup_RTD_BTN = Button(primaryattributes_setup_LF,text = 'randomize values',command = self.sub_button_rollprimary).grid(row=0,column=0)
@@ -2427,7 +2427,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             #print('charclass',charclass=='Cleric')
             if charclass == 'Cleric':
                 HITDICE = 'D8'
-                PRIM_PROF[4] = (1,PRIM_PROF[4][1])
+                PRIM_PROF[4] = (1,PRIM_PROF[4][1])##assigns data as tuple (proficency flag,text in proficiency box)
                 PRIM_PROF[5] = (1,PRIM_PROF[5][1])
             elif charclass == 'Fighter':
                 HITDICE = 'D10'
