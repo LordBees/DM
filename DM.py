@@ -1816,7 +1816,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_hitdie_LF = LabelFrame(self.This_win,text = 'BG\nHit Dice')
         Backgrounds_hitdie_HTD_BOX = Entry(Backgrounds_hitdie_LF,width = 5,textvariable = self.Backgrounds_hitdie_HTD_BOX_VAR).grid(row=0,column=1)
         Backgrounds_hitdie_HTD_LBL = Label(Backgrounds_hitdie_LF,text = 'hit die = ').grid(row=0,column=0)
-        Backgrounds_hitdie_LF.place(x=400,y=300)
+        Backgrounds_hitdie_LF.place(x=675,y=340)
         
         Backgrounds_misctraits_LF = LabelFrame(self.This_win,text = 'MISC\nBackground traits setup')
         Backgrounds_misctraits_DPT_LBL_LBL = Label(Backgrounds_misctraits_LF,text = '==personailty trait==').grid(row=0,column=0)##displaypersonalitytrait
@@ -1932,7 +1932,53 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             messagebox.showwarning('ERROR!','please select a value!')
 
     def sub_button_FIN(self):##finalize and export character creation to existing character sheet and save
-        pass
+        FLAG_OK = False
+        FLAG_WRITE = False
+        ##checking routine
+        if self.internal_validaterolls() == False:## check dice attributes have not been assigned
+            messagebox.showwarning('rolls','please check primary attributes')
+            #charclass == 'None selected!'
+        elif self.Backgrounds_setup_CBG_CURR_LBL_VAR.get() == 'None selected!':#check race has not been selected
+            messagebox.showwarning('race','Please select a race!')
+        elif self.Backgrounds_setup_CBS_CURR_LBL_VAR.get() == 'None selected!':#check subrace has not been selected
+            messagebox.showwarning('subrace','Please select a subrace!')
+        elif self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()  == 'None selected!':#check background has not been selected
+            messagebox.showwarning('background','Please select a character background')
+        elif len(self.Backgrounds_misctraits_DPT_LBL_VAR.get()) == 0:
+            messagebox.showwarning('background trait','Please select a character Trait!')#check background Trait has not been selected
+        elif len(self.Backgrounds_misctraits_DPI_LBL_VAR.get()) == 0:
+            messagebox.showwarning('background trait','Please select a character Ideal!')#check background Ideal has not been selected
+        elif len(self.Backgrounds_misctraits_DPB_LBL_VAR.get()) == 0:
+            messagebox.showwarning('background trait','Please select a character Bond!')#check background Bond has not been selected
+        elif len(self.Backgrounds_misctraits_DPF_LBL_VAR.get()) == 0:
+            messagebox.showwarning('background trait','Please select a character Flaw!')#check background Flaw has not been selected
+        
+        
+        else:##if no issues raised then ok to continue
+            FLAG_OK = True
+            
+        #FLAG_OK = True
+        if FLAG_OK:
+            if messagebox.askokcancel('Are You Sure?','finalize your character\nAre you sure'):   
+                #choosing save location
+                
+                if self.internal_savefileaskchecker()[1]:##if file already exists
+                    if messagebox.askokcancel('save file','Overwrite existing file\nare you sure?'):
+                        FLAG_WRITE = True
+                else:#else file does not exist
+                    if messagebox.askokcancel('save file','are you sure?'):
+                        FLAG_WRITE = True
+
+                if FLAG_WRITE == True:#if user decides to save
+                    ##preparing data
+                    #setting data
+                    #saving data
+                    pass
+                
+                else:#print to console dbg
+                    print('save cancelled')
+                #close window
+                self.This_win.destroy()
     def sub_button_CLR(self):##reset all values
         if messagebox.askokcancel('Are You Sure?','reset all values to default\nAre you sure'):
             self.This_win.destroy()##destroys current window instance then creates a new instance of the window
@@ -2019,6 +2065,16 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.savingthrows_CHR_CHK_VAR.set(data[5][0])
     
     ##internal
+    def internal_savefileaskchecker(self):##returns name and true if file exists
+        FPath = filedialog.asksaveasfilename(filetypes=(("D&D character sheet", "*.MEGA"),("All Files", "*.*") ))##adv extention is forced onto ##EDIT took out this defaultextension=".ADV", 
+        EXISTS_FLAG = False
+        if os.path.isfile(FPath):# or os.path.isfile(FPath.strip('.ADV')):##hack to get around
+            EXISTS_FLAG = True
+        else:
+            EXISTS_FLAG = False
+        print(os.path.isfile(FPath))
+        return[FPath,EXISTS_FLAG]
+    
     def internal_calcrollmod_primary_LBL(self):##calculates the values for the roll modifers in the primary attribute window
         rollmod = []
         Bcontents = self.get_primaryattributes_BTN()##button text
