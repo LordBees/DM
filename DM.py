@@ -2455,9 +2455,9 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.Backgrounds_setup_misctraits_DPF_LBX.insert(END,'3')
         self.Backgrounds_setup_misctraits_DPF_LBX.insert(END,'4')
         
-    def sub_button_confirmtrait(self):
-        names = ['Cleric','Fighter','Rogue','Wizard']
-        self.internal_processbgtraitsdata(names[lbxget])
+    #def sub_button_confirmtrait(self):
+        #names = ['Cleric','Fighter','Rogue','Wizard']
+        #self.internal_processbgtraitsdata(names[lbxget])
     def sub_button_confirmtrait_RNG(self):
         charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()
         if charclass == 'None selected!':
