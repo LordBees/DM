@@ -1,0 +1,4 @@
+[BG1],testinga,b,c,d,,
+[BG2],testinga,b,c,d,,
+[BG3],testinga,b,c,d,,
+[BG4],testinga,b,c,d,,

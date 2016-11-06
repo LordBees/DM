@@ -1590,6 +1590,12 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     secondaryskills_SRV_CHK_VAR = IntVar()
     secondaryskills_SRV_BOX_VAR = StringVar()
 
+    ##personality traits
+    Backgrounds_misctraits_DPT_LBL_VAR = StringVar()
+    Backgrounds_misctraits_DPI_LBL_VAR = StringVar()
+    Backgrounds_misctraits_DPB_LBL_VAR = StringVar()
+    Backgrounds_misctraits_DPF_LBL_VAR = StringVar()
+
 
     
     def __init__(self):
@@ -1709,16 +1715,20 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_setup_misctraits_DPT_LBL = Label(Backgrounds_setup_misctraits_LF,text = 'Pick a personailty trait!').grid(row=0,column=1)
         self.Backgrounds_setup_misctraits_DPT_LBX = Listbox(Backgrounds_setup_misctraits_LF,width=10,height = 5)
         self.Backgrounds_setup_misctraits_DPT_LBX.grid(row=1,column=1)
+        Backrounds_setup_misctraits_DPT_BTN = Button(Backgrounds_setup_misctraits_LF,text = 'Pick!',command = self.sub_button_confirmtrait_PERS).grid(row=2,column=1)
         Backgrounds_setup_misctraits_DPI_LBL = Label(Backgrounds_setup_misctraits_LF,text = 'Pick a personality ideal!').grid(row=0,column=2)
         self.Backgrounds_setup_misctraits_DPI_LBX = Listbox(Backgrounds_setup_misctraits_LF,width=10,height = 5)
         self.Backgrounds_setup_misctraits_DPI_LBX.grid(row=1,column=2)
-        Backgrounds_setup_misctraits_DPB_LBL = Label(Backgrounds_setup_misctraits_LF,text = 'Pick a personality bond!').grid(row=0,column=3)
+        Backrounds_setup_misctraits_DPI_BTN = Button(Backgrounds_setup_misctraits_LF,text = 'Pick!',command = self.sub_button_confirmtrait_IDEAL).grid(row=2,column=2)
+        Backgrounds_setup_misctraits_DPF_LBL = Label(Backgrounds_setup_misctraits_LF,text = 'Pick a personality bond!').grid(row=0,column=3)
         self.Backgrounds_setup_misctraits_DPB_LBX = Listbox(Backgrounds_setup_misctraits_LF,width=10,height = 5)
         self.Backgrounds_setup_misctraits_DPB_LBX.grid(row=1,column=3)
+        Backrounds_setup_misctraits_DPB_BTN = Button(Backgrounds_setup_misctraits_LF,text = 'Pick!',command = self.sub_button_confirmtrait_BOND).grid(row=2,column=3)
         Backgrounds_setup_misctraits_DPF_LBL = Label(Backgrounds_setup_misctraits_LF,text = 'Pick a personality flaw!').grid(row=0,column=4)
         self.Backgrounds_setup_misctraits_DPF_LBX = Listbox(Backgrounds_setup_misctraits_LF,width=10,height = 5)
         self.Backgrounds_setup_misctraits_DPF_LBX.grid(row=1,column=4)
-        Backgrounds_setup_misctraits_RNG_BTN = Button(Backgrounds_setup_misctraits_LF,text = 'Randomize\nall selections!').grid(row=2,column=1)
+        Backrounds_setup_misctraits_DPF_BTN = Button(Backgrounds_setup_misctraits_LF,text = 'Pick!',command = self.sub_button_confirmtrait_FLAW).grid(row=2,column=4)
+        Backgrounds_setup_misctraits_RNG_BTN = Button(Backgrounds_setup_misctraits_LF,text = 'Randomize\nall selections!',command =self.sub_button_confirmtrait_RNG).grid(row=3,column=1)
         Backgrounds_setup_misctraits_LF.place(x=825,y=0)#.grid(row=0,column=0)
 
         #savingthrows_LF
@@ -1807,10 +1817,10 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_misctraits_DPB_LBL_LBL = Label(Backgrounds_misctraits_LF,text = '==personailty bond ==').grid(row=2,column=0)##displaypersonalitybond
         Backgrounds_misctraits_DPF_LBL_LBL = Label(Backgrounds_misctraits_LF,text = '==personailty flaw ==').grid(row=2,column=1)##displaypersonalityflaw
         
-        Backgrounds_misctraits_DPT_LBL = Label(Backgrounds_misctraits_LF).grid(row=1,column=0)##displaypersonalitytrait
-        Backgrounds_misctraits_DPI_LBL = Label(Backgrounds_misctraits_LF).grid(row=1,column=1)##displaypersonalityideal
-        Backgrounds_misctraits_DPB_LBL = Label(Backgrounds_misctraits_LF).grid(row=3,column=0)##displaypersonalitybond
-        Backgrounds_misctraits_DPF_LBL = Label(Backgrounds_misctraits_LF).grid(row=3,column=1)##displaypersonalityflaw
+        Backgrounds_misctraits_DPT_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPT_LBL_VAR).grid(row=1,column=0)##displaypersonalitytrait
+        Backgrounds_misctraits_DPI_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPI_LBL_VAR).grid(row=1,column=1)##displaypersonalityideal
+        Backgrounds_misctraits_DPB_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPB_LBL_VAR).grid(row=3,column=0)##displaypersonalitybond
+        Backgrounds_misctraits_DPF_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPF_LBL_VAR).grid(row=3,column=1)##displaypersonalityflaw
         Backgrounds_misctraits_LF.place(x=825,y=200)#.grid(row=0,column=0)
 
 
@@ -1824,6 +1834,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         
         ## post widget code
         self.internal_preload_data()#loads listboxes
+        self.intenal_preload_traitselectiondata()##loads personality trait listboxes
 
         #tkloop
         
@@ -1917,7 +1928,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         pass
     def sub_button_CLR(self):##reset all values
         if messagebox.askokcancel('Are You Sure?','reset all values to default\nAre you sure'):
-            self.This_win.destroy()
+            self.This_win.destroy()##destroys current window instance then creates a new instance of the window
             createcharwin()
     ##get
     def get_primaryattributes_BTN(self):##get button content
@@ -2373,6 +2384,11 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         else:
             charclass = self.internal_get_CBO_currselection_listbox()
             self.Backgrounds_setup_CBO_CURR_LBL_VAR.set(charclass)
+
+            #fetches data for specific background, loads numbers 1-4 into each listbox
+            #dispaly and populate listbox background table
+                    
+            #set specific attributes for each class
             if charclass == 'Cleric':
                 pass
             elif charclass == 'Fighter':
@@ -2381,7 +2397,149 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 pass
             elif charclass == 'Wizard':
                 pass
+            
+    def internal_processbgtraitsdata(self,charclass,bgid):##sets up background class data based on background for testing
+        data = datamain.fetch(charclass+'.txt')##repurpoused as random
+        for x in range(len(data)):
+            data[x] = self.csv2array(data[x])
+        for x in range(len(data)):
+            if data[x][0] == '[BG1]':
+                data[x].remove('[BG1]')
+                
+                self.Backgrounds_misctraits_DPT_LBL_VAR.set(data[x][bgid[0]])
+                #for y in range(len(data[x])):
+                    #print('datagggg##~~',data[x][y])
+                    #pass##set lbx for background as numbers
+            elif data[x][0] == '[BG2]':
+                data[x].remove('[BG2]')
+                
+                self.Backgrounds_misctraits_DPI_LBL_VAR.set(data[x][bgid[1]])
 
+            elif data[x][0] == '[BG3]':
+                data[x].remove('[BG3]')
+                
+                self.Backgrounds_misctraits_DPB_LBL_VAR.set(data[x][bgid[2]])
+
+            elif data[x][0] == '[BG4]':
+                data[x].remove('[BG4]')
+                
+                self.Backgrounds_misctraits_DPF_LBL_VAR.set(data[x][bgid[3]])
+        #self.Backgrounds_misctraits_DPT_LBL_VAR.set()
+        #self.Backgrounds_misctraits_DPI_LBL_VAR.set()
+        #self.Backgrounds_misctraits_DPB_LBL_VAR.set()
+        #self.Backgrounds_misctraits_DPF_LBL_VAR.set()
+
+    def intenal_preload_traitselectiondata(self):##populates listbox with values
+        self.Backgrounds_setup_misctraits_DPT_LBX.delete(0,self.Backgrounds_setup_misctraits_DPT_LBX.size())#.clear()
+        self.Backgrounds_setup_misctraits_DPI_LBX.delete(0,self.Backgrounds_setup_misctraits_DPI_LBX.size())#.clear()
+        self.Backgrounds_setup_misctraits_DPB_LBX.delete(0,self.Backgrounds_setup_misctraits_DPB_LBX.size())#.clear()
+        self.Backgrounds_setup_misctraits_DPF_LBX.delete(0,self.Backgrounds_setup_misctraits_DPF_LBX.size())#.clear()
+
+        self.Backgrounds_setup_misctraits_DPT_LBX.insert(END,'1')
+        self.Backgrounds_setup_misctraits_DPT_LBX.insert(END,'2')
+        self.Backgrounds_setup_misctraits_DPT_LBX.insert(END,'3')
+        self.Backgrounds_setup_misctraits_DPT_LBX.insert(END,'4')
+
+        self.Backgrounds_setup_misctraits_DPI_LBX.insert(END,'1')
+        self.Backgrounds_setup_misctraits_DPI_LBX.insert(END,'2')
+        self.Backgrounds_setup_misctraits_DPI_LBX.insert(END,'3')
+        self.Backgrounds_setup_misctraits_DPI_LBX.insert(END,'4')
+
+        self.Backgrounds_setup_misctraits_DPB_LBX.insert(END,'1')
+        self.Backgrounds_setup_misctraits_DPB_LBX.insert(END,'2')
+        self.Backgrounds_setup_misctraits_DPB_LBX.insert(END,'3')
+        self.Backgrounds_setup_misctraits_DPB_LBX.insert(END,'4')
+
+        self.Backgrounds_setup_misctraits_DPF_LBX.insert(END,'1')
+        self.Backgrounds_setup_misctraits_DPF_LBX.insert(END,'2')
+        self.Backgrounds_setup_misctraits_DPF_LBX.insert(END,'3')
+        self.Backgrounds_setup_misctraits_DPF_LBX.insert(END,'4')
+        
+    def sub_button_confirmtrait(self):
+        names = ['Cleric','Fighter','Rogue','Wizard']
+        self.internal_processbgtraitsdata(names[lbxget])
+    def sub_button_confirmtrait_RNG(self):
+        charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()
+        if charclass == 'None selected!':
+            pass
+        else:
+            temp = []
+            for x in range(0,4):
+                temp.append(random.randint(0,3))
+            self.internal_processbgtraitsdata(charclass,temp)
+    def sub_button_confirmtrait_PERS(self):
+        charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()#self.internal_get_CBO_currselection_listbox()
+        bgid = self.Backgrounds_setup_misctraits_DPT_LBX.curselection()##check
+        bgid = bgid[0]#takes value out of tuple
+        print(bgid)
+        if charclass == 'None selected!':
+            pass
+        else:
+            data = datamain.fetch(charclass+'.txt')
+            for x in range(len(data)):
+                data[x] = self.csv2array(data[x])
+            for x in range(len(data)):
+                if data[x][0] == '[BG1]':
+                    data[x].remove('[BG1]')
+                    
+                    self.Backgrounds_misctraits_DPT_LBL_VAR.set(data[x][bgid])
+                    #for y in range(len(data[x])):
+                        #print('datagggg##~~',data[x][y])
+                        #pass##set lbx for background as numbers
+                
+    def sub_button_confirmtrait_IDEAL(self):
+        charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()#self.internal_get_CBO_currselection_listbox()
+        bgid = self.Backgrounds_setup_misctraits_DPI_LBX.curselection()##check
+        bgid = bgid[0]#takes value out of tuple
+        print(bgid)
+        if charclass == 'None selected!':
+            pass
+        else:
+            data = datamain.fetch(charclass+'.txt')
+            for x in range(len(data)):
+                data[x] = self.csv2array(data[x])
+            for x in range(len(data)):
+                if data[x][0] == '[BG2]':
+                    data[x].remove('[BG2]')
+                    
+                    self.Backgrounds_misctraits_DPI_LBL_VAR.set(data[x][bgid])
+                
+    def sub_button_confirmtrait_BOND(self):
+        charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()#self.internal_get_CBO_currselection_listbox()
+        bgid = self.Backgrounds_setup_misctraits_DPB_LBX.curselection()##check
+        bgid = bgid[0]#takes value out of tuple
+        print(bgid)
+        if charclass == 'None selected!':
+            pass
+        else:
+            data = datamain.fetch(charclass+'.txt')
+            for x in range(len(data)):
+                data[x] = self.csv2array(data[x])
+            for x in range(len(data)):
+                if data[x][0] == '[BG3]':
+                    data[x].remove('[BG3]')
+                    
+                    self.Backgrounds_misctraits_DPB_LBL_VAR.set(data[x][bgid])
+                    
+    def sub_button_confirmtrait_FLAW(self):
+        charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()#self.internal_get_CBO_currselection_listbox()
+        bgid = self.Backgrounds_setup_misctraits_DPF_LBX.curselection()##check
+        bgid = bgid[0]#takes value out of tuple
+        print(bgid)
+        if charclass == 'None selected!':
+            pass
+        else:
+            data = datamain.fetch(charclass+'.txt')
+            for x in range(len(data)):
+                data[x] = self.csv2array(data[x])
+            for x in range(len(data)):
+                if data[x][0] == '[BG4]':
+                    data[x].remove('[BG4]')
+                    
+                    self.Backgrounds_misctraits_DPF_LBL_VAR.set(data[x][bgid])
+                
+    
+    
 ##    ##not used anymore split up within button functions
 ##    def internal_process_backgrounddata(self):#process backgroundform refreshing for character background
 ##        #readingdata = [False,'',0]##reading,reader,linesleft
