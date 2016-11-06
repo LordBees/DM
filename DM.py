@@ -193,7 +193,7 @@ class main_win:
         charbase_name_EXP_BOX = Entry(charbase_name_LF,width = 5,textvariable = self.charbase_name_EXP_BOX_VAR).grid(row=0,column=7)
         charbase_name_EXP_LBL = Label(charbase_name_LF,text = 'player experience:').grid(row=0,column=6)
         
-        charbase_name_LF.place(x=400,y=0)
+        charbase_name_LF.place(x=75,y=0)
         #primaryattributes_LF
         primaryattributes_LF = LabelFrame(self.This_win,text = 'primary\nattributes')
         primaryattributes_STR_BOX = Entry(primaryattributes_LF,width = 3,textvariable = self.primaryattributes_STR_BOX_VAR).pack()
@@ -208,7 +208,7 @@ class main_win:
         primaryattributes_WIS_LBL = Label(primaryattributes_LF,text = 'Wisdom').pack()
         primaryattributes_CHR_BOX = Entry(primaryattributes_LF,width = 3,textvariable = self.primaryattributes_CHR_BOX_VAR).pack()
         primaryattributes_CHR_LBL = Label(primaryattributes_LF,text = 'Charisma').pack()
-        primaryattributes_LF.place(x=50,y=50)##was w3
+        primaryattributes_LF.place(x=50,y=75)##was w3
 
         ##roll modifier
         #primaryattributes_LF
@@ -225,26 +225,26 @@ class main_win:
         primaryattributes_WIS_MOD_LBL = Label(primaryattributes_MOD_LF,text = 'Wisdom').pack()
         primaryattributes_CHR_MOD_BOX = Entry(primaryattributes_MOD_LF,width = 5,textvariable = self.primaryattributes_CHR_MOD_BOX_VAR).pack()
         primaryattributes_CHR_MOD_LBL = Label(primaryattributes_MOD_LF,text = 'Charisma').pack()
-        primaryattributes_MOD_LF.place(x=125,y=50)
+        primaryattributes_MOD_LF.place(x=125,y=75)
 
         ##Perception
         Perception_LF = LabelFrame(self.This_win,text = 'passive wisdom')
         Perception_PER_BOX = Entry(Perception_LF,width = 5,textvariable = self.Perception_PER_BOX_VAR).grid(row = 0,column=0)#.pack()
         Perception_PER_BOX = Label(Perception_LF,text = 'Perception').grid(row = 0,column=1)#.pack()
-        Perception_LF.place(x=50,y=325)
+        Perception_LF.place(x=50,y=350)
 
     
         ##inspiration_LF
         inspiration_LF = LabelFrame(self.This_win,text = ' inspiration points ')
         inspiration_STR_BOX = Entry(inspiration_LF,width = 5,textvariable = self.inspiration_STR_BOX_VAR).grid(row = 0,column=1)#.pack()
         inspiration_STR_LBL = Label(inspiration_LF,text = 'inspiration            ').grid(row = 0,column=0)#.pack()
-        inspiration_LF.place(x=225,y=50)
+        inspiration_LF.place(x=225,y=75)
 
         #proficiencybonus_LF
         proficiencybonus_LF = LabelFrame(self.This_win,text = ' proficiency Bonus ')
         proficiencybonus_STR_BOX = Entry(proficiencybonus_LF,width = 5,textvariable = self.proficiencybonus_STR_BOX_VAR).grid(row = 1,column=1)#.pack()
         proficiencybonus_STR_LBL = Label(proficiencybonus_LF,text = 'Proficiency bonus').grid(row = 1,column=0)#.pack()
-        proficiencybonus_LF.place(x=225,y=90)
+        proficiencybonus_LF.place(x=225,y=115)
 
         #savingthrows_LF
         savingthrows_LF = LabelFrame(self.This_win,text = 'Saving Throws')
@@ -266,7 +266,7 @@ class main_win:
         savingthrows_CHR_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_CHR_CHK_VAR).grid(row = 5,column=0)#.pack()
         savingthrows_CHR_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_CHR_BOX_VAR).grid(row = 5,column=1)#.pack()
         savingthrows_CHR_LBL = Label(savingthrows_LF,text = 'Charisma')                                     .grid(row = 5,column=2)#.pack()
-        savingthrows_LF.place(x=225,y=130)
+        savingthrows_LF.place(x=225,y=155)
 
         #secondaryskills_LF
         secondaryskills_LF = LabelFrame(self.This_win,text = 'skills')
@@ -324,7 +324,7 @@ class main_win:
         secondaryskills_SRV_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_SRV_CHK_VAR).grid(row=17,column=0)#.pack()
         secondaryskills_SRV_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_SRV_BOX_VAR).grid(row=17,column=1)#.pack()
         secondaryskills_SRV_LBL = Label(secondaryskills_LF,text = 'survival').grid(row=17,column=2)#.pack()
-        secondaryskills_LF.place(x=225,y=300)        
+        secondaryskills_LF.place(x=225,y=325)        
 
         ##hpmiscskills_LF
         HPmiscskills_LF = LabelFrame(self.This_win,text = 'HP/misc')
@@ -341,7 +341,7 @@ class main_win:
         HPmiscskills_HTP_LBL = Label(HPmiscskills_LF,text = 'temp HP')        .grid(row=5,column=0)#.pack()
         HPmiscskills_HCR_BOX = Entry(HPmiscskills_LF,width = 4,textvariable = self.HPmiscskills_HCR_BOX_VAR)              .grid(row=6,column=1)#.pack()
         HPmiscskills_HCR_LBL = Label(HPmiscskills_LF,text = 'current HP')        .grid(row=6,column=0)#.pack()
-        HPmiscskills_LF.place(x=400,y=50)##was 375
+        HPmiscskills_LF.place(x=400,y=75)#50)##was 375
 
         ##hitdicedeathsave
         #diceandsavesmisc
@@ -358,7 +358,7 @@ class main_win:
         diceandsavesmisc_DF1_CHK = Checkbutton(diceandsavesmisc_LF,variable = self.diceandsavesmisc_DF1_CHK_VAR)        .grid(row=2,column=2)#.pack()
         diceandsavesmisc_DF2_CHK = Checkbutton(diceandsavesmisc_LF,variable = self.diceandsavesmisc_DF2_CHK_VAR)        .grid(row=2,column=3)#.pack()
         diceandsavesmisc_DF3_CHK = Checkbutton(diceandsavesmisc_LF,variable = self.diceandsavesmisc_DF3_CHK_VAR)        .grid(row=2,column=4)#.pack()
-        diceandsavesmisc_LF.place(x=400,y=175)
+        diceandsavesmisc_LF.place(x=400,y=200)
 
         ##attackplusspells_LF
         attackplusspells_LF = LabelFrame(self.This_win,text = 'attack/magic stats')
@@ -377,49 +377,49 @@ class main_win:
         attackplusspells_NTS_LF =  LabelFrame(self.This_win,text = 'atk/mag notes')#position by magic/stats
         self.attackplusspells_MSC_TXT = Text(attackplusspells_NTS_LF,height = 25,width = 22)#add scrollbar to list
         self.attackplusspells_MSC_TXT                                                                                                .grid(row=4,column=0)#.pack() ##was height 10
-        attackplusspells_NTS_LF.place(x=400,y=400)
+        attackplusspells_NTS_LF.place(x=400,y=425)
         #add txt to fill spaces
-        attackplusspells_LF.place(x=400,y=300)
+        attackplusspells_LF.place(x=400,y=325)
 
         languagesplusskills_LF = LabelFrame(self.This_win,text = 'proficiencies and languages')
         self.languagesplusskills_TBX_TXT = Text(languagesplusskills_LF,height = 10,width = 25)#add scrollbar to list
         self.languagesplusskills_TBX_TXT.grid(row=0,column=0)
-        languagesplusskills_LF.place(x=825,y=50)
+        languagesplusskills_LF.place(x=825,y=75)
 
         equipmain_LF = LabelFrame(self.This_win,text = 'inventory')
         self.equipmain_TBX_TXT = Text(equipmain_LF,height = 25,width = 25)#add scrollbar to list
         self.equipmain_TBX_TXT.grid(row=0,column=0)
-        equipmain_LF.place(x=825,y=230)
+        equipmain_LF.place(x=825,y=255)
 
         #personalinfo_basic
         personalinfo_traits_LF = LabelFrame(self.This_win,text = 'misc personality traits')
         self.personalinfo_traits_TBX_TXT = Text(personalinfo_traits_LF,height = 5,width = 25)#add scrollbar to list
         self.personalinfo_traits_TBX_TXT.grid(row=0,column=0)
-        personalinfo_traits_LF.place(x=600,y=50)
+        personalinfo_traits_LF.place(x=600,y=75)
 
         #ideals
         personalinfo_ideals_LF = LabelFrame(self.This_win,text = 'ideals')
         self.personalinfo_ideals_TBX_TXT = Text(personalinfo_ideals_LF,height = 5,width = 25)#add scrollbar to list
         self.personalinfo_ideals_TBX_TXT.grid(row=0,column=0)
-        personalinfo_ideals_LF.place(x=600,y=100)
+        personalinfo_ideals_LF.place(x=600,y=125)
 
         #bond
         personalinfo_bonds_LF = LabelFrame(self.This_win,text = 'bonds')
         self.personalinfo_bonds_TBX_TXT = Text(personalinfo_bonds_LF,height = 5,width = 25)#add scrollbar to list
         self.personalinfo_bonds_TBX_TXT.grid(row=0,column=0)
-        personalinfo_bonds_LF.place(x=600,y=200)
+        personalinfo_bonds_LF.place(x=600,y=225)
 
         #personailty flaw
         personalinfo_flaws_LF = LabelFrame(self.This_win,text = 'flaws')
         self.personalinfo_flaws_TBX_TXT = Text(personalinfo_flaws_LF,height = 5,width = 25)#add scrollbar to list
         self.personalinfo_flaws_TBX_TXT.grid(row=0,column=0)
-        personalinfo_flaws_LF.place(x=600,y=300)
+        personalinfo_flaws_LF.place(x=600,y=325)
 
         #other personailty feature
         personalinfo_features_LF = LabelFrame(self.This_win,text = 'personality traits')
         self.personalinfo_features_TBX_TXT = Text(personalinfo_features_LF,height = 25,width = 25)#add scrollbar to list
         self.personalinfo_features_TBX_TXT.grid(row=0,column=0)
-        personalinfo_features_LF.place(x=600,y=400)
+        personalinfo_features_LF.place(x=600,y=425)
 
 ##        languagesplusskills_TBX_TXT
 ##        equipmain_TBX_TXT
@@ -2388,7 +2388,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             #fetches data for specific background, loads numbers 1-4 into each listbox
             #dispaly and populate listbox background table
                     
-            #set specific attributes for each class
+            #set specific attributes for each class here
             if charclass == 'Cleric':
                 pass
             elif charclass == 'Fighter':
@@ -2399,7 +2399,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 pass
             
     def internal_processbgtraitsdata(self,charclass,bgid):##sets up background class data based on background for testing
-        data = datamain.fetch(charclass+'.txt')##repurpoused as random
+        data = datamain.fetch(charclass+'.txt')##repurposed as random
         for x in range(len(data)):
             data[x] = self.csv2array(data[x])
         for x in range(len(data)):
@@ -2467,6 +2467,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             for x in range(0,4):
                 temp.append(random.randint(0,3))
             self.internal_processbgtraitsdata(charclass,temp)
+            
     def sub_button_confirmtrait_PERS(self):
         charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()#self.internal_get_CBO_currselection_listbox()
         bgid = self.Backgrounds_setup_misctraits_DPT_LBX.curselection()##check
