@@ -1953,19 +1953,25 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             messagebox.showwarning('subrace','Please select a subrace!')
         elif self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()  == 'None selected!':#check background has not been selected
             messagebox.showwarning('background','Please select a character background')
-        elif len(self.Backgrounds_misctraits_DPT_LBL_VAR.get()) == 0:
+        elif len(self.get_Backgrounds_misctraits_DPT_TXT()) == 0:#len(self.Backgrounds_misctraits_DPT_LBL_VAR.get()) == 0:
             messagebox.showwarning('background trait','Please select a character Trait!')#check background Trait has not been selected
-        elif len(self.Backgrounds_misctraits_DPI_LBL_VAR.get()) == 0:
+        elif len(self.get_Backgrounds_misctraits_DPI_TXT()) == 0:#len(self.Backgrounds_misctraits_DPI_LBL_VAR.get()) == 0:
             messagebox.showwarning('background trait','Please select a character Ideal!')#check background Ideal has not been selected
-        elif len(self.Backgrounds_misctraits_DPB_LBL_VAR.get()) == 0:
+        elif len(self.get_Backgrounds_misctraits_DPB_TXT()) == 0:#len(self.Backgrounds_misctraits_DPB_LBL_VAR.get()) == 0:
             messagebox.showwarning('background trait','Please select a character Bond!')#check background Bond has not been selected
-        elif len(self.Backgrounds_misctraits_DPF_LBL_VAR.get()) == 0:
+        elif len(self.get_Backgrounds_misctraits_DPF_TXT()) == 0:#len(self.Backgrounds_misctraits_DPF_LBL_VAR.get()) == 0:
             messagebox.showwarning('background trait','Please select a character Flaw!')#check background Flaw has not been selected
+
         
         
         else:##if no issues raised then ok to continue
             FLAG_OK = True
-            
+
+        print(len(self.get_Backgrounds_misctraits_DPT_TXT()))
+        print(len(self.get_Backgrounds_misctraits_DPI_TXT()))
+        print(len(self.get_Backgrounds_misctraits_DPB_TXT()))
+        print(len(self.get_Backgrounds_misctraits_DPF_TXT()))
+        
         #FLAG_OK = True
         if FLAG_OK:
             if messagebox.askokcancel('Are You Sure?','finalize your character\nAre you sure'):   
@@ -2031,11 +2037,11 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def get_Backgrounds_misctraits_DPT_TXT(self):
         return self.Backgrounds_misctraits_DPT_TXT.get(1.0,'end-1c')
     def get_Backgrounds_misctraits_DPI_TXT(self):
-        return self.Backgrounds_misctraits_DPT_TXT.get(1.0,'end-1c')
+        return self.Backgrounds_misctraits_DPI_TXT.get(1.0,'end-1c')
     def get_Backgrounds_misctraits_DPB_TXT(self):
-        return self.Backgrounds_misctraits_DPT_TXT.get(1.0,'end-1c')
+        return self.Backgrounds_misctraits_DPB_TXT.get(1.0,'end-1c')
     def get_Backgrounds_misctraits_DPF_TXT(self):
-        return self.Backgrounds_misctraits_DPT_TXT.get(1.0,'end-1c')
+        return self.Backgrounds_misctraits_DPF_TXT.get(1.0,'end-1c')
     ##set
     def set_primaryattributes_LBL(self,data):##set rollmod label
         self.primaryattributes_STR_LBL_VAR.set(data[0])
