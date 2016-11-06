@@ -1593,10 +1593,10 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     Backgrounds_hitdie_HTD_BOX_VAR = StringVar()
     
     ##personality traits
-    Backgrounds_misctraits_DPT_LBL_VAR = StringVar()
-    Backgrounds_misctraits_DPI_LBL_VAR = StringVar()
-    Backgrounds_misctraits_DPB_LBL_VAR = StringVar()
-    Backgrounds_misctraits_DPF_LBL_VAR = StringVar()
+    #Backgrounds_misctraits_DPT_LBL_VAR = StringVar()
+    #Backgrounds_misctraits_DPI_LBL_VAR = StringVar()
+    #Backgrounds_misctraits_DPB_LBL_VAR = StringVar()
+    #Backgrounds_misctraits_DPF_LBL_VAR = StringVar()
 
 
     
@@ -1824,10 +1824,19 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_misctraits_DPB_LBL_LBL = Label(Backgrounds_misctraits_LF,text = '==personailty bond ==').grid(row=2,column=0)##displaypersonalitybond
         Backgrounds_misctraits_DPF_LBL_LBL = Label(Backgrounds_misctraits_LF,text = '==personailty flaw ==').grid(row=2,column=1)##displaypersonalityflaw
         
-        Backgrounds_misctraits_DPT_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPT_LBL_VAR).grid(row=1,column=0)##displaypersonalitytrait
-        Backgrounds_misctraits_DPI_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPI_LBL_VAR).grid(row=1,column=1)##displaypersonalityideal
-        Backgrounds_misctraits_DPB_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPB_LBL_VAR).grid(row=3,column=0)##displaypersonalitybond
-        Backgrounds_misctraits_DPF_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPF_LBL_VAR).grid(row=3,column=1)##displaypersonalityflaw
+        #Backgrounds_misctraits_DPT_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPT_LBL_VAR).grid(row=1,column=0)##displaypersonalitytrait
+        #Backgrounds_misctraits_DPI_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPI_LBL_VAR).grid(row=1,column=1)##displaypersonalityideal
+        #Backgrounds_misctraits_DPB_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPB_LBL_VAR).grid(row=3,column=0)##displaypersonalitybond
+        #Backgrounds_misctraits_DPF_LBL = Label(Backgrounds_misctraits_LF,textvariable = self.Backgrounds_misctraits_DPF_LBL_VAR).grid(row=3,column=1)##displaypersonalityflaw
+
+        self.Backgrounds_misctraits_DPT_TXT = Text(Backgrounds_misctraits_LF,height = 5,width = 25)##width was 15
+        self.Backgrounds_misctraits_DPT_TXT.grid(row=1,column=0)
+        self.Backgrounds_misctraits_DPI_TXT = Text(Backgrounds_misctraits_LF,height = 5,width = 25)
+        self.Backgrounds_misctraits_DPI_TXT.grid(row=1,column=1)
+        self.Backgrounds_misctraits_DPB_TXT = Text(Backgrounds_misctraits_LF,height = 5,width = 25)
+        self.Backgrounds_misctraits_DPB_TXT.grid(row=3,column=0)
+        self.Backgrounds_misctraits_DPF_TXT = Text(Backgrounds_misctraits_LF,height = 5,width = 25)
+        self.Backgrounds_misctraits_DPF_TXT.grid(row=3,column=1)
         Backgrounds_misctraits_LF.place(x=825,y=225)#.grid(row=0,column=0)
 
 
@@ -1974,11 +1983,13 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                     #setting data
                     #saving data
                     pass
-                
+                    #finally close window
+                    self.This_win.destroy()
+                    
                 else:#print to console dbg
                     print('save cancelled')
-                #close window
-                self.This_win.destroy()
+                    
+                
     def sub_button_CLR(self):##reset all values
         if messagebox.askokcancel('Are You Sure?','reset all values to default\nAre you sure'):
             self.This_win.destroy()##destroys current window instance then creates a new instance of the window
@@ -2016,8 +2027,15 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             (self.savingthrows_INT_CHK_VAR.get(),self.savingthrows_INT_BOX_VAR.get()),
             (self.savingthrows_WIS_CHK_VAR.get(),self.savingthrows_WIS_BOX_VAR.get()),
             (self.savingthrows_CHR_CHK_VAR.get(),self.savingthrows_CHR_BOX_VAR.get())]##return tuples of each attribute(proficient,throw)
-
     
+    def get_Backgrounds_misctraits_DPT_TXT(self):
+        return self.Backgrounds_misctraits_DPT_TXT.get(1.0,'end-1c')
+    def get_Backgrounds_misctraits_DPI_TXT(self):
+        return self.Backgrounds_misctraits_DPT_TXT.get(1.0,'end-1c')
+    def get_Backgrounds_misctraits_DPB_TXT(self):
+        return self.Backgrounds_misctraits_DPT_TXT.get(1.0,'end-1c')
+    def get_Backgrounds_misctraits_DPF_TXT(self):
+        return self.Backgrounds_misctraits_DPT_TXT.get(1.0,'end-1c')
     ##set
     def set_primaryattributes_LBL(self,data):##set rollmod label
         self.primaryattributes_STR_LBL_VAR.set(data[0])
@@ -2063,6 +2081,42 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.savingthrows_INT_CHK_VAR.set(data[3][0])
         self.savingthrows_WIS_CHK_VAR.set(data[4][0])
         self.savingthrows_CHR_CHK_VAR.set(data[5][0])
+#   text for personailty traits  _LIN
+    def set_Backgrounds_misctraits_DPT_TXT_CLR(self):
+        self.Backgrounds_misctraits_DPT_TXT.delete(1.0, 'end-1c')
+    def set_Backgrounds_misctraits_DPT_TXT_LIN(self,x):##insert a single line
+        self.Backgrounds_misctraits_DPT_TXT.insert(INSERT,x)
+    def set_Backgrounds_misctraits_DPT_TXT(self,Larray):
+        self.Backgrounds_misctraits_DPT_TXT.delete(1.0, 'end-1c')
+        for x in Larray:
+            self.Backgrounds_misctraits_DPT_TXT.insert(INSERT,x)
+        
+    def set_Backgrounds_misctraits_DPI_TXT_CLR(self):
+        self.Backgrounds_misctraits_DPI_TXT.delete(1.0, 'end-1c')
+    def set_Backgrounds_misctraits_DPI_TXT_LIN(self,x):
+        self.Backgrounds_misctraits_DPI_TXT.insert(INSERT,x)
+    def set_Backgrounds_misctraits_DPI_TXT(self,Larray):
+        self.Backgrounds_misctraits_DPI_TXT.delete(1.0, 'end-1c')
+        for x in Larray:
+            self.Backgrounds_misctraits_DPI_TXT.insert(INSERT,x)
+        
+    def set_Backgrounds_misctraits_DPB_TXT_CLR(self):
+        self.Backgrounds_misctraits_DPB_TXT.delete(1.0, 'end-1c')
+    def set_Backgrounds_misctraits_DPB_TXT_LIN(self,x):
+        self.Backgrounds_misctraits_DPB_TXT.insert(INSERT,x)
+    def set_Backgrounds_misctraits_DPB_TXT(self,Larray):
+        self.Backgrounds_misctraits_DPB_TXT.delete(1.0, 'end-1c')
+        for x in Larray:
+            self.Backgrounds_misctraits_DPB_TXT.insert(INSERT,x)
+        
+    def set_Backgrounds_misctraits_DPF_TXT_CLR(self):
+        self.Backgrounds_misctraits_DPF_TXT.delete(1.0, 'end-1c')
+    def set_Backgrounds_misctraits_DPI_TXT_LIN(self,x):
+        self.Backgrounds_misctraits_DPI_TXT.insert(INSERT,x)
+    def set_Backgrounds_misctraits_DPF_TXT(self,Larray):
+        self.Backgrounds_misctraits_DPF_TXT.delete(1.0, 'end-1c')
+        for x in Larray:
+            self.Backgrounds_misctraits_DPF_TXT.insert(INSERT,x)
     
     ##internal
     def internal_savefileaskchecker(self):##returns name and true if file exists
@@ -2500,6 +2554,10 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
 
             self.Backgrounds_hitdie_HTD_BOX_VAR.set(HITDICE)
             self.set_savingthrows(PRIM_PROF)
+            self.set_Backgrounds_misctraits_DPT_TXT_CLR()##clear backgrounds
+            self.set_Backgrounds_misctraits_DPI_TXT_CLR()
+            self.set_Backgrounds_misctraits_DPB_TXT_CLR()
+            self.set_Backgrounds_misctraits_DPF_TXT_CLR()
             
     def internal_processbgtraitsdata(self,charclass,bgid):##sets up background class data based on background for testing
         data = datamain.fetch(charclass+'.txt')##repurposed as random
@@ -2509,24 +2567,30 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             if data[x][0] == '[BG1]':
                 data[x].remove('[BG1]')
                 
-                self.Backgrounds_misctraits_DPT_LBL_VAR.set(data[x][bgid[0]])
+                #self.Backgrounds_misctraits_DPT_LBL_VAR.set(data[x][bgid[0]])##removed labels in favour of text entries
+                print(bgid)
+                #input()
+                self.set_Backgrounds_misctraits_DPT_TXT(data[x][bgid[0]])
                 #for y in range(len(data[x])):
                     #print('datagggg##~~',data[x][y])
                     #pass##set lbx for background as numbers
             elif data[x][0] == '[BG2]':
                 data[x].remove('[BG2]')
                 
-                self.Backgrounds_misctraits_DPI_LBL_VAR.set(data[x][bgid[1]])
+                #self.Backgrounds_misctraits_DPI_LBL_VAR.set(data[x][bgid[1]])
+                self.set_Backgrounds_misctraits_DPI_TXT(data[x][bgid[1]])
 
             elif data[x][0] == '[BG3]':
                 data[x].remove('[BG3]')
                 
-                self.Backgrounds_misctraits_DPB_LBL_VAR.set(data[x][bgid[2]])
+                #self.Backgrounds_misctraits_DPB_LBL_VAR.set(data[x][bgid[2]])
+                self.set_Backgrounds_misctraits_DPB_TXT(data[x][bgid[2]])
 
             elif data[x][0] == '[BG4]':
                 data[x].remove('[BG4]')
                 
-                self.Backgrounds_misctraits_DPF_LBL_VAR.set(data[x][bgid[3]])
+                #self.Backgrounds_misctraits_DPF_LBL_VAR.set(data[x][bgid[3]])
+                self.set_Backgrounds_misctraits_DPF_TXT(data[x][bgid[3]])
         #self.Backgrounds_misctraits_DPT_LBL_VAR.set()
         #self.Backgrounds_misctraits_DPI_LBL_VAR.set()
         #self.Backgrounds_misctraits_DPB_LBL_VAR.set()
@@ -2586,7 +2650,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 if data[x][0] == '[BG1]':
                     data[x].remove('[BG1]')
                     
-                    self.Backgrounds_misctraits_DPT_LBL_VAR.set(data[x][bgid])
+                    ##self.Backgrounds_misctraits_DPT_LBL_VAR.set(data[x][bgid])
+                    self.set_Backgrounds_misctraits_DPT_TXT(data[x][bgid])
                     #for y in range(len(data[x])):
                         #print('datagggg##~~',data[x][y])
                         #pass##set lbx for background as numbers
@@ -2606,7 +2671,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 if data[x][0] == '[BG2]':
                     data[x].remove('[BG2]')
                     
-                    self.Backgrounds_misctraits_DPI_LBL_VAR.set(data[x][bgid])
+                    ##self.Backgrounds_misctraits_DPI_LBL_VAR.set(data[x][bgid])
+                    self.set_Backgrounds_misctraits_DPI_TXT(data[x][bgid])
                 
     def sub_button_confirmtrait_BOND(self):
         charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()#self.internal_get_CBO_currselection_listbox()
@@ -2623,7 +2689,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 if data[x][0] == '[BG3]':
                     data[x].remove('[BG3]')
                     
-                    self.Backgrounds_misctraits_DPB_LBL_VAR.set(data[x][bgid])
+                    ##self.Backgrounds_misctraits_DPB_LBL_VAR.set(data[x][bgid])
+                    self.set_Backgrounds_misctraits_DPB_TXT(data[x][bgid])
                     
     def sub_button_confirmtrait_FLAW(self):
         charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()#self.internal_get_CBO_currselection_listbox()
@@ -2639,12 +2706,13 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             for x in range(len(data)):
                 if data[x][0] == '[BG4]':
                     data[x].remove('[BG4]')
-                    for y in range(data[x]):
+                    for y in range(len(data[x])):
                         if data[x][y] == '@':
-                            pass
+                            pass##check for adding newlines
                             
                     
-                    self.Backgrounds_misctraits_DPF_LBL_VAR.set(data[x][bgid])
+                    ##self.Backgrounds_misctraits_DPF_LBL_VAR.set(data[x][bgid])
+                    self.set_Backgrounds_misctraits_DPF_TXT(data[x][bgid])
                 
     
     
