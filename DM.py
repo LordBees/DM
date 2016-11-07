@@ -1982,8 +1982,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         if FLAG_OK:
             if messagebox.askokcancel('Are You Sure?','finalize your character\nAre you sure'):   
                 #choosing save location
-                
-                if self.internal_savefileaskchecker()[1]:##if file already exists
+                saveloc  = self.internal_savefileaskchecker()
+                if saveloc[1]:##if file already exists
                     if messagebox.askokcancel('save file','Overwrite existing file\nare you sure?'):
                         FLAG_WRITE = True
                 else:#else file does not exist
@@ -1992,10 +1992,44 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
 
                 if FLAG_WRITE == True:#if user decides to save
                     ##preparing data
-                    #setting data
-                    #saving data
-                    pass
+                    #print(self.get_Backgrounds_rollmod_LBL(),'\n',self.get_primaryattributes_LBL())#get rollmod primary
+                    #input()
+                    TOSAVE = []
+                    B_RM = self.get_Backgrounds_rollmod_LBL()##background rollmod
+                    P_RM = self.get_primaryattributes_LBL()##primary rollmod
+
+                    for x in range(len(B_RM)):
+                        B_RM[x] = B_RM[x].split('|')[1]##splits then discards the first entry
+                        if B_RM[x] == '+-0':
+                            B_RM[x] = '0'
+                    print('========\n',B_RM,'\n',P_RM,'\n========')
+                    temp = []
+                    for x in range(len(B_RM)):#B_RM and P_RM are both same length
+                        temp.append(int(B_RM[x])+int(P_RM[x]))#add them together
+                    print(temp)  
+                    #input()
+                    #rolling other dice for misc
+                        #initiative
+                        #hp
+                    ##setting data into format
+                    
+                    
+                    #primary info box
+                    yu=[self.charbase_name_CHR_BOX_VAR.get(),#char name
+                     self.charbase_name_IRL_BOX_VAR.get(),#irl name
+                     self.Backgrounds_setup_CBO_CURR_LBL_VAR.get(),#background
+                     'level',#lvl
+                     'faction',#faction
+                     str(self.Backgrounds_setup_CBS_CURR_LBL_VAR.get())+' '+str(self.Backgrounds_setup_CBG_CURR_LBL_VAR.get()),#race [subrace race]
+                     '0XP']#xp
+                    print(yu)
+                    input()
+                    
+                    ##saving data
+                    
                     #finally close window
+                    messagebox.showinfo('test','save complete')
+                    
                     self.This_win.destroy()
                     
                 else:#print to console dbg
@@ -2015,6 +2049,15 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             self.primaryattributes_INT_BTN_VAR.get(),
             self.primaryattributes_WIS_BTN_VAR.get(),
             self.primaryattributes_CHR_BTN_VAR.get()
+            ]
+    def get_primaryattributes_LBL(self):##get label content: roll modifier for primary stats
+        return[
+            self.primaryattributes_STR_LBL_VAR.get(),
+            self.primaryattributes_DEX_LBL_VAR.get(),
+            self.primaryattributes_CON_LBL_VAR.get(),
+            self.primaryattributes_INT_LBL_VAR.get(),
+            self.primaryattributes_WIS_LBL_VAR.get(),
+            self.primaryattributes_CHR_LBL_VAR.get()
             ]
     def get_Backgrounds_rollmod_LBL(self):##get button content
         return[
