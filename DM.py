@@ -1840,11 +1840,17 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_misctraits_LF.place(x=825,y=225)#.grid(row=0,column=0)
 
 
+        Backgrounds_misctraits_inventory_LF = LabelFrame(self.This_win,text = 'INV\nbasic inventory')
+        self.Backgrounds_misctraits_inventory_INV_TXT = Text(Backgrounds_misctraits_inventory_LF,width = 50,height = 10)
+        self.Backgrounds_misctraits_inventory_INV_TXT.grid(row=0,column=0)
+        Backgrounds_misctraits_inventory_LF.place(x=900,y=600)
+
+
 
         finalizechar_setup_LF = LabelFrame(self.This_win,text = 'options')
         finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'create character',command = self.sub_button_FIN).grid(row=0,column=0)
         finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'reset character',command = self.sub_button_CLR).grid(row=1,column=0)
-        finalizechar_setup_LF.place(x=900,y=500)
+        finalizechar_setup_LF.place(x=825,y=500)
         #print('x',self.primaryattributes_setup_DRL_LBX)
 
         
@@ -1967,10 +1973,10 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         else:##if no issues raised then ok to continue
             FLAG_OK = True
 
-        print(len(self.get_Backgrounds_misctraits_DPT_TXT()))
-        print(len(self.get_Backgrounds_misctraits_DPI_TXT()))
-        print(len(self.get_Backgrounds_misctraits_DPB_TXT()))
-        print(len(self.get_Backgrounds_misctraits_DPF_TXT()))
+        #print(len(self.get_Backgrounds_misctraits_DPT_TXT()))
+        #print(len(self.get_Backgrounds_misctraits_DPI_TXT()))
+        #print(len(self.get_Backgrounds_misctraits_DPB_TXT()))
+        #print(len(self.get_Backgrounds_misctraits_DPF_TXT()))
         
         #FLAG_OK = True
         if FLAG_OK:
@@ -2033,6 +2039,46 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             (self.savingthrows_INT_CHK_VAR.get(),self.savingthrows_INT_BOX_VAR.get()),
             (self.savingthrows_WIS_CHK_VAR.get(),self.savingthrows_WIS_BOX_VAR.get()),
             (self.savingthrows_CHR_CHK_VAR.get(),self.savingthrows_CHR_BOX_VAR.get())]##return tuples of each attribute(proficient,throw)
+
+    def get_secondaryskills(self):
+        return[[
+            self.secondaryskills_ACR_BOX_VAR.get(),
+            self.secondaryskills_ANH_BOX_VAR.get(),
+            self.secondaryskills_ARC_BOX_VAR.get(),
+            self.secondaryskills_ATH_BOX_VAR.get(),
+            self.secondaryskills_DEC_BOX_VAR.get(),
+            self.secondaryskills_HIS_BOX_VAR.get(),
+            self.secondaryskills_CHR_BOX_VAR.get(),
+            self.secondaryskills_IDT_BOX_VAR.get(),
+            self.secondaryskills_INV_BOX_VAR.get(),
+            self.secondaryskills_MED_BOX_VAR.get(),
+            self.secondaryskills_NAT_BOX_VAR.get(),
+            self.secondaryskills_PER_BOX_VAR.get(),
+            self.secondaryskills_PRF_BOX_VAR.get(),
+            self.secondaryskills_PRS_BOX_VAR.get(),
+            self.secondaryskills_REL_BOX_VAR.get(),
+            self.secondaryskills_SOH_BOX_VAR.get(),
+            self.secondaryskills_STE_BOX_VAR.get(),
+            self.secondaryskills_SRV_BOX_VAR.get(),
+            ],[
+            self.secondaryskills_ACR_CHK_VAR.get(),
+            self.secondaryskills_ANH_CHK_VAR.get(),
+            self.secondaryskills_ARC_CHK_VAR.get(),
+            self.secondaryskills_ATH_CHK_VAR.get(),
+            self.secondaryskills_DEC_CHK_VAR.get(),
+            self.secondaryskills_HIS_CHK_VAR.get(),
+            self.secondaryskills_CHR_CHK_VAR.get(),
+            self.secondaryskills_IDT_CHK_VAR.get(),
+            self.secondaryskills_INV_CHK_VAR.get(),
+            self.secondaryskills_MED_CHK_VAR.get(),
+            self.secondaryskills_NAT_CHK_VAR.get(),
+            self.secondaryskills_PER_CHK_VAR.get(),
+            self.secondaryskills_PRF_CHK_VAR.get(),
+            self.secondaryskills_PRS_CHK_VAR.get(),
+            self.secondaryskills_REL_CHK_VAR.get(),
+            self.secondaryskills_SOH_CHK_VAR.get(),
+            self.secondaryskills_STE_CHK_VAR.get(),
+            self.secondaryskills_SRV_CHK_VAR.get()]]
     
     def get_Backgrounds_misctraits_DPT_TXT(self):
         return self.Backgrounds_misctraits_DPT_TXT.get(1.0,'end-1c')
@@ -2042,6 +2088,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         return self.Backgrounds_misctraits_DPB_TXT.get(1.0,'end-1c')
     def get_Backgrounds_misctraits_DPF_TXT(self):
         return self.Backgrounds_misctraits_DPF_TXT.get(1.0,'end-1c')
+    def get_Backgrounds_misctraits_inventory_INV_TXT(self):
+        return self.Backgrounds_misctraits_inventory_INV_TXT.get(1.0,'end-1c')
     ##set
     def set_primaryattributes_LBL(self,data):##set rollmod label
         self.primaryattributes_STR_LBL_VAR.set(data[0])
@@ -2087,6 +2135,45 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.savingthrows_INT_CHK_VAR.set(data[3][0])
         self.savingthrows_WIS_CHK_VAR.set(data[4][0])
         self.savingthrows_CHR_CHK_VAR.set(data[5][0])
+    #secondary stats
+    def set_secondaryskills(self,data):#[boxdata/checkboxdata][data]
+        self.secondaryskills_ACR_BOX_VAR.set(data[0][0])
+        self.secondaryskills_ANH_BOX_VAR.set(data[0][1])
+        self.secondaryskills_ARC_BOX_VAR.set(data[0][2])
+        self.secondaryskills_ATH_BOX_VAR.set(data[0][3])
+        self.secondaryskills_DEC_BOX_VAR.set(data[0][4])
+        self.secondaryskills_HIS_BOX_VAR.set(data[0][5])
+        self.secondaryskills_CHR_BOX_VAR.set(data[0][6])
+        self.secondaryskills_IDT_BOX_VAR.set(data[0][7])
+        self.secondaryskills_INV_BOX_VAR.set(data[0][8])
+        self.secondaryskills_MED_BOX_VAR.set(data[0][9])
+        self.secondaryskills_NAT_BOX_VAR.set(data[0][10])
+        self.secondaryskills_PER_BOX_VAR.set(data[0][11])
+        self.secondaryskills_PRF_BOX_VAR.set(data[0][12])
+        self.secondaryskills_PRS_BOX_VAR.set(data[0][13])
+        self.secondaryskills_REL_BOX_VAR.set(data[0][14])
+        self.secondaryskills_SOH_BOX_VAR.set(data[0][15])
+        self.secondaryskills_STE_BOX_VAR.set(data[0][16])
+        self.secondaryskills_SRV_BOX_VAR.set(data[0][17])
+        
+        self.secondaryskills_ACR_CHK_VAR.set(data[1][0])
+        self.secondaryskills_ANH_CHK_VAR.set(data[1][1])
+        self.secondaryskills_ARC_CHK_VAR.set(data[1][2])
+        self.secondaryskills_ATH_CHK_VAR.set(data[1][3])
+        self.secondaryskills_DEC_CHK_VAR.set(data[1][4])
+        self.secondaryskills_HIS_CHK_VAR.set(data[1][5])
+        self.secondaryskills_CHR_CHK_VAR.set(data[1][6])
+        self.secondaryskills_IDT_CHK_VAR.set(data[1][7])
+        self.secondaryskills_INV_CHK_VAR.set(data[1][8])
+        self.secondaryskills_MED_CHK_VAR.set(data[1][9])
+        self.secondaryskills_NAT_CHK_VAR.set(data[1][10])
+        self.secondaryskills_PER_CHK_VAR.set(data[1][11])
+        self.secondaryskills_PRF_CHK_VAR.set(data[1][12])
+        self.secondaryskills_PRS_CHK_VAR.set(data[1][13])
+        self.secondaryskills_REL_CHK_VAR.set(data[1][14])
+        self.secondaryskills_SOH_CHK_VAR.set(data[1][15])
+        self.secondaryskills_STE_CHK_VAR.set(data[1][16])
+        self.secondaryskills_SRV_CHK_VAR.set(data[1][17])
 #   text for personailty traits  _LIN
     def set_Backgrounds_misctraits_DPT_TXT_CLR(self):
         self.Backgrounds_misctraits_DPT_TXT.delete(1.0, 'end-1c')
@@ -2123,7 +2210,14 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.Backgrounds_misctraits_DPF_TXT.delete(1.0, 'end-1c')
         for x in Larray:
             self.Backgrounds_misctraits_DPF_TXT.insert(INSERT,x)
-    
+    ##inv txt
+    #self.Backgrounds_misctraits_inventory_INV_TXT
+    def set_Backgrounds_misctraits_inventory_INV_TXT_CLR(self):
+        self.Backgrounds_misctraits_inventory_INV_TXT.delete(1.0, 'end-1c')
+    def set_Backgrounds_misctraits_inventory_INV_TXT(self,Larray):
+        self.Backgrounds_misctraits_inventory_INV_TXT.delete(1.0, 'end-1c')
+        for x in Larray:
+            self.Backgrounds_misctraits_inventory_INV_TXT.insert(INSERT,x)
     ##internal
     def internal_savefileaskchecker(self):##returns name and true if file exists
         FPath = filedialog.asksaveasfilename(filetypes=(("D&D character sheet", "*.MEGA"),("All Files", "*.*") ))##adv extention is forced onto ##EDIT took out this defaultextension=".ADV", 
@@ -2530,36 +2624,71 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         else:
             HITDICE = 'Dxx'
             PRIM_PROF = self.get_savingthrows()##gets proficiency for saving throws and refreshes them after updating
+            SEC_PROF = self.get_secondaryskills()##secondary skill proficiency
             charclass = self.internal_get_CBO_currselection_listbox()
+            INV = []
             self.Backgrounds_setup_CBO_CURR_LBL_VAR.set(charclass)
+            self.set_Backgrounds_misctraits_inventory_INV_TXT_CLR()##clears inv
 
+            #print('\n',SEC_PROF)
+            #input(self.get_secondaryskills())
+            
             #fetches data for specific background, loads numbers 1-4 into each listbox
             #display and populate listbox background table
             ##removes all proficienies
             for x in range(len(PRIM_PROF)):
                 PRIM_PROF[x] = (0,PRIM_PROF[x][1])
-                    
+                
+##            for x in range(len(SEC_PROF)):
+##                print(SEC_PROF[x])
+##                SEC_PROF[x] = (0,SEC_PROF[x][1])
+            for x in range(len(SEC_PROF[1])):
+                SEC_PROF[1][x] = 0
+            #print(SEC_PROF[1])
+
+            #print('\n',SEC_PROF)
+            #input(self.get_secondaryskills())
             #set specific attributes for each class here
             #print('charclass',charclass=='Cleric')
+                ##actual backgrounds,claric-acolyte,figter-soldier,rogue-criminal,wizard-sage,,
             if charclass == 'Cleric':
                 HITDICE = 'D8'
                 PRIM_PROF[4] = (1,PRIM_PROF[4][1])##assigns data as tuple (proficency flag,text in proficiency box)
                 PRIM_PROF[5] = (1,PRIM_PROF[5][1])
+                SEC_PROF[1][15] = 1#(1,SEC_PROF[15][1])
+                SEC_PROF[1][6] = 1#(1,SEC_PROF[6][1])
+                INV = ['A holy symbol (a gift to you when you entered the priesthood)\n','a prayer book or prayer wheel\n','5 sticks of incense\n','vestments\n','a set of common clothes\n','a pouch containing 15 gp\n']
+                
             elif charclass == 'Fighter':
                 HITDICE = 'D10'
                 PRIM_PROF[0] = (1,PRIM_PROF[0][1])
                 PRIM_PROF[2] = (1,PRIM_PROF[2][1])
+                SEC_PROF[1][3] = 1#(1,SEC_PROF[5][1])
+                SEC_PROF[1][7] = 1#(1,SEC_PROF[2][1])
+                INV = ['An insignia of rank\n', 'a trophy taken from a fallen enemy\n','a deck of cards\n','a set of common clothes\n','a pouch containing 10 gp\n']
             elif charclass == 'Rogue':
                 HITDICE = 'D8'
                 PRIM_PROF[1] = (1,PRIM_PROF[1][1])
                 PRIM_PROF[3] = (1,PRIM_PROF[3][1])
+                SEC_PROF[1][4] = 1#(1,SEC_PROF[5][1])
+                SEC_PROF[1][16] = 1#(1,SEC_PROF[2][1])
+                INV = ['A crowbar\n','a set of dark common clothes including a hood\n','a pouch containing 15 gp\n']
+                
             elif charclass == 'Wizard':
                 HITDICE = 'D6'
                 PRIM_PROF[3] = (1,PRIM_PROF[3][1])
                 PRIM_PROF[4] = (1,PRIM_PROF[4][1])
+                SEC_PROF[1][5] = 1#(1,SEC_PROF[5][1])
+                SEC_PROF[1][2] = 1#(1,SEC_PROF[2][1])
+                INV = ['A bottle of black ink\n','a quill\n','a small knife\n','a letter from a dead colleague posing a question\n you have not yet been able to answer\n','a set of common clothes\n','a pouch containing 10 gp\n']
+                
+
+            
 
             self.Backgrounds_hitdie_HTD_BOX_VAR.set(HITDICE)
             self.set_savingthrows(PRIM_PROF)
+            self.set_secondaryskills(SEC_PROF)
+            self.set_Backgrounds_misctraits_inventory_INV_TXT(INV)
             self.set_Backgrounds_misctraits_DPT_TXT_CLR()##clear backgrounds
             self.set_Backgrounds_misctraits_DPI_TXT_CLR()
             self.set_Backgrounds_misctraits_DPB_TXT_CLR()
