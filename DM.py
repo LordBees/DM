@@ -2,7 +2,7 @@
 ##imports
 import os,sys,random##packages
 from tkinter import *#tk
-from tkinter import messagebox,filedialog##specific imports
+from tkinter import messagebox,filedialog##specific imports testing
 import MEGA##custom lib
 
 ##tkclass##
@@ -37,6 +37,8 @@ class main_win:
     IS_LOADED = False
     d='1'##testing of boxes
 
+
+    #TK variables for storing data
     ##charbase_name
     charbase_name_CNM_BOX_VAR = StringVar()
     charbase_name_IRL_BOX_VAR = StringVar()
@@ -64,12 +66,15 @@ class main_win:
     
     #perception
     Perception_PER_BOX_VAR = StringVar()
+
     
     ##inspiration
     inspiration_STR_BOX_VAR = StringVar()
+
     
     ##proficiency bonus
     proficiencybonus_STR_BOX_VAR = StringVar()
+
     
     ##saving throws
     savingthrows_STR_CHK_VAR = IntVar()##chkboxes
@@ -134,7 +139,8 @@ class main_win:
     HPmiscskills_HTP_BOX_VAR = StringVar()
     HPmiscskills_HCR_BOX_VAR = StringVar()
 
-    #di
+
+    #dice saves and hit die
     diceandsavesmisc_HTD_BOX_VAR = StringVar()
     diceandsavesmisc_DTO_BOX_VAR = StringVar()
     diceandsavesmisc_DS1_CHK_VAR = IntVar()
@@ -143,6 +149,7 @@ class main_win:
     diceandsavesmisc_DF1_CHK_VAR = IntVar()
     diceandsavesmisc_DF2_CHK_VAR = IntVar()
     diceandsavesmisc_DF3_CHK_VAR = IntVar()
+
     
      #attackplusspells
     attackplusspells_WN1_BOX_VAR = StringVar()
@@ -161,14 +168,19 @@ class main_win:
     ##hack for getting data out of text box(assigned as stringvar temp to ensure .get() can be found before assignment
     #traits/lang box
     languagesplusskills_TBX_TXT = StringVar()
+
+    
     #equip/inventory
     equipmain_TBX_TXT = StringVar()
+
+    
     #traits
     personalinfo_traits_TBX_TXT = StringVar()
     personalinfo_ideals_TBX_TXT = StringVar()
     personalinfo_bonds_TBX_TXT = StringVar()
     personalinfo_flaws_TBX_TXT = StringVar()
     personalinfo_features_TBX_TXT = StringVar()
+    
 
     def __init__(self):
         
@@ -192,8 +204,8 @@ class main_win:
         charbase_name_RAC_LBL = Label(charbase_name_LF,text = 'player race:').grid(row=1,column=4)
         charbase_name_EXP_BOX = Entry(charbase_name_LF,width = 5,textvariable = self.charbase_name_EXP_BOX_VAR).grid(row=0,column=7)
         charbase_name_EXP_LBL = Label(charbase_name_LF,text = 'player experience:').grid(row=0,column=6)
-        
         charbase_name_LF.place(x=75,y=0)
+        
         #primaryattributes_LF
         primaryattributes_LF = LabelFrame(self.This_win,text = 'primary\nattributes')
         primaryattributes_STR_BOX = Entry(primaryattributes_LF,width = 3,textvariable = self.primaryattributes_STR_BOX_VAR).pack()
@@ -381,11 +393,13 @@ class main_win:
         #add txt to fill spaces
         attackplusspells_LF.place(x=400,y=325)
 
+        #language+misc skills LF
         languagesplusskills_LF = LabelFrame(self.This_win,text = 'proficiencies and languages')
         self.languagesplusskills_TBX_TXT = Text(languagesplusskills_LF,height = 10,width = 25)#add scrollbar to list
         self.languagesplusskills_TBX_TXT.grid(row=0,column=0)
         languagesplusskills_LF.place(x=825,y=75)
 
+        #inventory LF
         equipmain_LF = LabelFrame(self.This_win,text = 'inventory')
         self.equipmain_TBX_TXT = Text(equipmain_LF,height = 25,width = 25)#add scrollbar to list
         self.equipmain_TBX_TXT.grid(row=0,column=0)
@@ -435,19 +449,22 @@ class main_win:
         
         ##defining topbar menu on the top of the main window
         Menu_main = Menu(self.This_win)
-        
+
+        ##file io dropdown on menubar
         Menu_FileIO = Menu(Menu_main,tearoff = 0)##file tab
         Menu_FileIO.add_command(label="New", command=self.sub_button_newfile)
         Menu_FileIO.add_command(label="Load", command=self.sub_button_loadfile)
         Menu_FileIO.add_command(label="Save", command=self.sub_button_savefile)
         Menu_FileIO.add_command(label="Save As", command=self.sub_button_savefile_as)
-        
+
+        #settings dropdown on the menubar
         Menu_settings = Menu(Menu_main,tearoff = 0)##tools tab
         #Menu_settings = Menu(menubar, tearoff=0)
         Menu_settings.add_command(label="dice roller", command=dicewin)
         Menu_settings.add_command(label="combat helper")#, command=Menu_customchoose_window)
 
-        ##define menu tearoffs
+        ##top menu(the strip across the top of the windw with the options on)
+        ##define menu dropdowns
         Menu_main.add_cascade(label = '|File|',menu = Menu_FileIO)
         Menu_main.add_cascade(label = '|Tools|',menu = Menu_settings)
         Menu_main.add_command(label="|Options|",command = optwin)#, command=Menu_preview_window)
@@ -460,6 +477,7 @@ class main_win:
         
     def Alt_loop(self):##alt event loop code
         ##additional event loop code here
+        
         #print(self.get_attackplusspells())
         #print(self.get_secondaryskills())
         ##print(self.get_ALL())
@@ -473,8 +491,9 @@ class main_win:
         ##end
 
         ##end
-        self.This_win.after(1500,self.Alt_loop)
+        self.This_win.after(1500,self.Alt_loop)##recalls alt loop method
 
+    
     #useful functions
     def array2csv(self,array):##from beelib
         temp = ''
@@ -545,7 +564,8 @@ class main_win:
                 f.close()
             except:
                 print('error/file already closed!')
-                                   
+                
+    ##INTERNAL methods                               
      ## askfiledialog used here   
     def internal_savefileaskchecker(self):##returns name and true if file exists
         FPath = filedialog.asksaveasfilename(filetypes=(("D&D character sheet", "*.MEGA"),("All Files", "*.*") ))##adv extention is forced onto ##EDIT took out this defaultextension=".ADV", 
@@ -574,6 +594,7 @@ class main_win:
     ##mega file save prep
     def internal_prepsave(self,GotData):##handles conversion for data to save in megafile
         ##doublecheck this vs
+        ##file list to save under
         Fn = ['charbase',
               'primary',
               'rollmod',
@@ -1055,8 +1076,7 @@ class main_win:
                 self.primaryattributes_INT_BOX_VAR.get(),
                 self.primaryattributes_WIS_BOX_VAR.get(),
                 self.primaryattributes_CHR_BOX_VAR.get()]
-
-    
+  
     def get_rollmod(self):
         return[ self.primaryattributes_STR_MOD_BOX_VAR.get(),
                 self.primaryattributes_DEX_MOD_BOX_VAR.get(),
@@ -1070,11 +1090,9 @@ class main_win:
     
     def get_inspiration(self):
         return self.inspiration_STR_BOX_VAR.get()
-
     
     def get_proficiencybonus(self):
         return self.proficiencybonus_STR_BOX_VAR.get()
-
     
     def get_savingthrows(self):
         return[
@@ -1084,7 +1102,6 @@ class main_win:
             (self.savingthrows_INT_CHK_VAR.get(),self.savingthrows_INT_BOX_VAR.get()),
             (self.savingthrows_WIS_CHK_VAR.get(),self.savingthrows_WIS_BOX_VAR.get()),
             (self.savingthrows_CHR_CHK_VAR.get(),self.savingthrows_CHR_BOX_VAR.get())]##return tuples of each attribute(proficient,throw)
-
     
     def get_secondaryskills(self):
         return[[
@@ -1136,7 +1153,6 @@ class main_win:
         self.HPmiscskills_HTP_BOX_VAR.get(),
         self.HPmiscskills_HCR_BOX_VAR.get()]
 
-
     def get_diceandsavesmisc(self):
         #di
         return[
@@ -1148,7 +1164,6 @@ class main_win:
         self.diceandsavesmisc_DF1_CHK_VAR.get(),
         self.diceandsavesmisc_DF2_CHK_VAR.get(),
         self.diceandsavesmisc_DF3_CHK_VAR.get()]
-
     
     def get_attackplusspells_VAR(self):#[weaps/notes][data][weapno]
                                        #weapno
@@ -1176,18 +1191,23 @@ class main_win:
             ]]
         #text hack
         #self.attackplusspells_MSC_TXT
+    
     def get_attackplusspells_TXT(self):
         #text hack
         return self.attackplusspells_MSC_TXT.get(1.0, 'end-1c')##char1 2 end
+    
     def get_attackplusspells(self):
         return [self.get_attackplusspells_VAR(),self.get_attackplusspells_TXT()]
     #text boxes additionally need to be added
+    
     def get_languageplusskills(self):
         #traits/lang box
         return self.languagesplusskills_TBX_TXT.get(1.0, 'end-1c')
+    
     def get_equipmain(self):
         #equip/inventory
         return self.equipmain_TBX_TXT.get(1.0, 'end-1c')
+    
     def get_personalinfo_basic(self):
         #traits
         return[
@@ -1196,6 +1216,7 @@ class main_win:
             self.personalinfo_bonds_TBX_TXT.get(1.0, 'end-1c'),
             self.personalinfo_flaws_TBX_TXT.get(1.0, 'end-1c'),
             self.personalinfo_features_TBX_TXT.get(1.0, 'end-1c')]
+    
     def get_ALL(self):
         return[
         self.get_charbase_name(),
@@ -1226,6 +1247,7 @@ class main_win:
         self.charbase_name_FAC_BOX_VAR.set(data[4])
         self.charbase_name_RAC_BOX_VAR.set(data[5])
         self.charbase_name_EXP_BOX_VAR.set(data[6])
+        
     #primaryattributes
     def set_primaryattributes(self,data):
         self.primaryattributes_STR_BOX_VAR.set(data[0])
@@ -1332,7 +1354,6 @@ class main_win:
         self.diceandsavesmisc_DF1_CHK_VAR.set(data[5])
         self.diceandsavesmisc_DF2_CHK_VAR.set(data[6])
         self.diceandsavesmisc_DF3_CHK_VAR.set(data[7])
-
     
     def set_attackplusspells_VAR(self,data):#[weaps/notes][data][weapno]
                                        #weapno
@@ -1355,25 +1376,30 @@ class main_win:
                 self.attackplusspells_DT3_BOX_VAR.set(data[2][2])
         #text hack
         #self.attackplusspells_MSC_TXT
+                
     def set_attackplusspells_TXT(self,data):
         #text hack
         self.attackplusspells_MSC_TXT.delete(1.0, 'end-1c')
         for x in data:#.insert for loop or pass whole string with newlines
             self.attackplusspells_MSC_TXT.insert(INSERT,x)#.set(data[0])##char1 2 end
+            
     def set_attackplusspells(self,data):
         self.set_attackplusspells_VAR(data[0])
         self.set_attackplusspells_TXT(data[1])
     #text boxes additionally need to be added
+        
     def set_languageplusskills(self,data):
         #traits/lang box
         self.languagesplusskills_TBX_TXT.delete(1.0, 'end-1c')
         for x in data:
             self.languagesplusskills_TBX_TXT.insert(INSERT,x)
+            
     def set_equipmain(self,data):
         #equip/inventory
         self.equipmain_TBX_TXT.delete(1.0, 'end-1c')
         for x in data:
             self.equipmain_TBX_TXT.insert(INSERT,x)
+            
     def set_personalinfo_basic(self,data):
         #traits
 
@@ -1410,6 +1436,7 @@ class main_win:
         self.set_equipmain(data[12])
         self.set_personalinfo_basic(data[13])
         #add txt boxes
+        
     def get_a():
         pass
             
@@ -1418,6 +1445,8 @@ class dicewin:
     #This_win = Toplevel
     #print('init')
     ##variables
+    
+    #TK variables
     Diceroller_DX1_RAD_VAR = IntVar()#StringVar()
     Diceroller_RDR_LBL_VAR = StringVar()
     
@@ -1476,6 +1505,8 @@ class dicewin:
     ##sets label of output and formats
     def set_rollerlabel(self,data):
         self.Diceroller_RDR_LBL_VAR.set('you rolled a |'+str(data))
+
+
         
 ##creation of custom character window class(instanced from menubar create new preset character)        
 class createcharwin:#(main_win):##better to create new window form,from scratch
@@ -2030,8 +2061,9 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                     ARRAY_SAVES = self.get_savingthrows()
 
                     ARRAY_HPMISC = self.get_hpmiscskills()
-                    
-                    STRING_PERCEPTION = str(10+int(ARRAY_PATTR_ROLLMOD[4])+int(ARRAY_SKILLS[11]))##perception=10+wisdom rollmod+proficiency in perception
+
+                    print(ARRAY_PATTR_RMOD,';',ARRAY_SKILLS)
+                    STRING_PERCEPTION = str(10+int(ARRAY_PATTR_RMOD[4])+int(ARRAY_SKILLS[0][11]))##perception=10+wisdom rollmod+proficiency in perception
                     #input()
                     #rolling other dice for misc
                         #initiative
@@ -2323,6 +2355,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             self.Backgrounds_misctraits_inventory_INV_TXT.insert(INSERT,x)
     ##internal
     def internal_calcprofbonusplushpmisc(self):
+        PROFBONUS_LVL = 0 ## i am going to expand this later to include starting level on the page but for now is fixed at 0
         B_RM = self.get_Backgrounds_rollmod_LBL()##background rollmod
         P_RM = self.get_primaryattributes_LBL()##primary rollmod
         T_RM = []
@@ -2348,7 +2381,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             
             ##update saving throws and skill proficiency bonuses
             A_SF = self.get_savingthrows()##array_savingthrows
-            #A_SP = self.get_secondaryskills()##array_skillproficiencies##sp not needed as lvl 0
+            A_SP = self.get_secondaryskills()##array_skillproficiencies##sp not needed as lvl 0
 
             for x in range(len(A_SF)):
                 print(A_SF[x])
@@ -2357,13 +2390,14 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 else:
                     A_SF[x] = [0,str('0')]##reassign tuple as list
                     
-##            for x in range(len(A_SP[1])):
-##                if A_SP[1] == 1:
-##                    A_SP[0] = str(profbonus)
+            for x in range(len(A_SP[1])):
+##                if A_SP[1][x] == 1:
+##                    A_SP[0][x] = str(PROFBONUS_LVL)
+                A_SP[0][x] = str(PROFBONUS_LVL)
 
             #set the values
             self.set_savingthrows(A_SF)##array_savingthrows
-            #self.set_secondaryskills(A_SP)##array_skillproficiencies
+            self.set_secondaryskills(A_SP)##array_skillproficiencies
 
             
             ##caclulate and update wisdom##EDIT: now done on finalisation of character
@@ -2560,6 +2594,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             
     def internal_get_CBG_listbox(self):
             return self.Backgrounds_setup_CBG_LBX.get(0,self.Backgrounds_setup_CBG_LBX.size())
+    ########
+
 
 
     #Charactersubracelistbox functions
@@ -2597,6 +2633,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def internal_setindex_CBS_listbox(self,Iitem):#change index in listbox
         self.Backgrounds_setup_CBS_LBX.activate(Iitem)
     ########
+
         
     #Characterclasslistbox functions
     #Backgrounds_setup_CBO_LBX
@@ -2634,6 +2671,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.Backgrounds_setup_CBO_LBX.activate(Iitem)
         
     ########
+
         
     def internal_stripbrackets(self,strng):
         return strng[:-1].strip('[')
@@ -2920,6 +2958,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     #def sub_button_confirmtrait(self):
         #names = ['Cleric','Fighter','Rogue','Wizard']
         #self.internal_processbgtraitsdata(names[lbxget])
+        
     def sub_button_confirmtrait_RNG(self):
         charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()
         if charclass == 'None selected!':
@@ -2950,6 +2989,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                     #for y in range(len(data[x])):
                         #print('datagggg##~~',data[x][y])
                         #pass##set lbx for background as numbers
+
                 
     def sub_button_confirmtrait_IDEAL(self):
         charclass = self.Backgrounds_setup_CBO_CURR_LBL_VAR.get()#self.internal_get_CBO_currselection_listbox()
