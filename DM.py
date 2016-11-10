@@ -462,7 +462,7 @@ class main_win:
         ##additional event loop code here
         #print(self.get_attackplusspells())
         #print(self.get_secondaryskills())
-        print(self.get_ALL())
+        ##print(self.get_ALL())
 ##        self.set_primaryattributes([random.random(),random.random(),random.random(),random.random(),random.random(),random.random(),random.random()])
 ##        if self.d == '1':
 ##            self.d = '0'
@@ -1736,80 +1736,80 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         #savingthrows_LF
         savingthrows_LF = LabelFrame(self.This_win,text = 'BG\nSaving Throws')
         savingthrows_STR_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_STR_CHK_VAR).grid(row = 0,column=0)#.pack()
-        savingthrows_STR_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_STR_BOX_VAR).grid(row = 0,column=1)#.pack()
+        savingthrows_STR_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_STR_BOX_VAR,state = DISABLED).grid(row = 0,column=1)#.pack()
         savingthrows_STR_LBL = Label(savingthrows_LF,text = 'Strength')                                     .grid(row = 0,column=2)#.pack()
         savingthrows_DEX_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_DEX_CHK_VAR).grid(row = 1,column=0)#.pack()
-        savingthrows_DEX_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_DEX_BOX_VAR).grid(row = 1,column=1)#.pack()
+        savingthrows_DEX_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_DEX_BOX_VAR,state = DISABLED).grid(row = 1,column=1)#.pack()
         savingthrows_DEX_LBL = Label(savingthrows_LF,text = 'Dexterity')                                    .grid(row = 1,column=2)#.pack()
         savingthrows_CON_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_CON_CHK_VAR).grid(row = 2,column=0)#.pack()
-        savingthrows_CON_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_CON_BOX_VAR).grid(row = 2,column=1)#.pack()
+        savingthrows_CON_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_CON_BOX_VAR,state = DISABLED).grid(row = 2,column=1)#.pack()
         savingthrows_CON_LBL = Label(savingthrows_LF,text = 'Constitution')                                 .grid(row = 2,column=2)#.pack()
         savingthrows_INT_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_INT_CHK_VAR).grid(row = 3,column=0)#.pack()
-        savingthrows_INT_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_INT_BOX_VAR).grid(row = 3,column=1)#.pack()
+        savingthrows_INT_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_INT_BOX_VAR,state = DISABLED).grid(row = 3,column=1)#.pack()
         savingthrows_INT_LBL = Label(savingthrows_LF,text = 'Intelligence')                                 .grid(row = 3,column=2)#.pack()
         savingthrows_WIS_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_WIS_CHK_VAR).grid(row = 4,column=0)#.pack()
-        savingthrows_WIS_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_WIS_BOX_VAR).grid(row = 4,column=1)#.pack()
+        savingthrows_WIS_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_WIS_BOX_VAR,state = DISABLED).grid(row = 4,column=1)#.pack()
         savingthrows_WIS_LBL = Label(savingthrows_LF,text = 'Wisdom')                                       .grid(row = 4,column=2)#.pack()
         savingthrows_CHR_CHK = Checkbutton(savingthrows_LF,variable =           self.savingthrows_CHR_CHK_VAR).grid(row = 5,column=0)#.pack()
-        savingthrows_CHR_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_CHR_BOX_VAR).grid(row = 5,column=1)#.pack()
+        savingthrows_CHR_BOX = Entry(savingthrows_LF,width = 5,textvariable =   self.savingthrows_CHR_BOX_VAR,state = DISABLED).grid(row = 5,column=1)#.pack()
         savingthrows_CHR_LBL = Label(savingthrows_LF,text = 'Charisma')                                     .grid(row = 5,column=2)#.pack()
         savingthrows_LF.place(x=325,y=130)
 
         #secondaryskills_LF
         secondaryskills_LF = LabelFrame(self.This_win,text = 'BG\nskills')
         secondaryskills_ACR_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_ACR_CHK_VAR).grid(row=0,column=0)#).pack(side=LEFT)
-        secondaryskills_ACR_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ACR_BOX_VAR).grid(row=0,column=1)#.pack()
+        secondaryskills_ACR_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ACR_BOX_VAR,state = DISABLED).grid(row=0,column=1)#.pack()
         secondaryskills_ACR_LBL = Label(secondaryskills_LF,text = 'acrobatics').grid(row=0,column=2)#.pack()
         secondaryskills_ANH_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_ANH_CHK_VAR).grid(row=1,column=0)#.pack()
-        secondaryskills_ANH_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ANH_BOX_VAR).grid(row=1,column=1)#.pack()
+        secondaryskills_ANH_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ANH_BOX_VAR,state = DISABLED).grid(row=1,column=1)#.pack()
         secondaryskills_ANH_LBL = Label(secondaryskills_LF,text = 'animal handling').grid(row=1,column=2)#.pack()
         secondaryskills_ARC_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_ARC_CHK_VAR).grid(row=2,column=0)#.pack()
-        secondaryskills_ARC_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ARC_BOX_VAR).grid(row=2,column=1)#.pack()
+        secondaryskills_ARC_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ARC_BOX_VAR,state = DISABLED).grid(row=2,column=1)#.pack()
         secondaryskills_ARC_LBL = Label(secondaryskills_LF,text = 'arcana').grid(row=2,column=2)#.pack()
         secondaryskills_ATH_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_ATH_CHK_VAR).grid(row=3,column=0)#.pack()
-        secondaryskills_ATH_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ATH_BOX_VAR).grid(row=3,column=1)#.pack()
+        secondaryskills_ATH_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_ATH_BOX_VAR,state = DISABLED).grid(row=3,column=1)#.pack()
         secondaryskills_ATH_LBL = Label(secondaryskills_LF,text = 'athletics').grid(row=3,column=2)#.pack()
         secondaryskills_DEC_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_DEC_CHK_VAR).grid(row=4,column=0)#.pack()
-        secondaryskills_DEC_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_DEC_BOX_VAR).grid(row=4,column=1)#.pack()
+        secondaryskills_DEC_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_DEC_BOX_VAR,state = DISABLED).grid(row=4,column=1)#.pack()
         secondaryskills_DEC_LBL = Label(secondaryskills_LF,text = 'deception').grid(row=4,column=2)#.pack()
         secondaryskills_HIS_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_HIS_CHK_VAR).grid(row=5,column=0)#.pack()
-        secondaryskills_HIS_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_HIS_BOX_VAR).grid(row=5,column=1)#.pack()
+        secondaryskills_HIS_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_HIS_BOX_VAR,state = DISABLED).grid(row=5,column=1)#.pack()
         secondaryskills_HIS_LBL = Label(secondaryskills_LF,text = 'history').grid(row=5,column=2)#.pack()
         secondaryskills_CHR_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_CHR_CHK_VAR).grid(row=6,column=0)#.pack()
-        secondaryskills_CHR_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_CHR_BOX_VAR).grid(row=6,column=1)#.pack()
+        secondaryskills_CHR_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_CHR_BOX_VAR,state = DISABLED).grid(row=6,column=1)#.pack()
         secondaryskills_CHR_LBL = Label(secondaryskills_LF,text = 'insight').grid(row=6,column=2)#.pack()
         secondaryskills_IDT_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_IDT_CHK_VAR).grid(row=7,column=0)#.pack()
-        secondaryskills_IDT_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_IDT_BOX_VAR).grid(row=7,column=1)#.pack()
+        secondaryskills_IDT_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_IDT_BOX_VAR,state = DISABLED).grid(row=7,column=1)#.pack()
         secondaryskills_IDT_LBL = Label(secondaryskills_LF,text = 'intimidation').grid(row=7,column=2)#.pack()
         secondaryskills_INV_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_INV_CHK_VAR).grid(row=8,column=0)#.pack()
-        secondaryskills_INV_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_INV_BOX_VAR).grid(row=8,column=1)#.pack()
+        secondaryskills_INV_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_INV_BOX_VAR,state = DISABLED).grid(row=8,column=1)#.pack()
         secondaryskills_INV_LBL = Label(secondaryskills_LF,text = 'investigation').grid(row=8,column=2)#.pack()
         secondaryskills_MED_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_MED_CHK_VAR).grid(row=9,column=0)#.pack()
-        secondaryskills_MED_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_MED_BOX_VAR).grid(row=9,column=1)#.pack()
+        secondaryskills_MED_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_MED_BOX_VAR,state = DISABLED).grid(row=9,column=1)#.pack()
         secondaryskills_MED_LBL = Label(secondaryskills_LF,text = 'medicine').grid(row=9,column=2)#.pack()
         secondaryskills_NAT_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_NAT_CHK_VAR).grid(row=10,column=0)#.pack()
-        secondaryskills_NAT_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_NAT_BOX_VAR).grid(row=10,column=1)#.pack()
+        secondaryskills_NAT_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_NAT_BOX_VAR,state = DISABLED).grid(row=10,column=1)#.pack()
         secondaryskills_NAT_LBL = Label(secondaryskills_LF,text = 'nature').grid(row=10,column=2)#.pack()
         secondaryskills_PER_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_PER_CHK_VAR).grid(row=11,column=0)#.pack()
-        secondaryskills_PER_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_PER_BOX_VAR).grid(row=11,column=1)#.pack()
+        secondaryskills_PER_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_PER_BOX_VAR,state = DISABLED).grid(row=11,column=1)#.pack()
         secondaryskills_PER_LBL = Label(secondaryskills_LF,text = 'perception').grid(row=11,column=2)#.pack()
         secondaryskills_PRF_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_PRF_CHK_VAR).grid(row=12,column=0)#.pack()
-        secondaryskills_PRF_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_PRF_BOX_VAR).grid(row=12,column=1)#.pack()
+        secondaryskills_PRF_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_PRF_BOX_VAR,state = DISABLED).grid(row=12,column=1)#.pack()
         secondaryskills_PRF_LBL = Label(secondaryskills_LF,text = 'performance').grid(row=12,column=2)#.pack()
         secondaryskills_PRS_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_PRS_CHK_VAR).grid(row=13,column=0)#.pack()
-        secondaryskills_PRS_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_PRS_BOX_VAR).grid(row=13,column=1)#.pack()
+        secondaryskills_PRS_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_PRS_BOX_VAR,state = DISABLED).grid(row=13,column=1)#.pack()
         secondaryskills_PRS_LBL = Label(secondaryskills_LF,text = 'persuasion').grid(row=13,column=2)#.pack()
         secondaryskills_REL_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_REL_CHK_VAR).grid(row=14,column=0)#.pack()
-        secondaryskills_REL_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_REL_BOX_VAR).grid(row=14,column=1)#.pack()
+        secondaryskills_REL_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_REL_BOX_VAR,state = DISABLED).grid(row=14,column=1)#.pack()
         secondaryskills_REL_LBL = Label(secondaryskills_LF,text = 'religion').grid(row=14,column=2)#.pack()
         secondaryskills_SOH_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_SOH_CHK_VAR).grid(row=15,column=0)#.pack()
-        secondaryskills_SOH_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_SOH_BOX_VAR).grid(row=15,column=1)#.pack()
+        secondaryskills_SOH_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_SOH_BOX_VAR,state = DISABLED).grid(row=15,column=1)#.pack()
         secondaryskills_SOH_LBL = Label(secondaryskills_LF,text = 'sleight of hand').grid(row=15,column=2)#.pack()
         secondaryskills_STE_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_STE_CHK_VAR).grid(row=16,column=0)#.pack()
-        secondaryskills_STE_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_STE_BOX_VAR).grid(row=16,column=1)#.pack()
+        secondaryskills_STE_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_STE_BOX_VAR,state = DISABLED).grid(row=16,column=1)#.pack()
         secondaryskills_STE_LBL = Label(secondaryskills_LF,text = 'stealth').grid(row=16,column=2)#.pack()
         secondaryskills_SRV_CHK = Checkbutton(secondaryskills_LF,               variable = self.secondaryskills_SRV_CHK_VAR).grid(row=17,column=0)#.pack()
-        secondaryskills_SRV_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_SRV_BOX_VAR).grid(row=17,column=1)#.pack()
+        secondaryskills_SRV_BOX = Entry(secondaryskills_LF,width = 5,           textvariable = self.secondaryskills_SRV_BOX_VAR,state = DISABLED).grid(row=17,column=1)#.pack()
         secondaryskills_SRV_LBL = Label(secondaryskills_LF,text = 'survival').grid(row=17,column=2)#.pack()
         secondaryskills_LF.place(x=325,y=315)
 
@@ -1867,6 +1867,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
     def Alt_loop(self):##runs every 1.5 seconds
         ##additional event loop code here
         self.internal_calcrollmod_primary_LBL()
+        self.internal_calcprofbonusplushpmisc()
         #self.internal_process_backgrounddata()
         print(self.internal_validaterolls())
         ##end
@@ -2029,6 +2030,8 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                     ARRAY_SAVES = self.get_savingthrows()
 
                     ARRAY_HPMISC = self.get_hpmiscskills()
+                    
+                    STRING_PERCEPTION = str(10+int(ARRAY_PATTR_ROLLMOD[4])+int(ARRAY_SKILLS[11]))##perception=10+wisdom rollmod+proficiency in perception
                     #input()
                     #rolling other dice for misc
                         #initiative
@@ -2047,7 +2050,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                     #print('NAMeSTAT\n',yu)
                     #input()
 
-                    TOSAVE = [ARRAY_NAMESTAT,ARRAY_PATTR,ARRAY_PATTR_RMOD,'PERCEPTION','INSPIRATION','PROFICIENCY BONUS',ARRAY_SAVES,ARRAY_SKILLS,ARRAY_HPMISC,
+                    TOSAVE = [ARRAY_NAMESTAT,ARRAY_PATTR,ARRAY_PATTR_RMOD,STRING_PERCEPTION,'0','0',ARRAY_SAVES,ARRAY_SKILLS,ARRAY_HPMISC,##profbonus =0 at lvl:0 inspiration is 0 at start normally
                               [self.Backgrounds_hitdie_HTD_BOX_VAR.get(), 'TOT', 0, 0, 0, 0, 0, 0],[[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']],' '],
                               self.get_Backgrounds_LANG_TRT_TXT(),self.get_Backgrounds_misctraits_inventory_INV_TXT(),
                               [self.get_Backgrounds_misctraits_DPT_TXT(),self.get_Backgrounds_misctraits_DPI_TXT(),self.get_Backgrounds_misctraits_DPB_TXT(),self.get_Backgrounds_misctraits_DPF_TXT(),
@@ -2197,6 +2200,15 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         self.Backgrounds_rollmod_INT_LBL_VAR.set(data[3])
         self.Backgrounds_rollmod_WIS_LBL_VAR.set(data[4])
         self.Backgrounds_rollmod_CHR_LBL_VAR.set(data[5])
+
+    def set_hpmiscskills(self,data):
+        ##hpmiscskills
+        self.HPmiscskills_AMC_BOX_VAR.set(data[0])
+        self.HPmiscskills_INI_BOX_VAR.set(data[1])
+        self.HPmiscskills_SPD_BOX_VAR.set(data[2])
+        self.HPmiscskills_HMX_BOX_VAR.set(data[3])
+        self.HPmiscskills_HTP_BOX_VAR.set(data[4])
+        self.HPmiscskills_HCR_BOX_VAR.set(data[5])
         
     def set_Backgrounds_traits_TRT_TXT(self,Larray):
         self.Backgrounds_traits_TRT_TXT.delete(1.0, 'end-1c')
@@ -2310,6 +2322,61 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         for x in Larray:
             self.Backgrounds_misctraits_inventory_INV_TXT.insert(INSERT,x)
     ##internal
+    def internal_calcprofbonusplushpmisc(self):
+        B_RM = self.get_Backgrounds_rollmod_LBL()##background rollmod
+        P_RM = self.get_primaryattributes_LBL()##primary rollmod
+        T_RM = []
+        if 'NA' in P_RM:## if primary attributes are not calculated  dont calculate the rest
+            pass
+        else:
+            for x in range(len(B_RM)):
+                B_RM[x] = B_RM[x].split('|')[1]##splits then discards the first entry
+                if B_RM[x] == '+-0':
+                    B_RM[x] = '0'
+            print('========\n',B_RM,'\n',P_RM,'\n========')
+            #temp = []
+            for x in range(len(B_RM)):#B_RM and P_RM are both same length
+                T_RM.append(int(B_RM[x])+int(P_RM[x]))#add them together
+                
+    ##        ARRAY_HPMISC[0] = str(10+int(ARRAY_PATTR[1]))##armour class = 10+rollmod(dexterity)
+    ##        ARRAY_HPMISC[5] = str(10+int(ARRAY_PATTR[1]))##hp max = 10+rollmod(dexterity)
+    ##        ARRAY_HPMISC[3] = str(10+int(ARRAY_PATTR[1]))##current hp is the same as hp max as character is just starting
+    ####      print(ARRAY_HPMISC)
+    ####      input()
+    ##        
+    ##        ARRAY_PERCEPTION = str(10+int(ARRAY_PATTR_ROLLMOD[4])+int())##perception=10+wisdom rollmod+proficiency in perception
+            
+            ##update saving throws and skill proficiency bonuses
+            A_SF = self.get_savingthrows()##array_savingthrows
+            #A_SP = self.get_secondaryskills()##array_skillproficiencies##sp not needed as lvl 0
+
+            for x in range(len(A_SF)):
+                print(A_SF[x])
+                if A_SF[x][0] == 1:##if proficent put rollmod of primary attribute into box
+                    A_SF[x] = [1,str(P_RM[x])]##reassign tuple as list
+                else:
+                    A_SF[x] = [0,str('0')]##reassign tuple as list
+                    
+##            for x in range(len(A_SP[1])):
+##                if A_SP[1] == 1:
+##                    A_SP[0] = str(profbonus)
+
+            #set the values
+            self.set_savingthrows(A_SF)##array_savingthrows
+            #self.set_secondaryskills(A_SP)##array_skillproficiencies
+
+            
+            ##caclulate and update wisdom##EDIT: now done on finalisation of character
+            #self.str(10+int(ARRAY_PATTR_ROLLMOD[4])+int())
+                
+            ##calculate and update hpmisc(hp and ac)
+            temp = self.get_hpmiscskills()
+            temp[0] = str(10+int(T_RM[1]))##armour class = 10+rollmod(dexterity)
+            temp[5] = str(10+int(T_RM[1]))##hp max = 10+rollmod(dexterity)
+            temp[3] = temp[5]#  = str(10+int(ARRAY_PATTR[1]))##current hp is the same as hp max as character is just starting
+            self.set_hpmiscskills(temp)
+
+            
     def internal_savefileaskchecker(self):##returns name and true if file exists
         FPath = filedialog.asksaveasfilename(filetypes=(("D&D character sheet", "*.MEGA"),("All Files", "*.*") ))##adv extention is forced onto ##EDIT took out this defaultextension=".ADV", 
         EXISTS_FLAG = False
@@ -2605,6 +2672,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                     self.HPmiscskills_SPD_BOX_VAR.set(data[x][0])
             print(lang_temp)
             self.set_Backgrounds_LANG_TRT_TXT(lang_temp)##clears textbox then adds
+            self.Backgrounds_setup_CBS_CURR_LBL_VAR.set('None selected!')##removes subrace label data 
             
             
             
@@ -2741,7 +2809,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             #input(self.get_secondaryskills())
             #set specific attributes for each class here
             #print('charclass',charclass=='Cleric')
-                ##actual backgrounds,claric-acolyte,figter-soldier,rogue-criminal,wizard-sage,,
+                ##actual backgrounds,cleric-acolyte,figter-soldier,rogue-criminal,wizard-sage,,
             if charclass == 'Cleric':
                 HITDICE = 'D8'
                 PRIM_PROF[4] = (1,PRIM_PROF[4][1])##assigns data as tuple (proficency flag,text in proficiency box)
@@ -2784,6 +2852,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             self.set_Backgrounds_misctraits_DPI_TXT_CLR()
             self.set_Backgrounds_misctraits_DPB_TXT_CLR()
             self.set_Backgrounds_misctraits_DPF_TXT_CLR()
+            
             
     def internal_processbgtraitsdata(self,charclass,bgid):##sets up background class data based on background for testing
         data = datamain.fetch(charclass+'.txt')##repurposed as random
@@ -3095,6 +3164,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         dat2rt[18] = [Fn[18],GotData[13][4].split('\n')]
         
         return dat2rt#GotData#dat2rt
+    
 ##    ##not used anymore split up within button functions
 ##    def internal_process_backgrounddata(self):#process backgroundform refreshing for character background
 ##        #readingdata = [False,'',0]##reading,reader,linesleft
