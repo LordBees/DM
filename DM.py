@@ -2083,12 +2083,15 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                     #input()
 
                     TOSAVE = [ARRAY_NAMESTAT,ARRAY_PATTR,ARRAY_PATTR_RMOD,STRING_PERCEPTION,'0','0',ARRAY_SAVES,ARRAY_SKILLS,ARRAY_HPMISC,##profbonus =0 at lvl:0 inspiration is 0 at start normally
-                              [self.Backgrounds_hitdie_HTD_BOX_VAR.get(), 'TOT', 0, 0, 0, 0, 0, 0],[[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']],' '],
+                              [self.Backgrounds_hitdie_HTD_BOX_VAR.get(), '1x', 0, 0, 0, 0, 0, 0],[[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']],' '],#1x is hit dice
                               self.get_Backgrounds_LANG_TRT_TXT(),self.get_Backgrounds_misctraits_inventory_INV_TXT(),
                               [self.get_Backgrounds_misctraits_DPT_TXT(),self.get_Backgrounds_misctraits_DPI_TXT(),self.get_Backgrounds_misctraits_DPB_TXT(),self.get_Backgrounds_misctraits_DPF_TXT(),
                                self.get_Backgrounds_traits_TRT_TXT()]]
                     print('\n\nsave{}>')
+                    #for x in TOSAVE:
+                        #print(x)
                     print(TOSAVE)
+                    print('ss')
                     ##saving data
 
                     Fs = MEGA.mega2(saveloc[0])
