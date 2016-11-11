@@ -2355,7 +2355,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             self.Backgrounds_misctraits_inventory_INV_TXT.insert(INSERT,x)
     ##internal
     def internal_calcprofbonusplushpmisc(self):
-        PROFBONUS_LVL = 0 ## i am going to expand this later to include starting level on the page but for now is fixed at 0
+        PROFBONUS_LVL = 2 ## i am going to expand this later to include starting level on the page but for now is fixed at 2 as character will be lvl 0 at start
         B_RM = self.get_Backgrounds_rollmod_LBL()##background rollmod
         P_RM = self.get_primaryattributes_LBL()##primary rollmod
         T_RM = []
@@ -2386,14 +2386,16 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             for x in range(len(A_SF)):
                 print(A_SF[x])
                 if A_SF[x][0] == 1:##if proficent put rollmod of primary attribute into box
-                    A_SF[x] = [1,str(P_RM[x])]##reassign tuple as list
+                    A_SF[x] = [1,str(T_RM[x])]##reassign tuple as list ##EDIT now includes modifiers
                 else:
                     A_SF[x] = [0,str('0')]##reassign tuple as list
                     
             for x in range(len(A_SP[1])):
-##                if A_SP[1][x] == 1:
-##                    A_SP[0][x] = str(PROFBONUS_LVL)
-                A_SP[0][x] = str(PROFBONUS_LVL)
+                if A_SP[1][x] == 1:
+                    A_SP[0][x] = str(PROFBONUS_LVL)
+                else:
+                    A_SP[0][x] = str(0)
+                #A_SP[0][x] = str(PROFBONUS_LVL)
 
             #set the values
             self.set_savingthrows(A_SF)##array_savingthrows
@@ -2406,6 +2408,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             ##calculate and update hpmisc(hp and ac)
             temp = self.get_hpmiscskills()
             temp[0] = str(10+int(T_RM[1]))##armour class = 10+rollmod(dexterity)
+            temp[1] = str(T_RM[1])##initiative = dex rollmod
             temp[5] = str(10+int(T_RM[1]))##hp max = 10+rollmod(dexterity)
             temp[3] = temp[5]#  = str(10+int(ARRAY_PATTR[1]))##current hp is the same as hp max as character is just starting
             self.set_hpmiscskills(temp)
@@ -2854,7 +2857,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 PRIM_PROF[5] = (1,PRIM_PROF[5][1])
                 SEC_PROF[1][15] = 1#(1,SEC_PROF[15][1])
                 SEC_PROF[1][6] = 1#(1,SEC_PROF[6][1])
-                INV = ['A holy symbol (a gift to you when you entered the priesthood)\n','a prayer book or prayer wheel\n','5 sticks of incense\n','vestments\n','a set of common clothes\n','a pouch containing 15 gp\n']
+                INV = ['A holy symbol (a gift to you when you entered the priesthood)\n','a prayer book or prayer wheel\n','5 sticks of incense\n','vestments\n','a set of common clothes\n','a pouch containing 15 gp\n','Priest’s Pack']
                 
             elif charclass == 'Fighter':
                 HITDICE = 'D10'
@@ -2862,14 +2865,14 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 PRIM_PROF[2] = (1,PRIM_PROF[2][1])
                 SEC_PROF[1][3] = 1#(1,SEC_PROF[5][1])
                 SEC_PROF[1][7] = 1#(1,SEC_PROF[2][1])
-                INV = ['An insignia of rank\n', 'a trophy taken from a fallen enemy\n','a deck of cards\n','a set of common clothes\n','a pouch containing 10 gp\n']
+                INV = ['An insignia of rank\n', 'a trophy taken from a fallen enemy\n','a deck of cards\n','a set of common clothes\n','a pouch containing 10 gp\n','Dungeoneer’s Pack']
             elif charclass == 'Rogue':
                 HITDICE = 'D8'
                 PRIM_PROF[1] = (1,PRIM_PROF[1][1])
                 PRIM_PROF[3] = (1,PRIM_PROF[3][1])
                 SEC_PROF[1][4] = 1#(1,SEC_PROF[5][1])
                 SEC_PROF[1][16] = 1#(1,SEC_PROF[2][1])
-                INV = ['A crowbar\n','a set of dark common clothes including a hood\n','a pouch containing 15 gp\n']
+                INV = ['A crowbar\n','a set of dark common clothes including a hood\n','a pouch containing 15 gp\n','Burglar’s Pack']
                 
             elif charclass == 'Wizard':
                 HITDICE = 'D6'
@@ -2877,7 +2880,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 PRIM_PROF[4] = (1,PRIM_PROF[4][1])
                 SEC_PROF[1][5] = 1#(1,SEC_PROF[5][1])
                 SEC_PROF[1][2] = 1#(1,SEC_PROF[2][1])
-                INV = ['A bottle of black ink\n','a quill\n','a small knife\n','a letter from a dead colleague posing a question\n you have not yet been able to answer\n','a set of common clothes\n','a pouch containing 10 gp\n']
+                INV = ['A bottle of black ink\n','a quill\n','a small knife\n','a letter from a dead colleague posing a question\n you have not yet been able to answer\n','a set of common clothes\n','a pouch containing 10 gp\n','Scholar’s Pack']
                 
 
             
