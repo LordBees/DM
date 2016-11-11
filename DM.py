@@ -1729,18 +1729,18 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
 ##        HPMISC_SETUP_LF = LabelFrame(self.This_win,text = 'armour class\nhealth stats selection')
 ##        HPMISC_SETUP_LF.place(x=0,y=0)
         HPmiscskills_LF = LabelFrame(self.This_win,text = 'BG\nHP/misc')
-        HPmiscskills_AMC_BOX = Entry(HPmiscskills_LF,width = 5,textvariable = self.HPmiscskills_AMC_BOX_VAR)             .grid(row=1,column=0)#.pack()
+        HPmiscskills_AMC_BOX = Entry(HPmiscskills_LF,width = 5,textvariable = self.HPmiscskills_AMC_BOX_VAR,state = DISABLED)             .grid(row=1,column=0)#.pack()
         HPmiscskills_AMC_LBL = Label(HPmiscskills_LF,text = 'armour class') .grid(row=0,column=0)#.pack()
-        HPmiscskills_INI_BOX = Entry(HPmiscskills_LF,width = 5,textvariable = self.HPmiscskills_INI_BOX_VAR)             .grid(row=1,column=1)#.pack()
+        HPmiscskills_INI_BOX = Entry(HPmiscskills_LF,width = 5,textvariable = self.HPmiscskills_INI_BOX_VAR,state = DISABLED)             .grid(row=1,column=1)#.pack()
         HPmiscskills_INI_LBL = Label(HPmiscskills_LF,text = 'initiative')   .grid(row=0,column=1)#.pack()
-        HPmiscskills_SPD_BOX = Entry(HPmiscskills_LF,width = 5,textvariable = self.HPmiscskills_SPD_BOX_VAR)             .grid(row=1,column=2)#.pack()
+        HPmiscskills_SPD_BOX = Entry(HPmiscskills_LF,width = 5,textvariable = self.HPmiscskills_SPD_BOX_VAR,state = DISABLED)             .grid(row=1,column=2)#.pack()
         HPmiscskills_SPD_LBL = Label(HPmiscskills_LF,text = 'Speed')        .grid(row=0,column=2)#.pack()
         
-        HPmiscskills_HMX_BOX = Entry(HPmiscskills_LF,width = 4,textvariable = self.HPmiscskills_HMX_BOX_VAR)             .grid(row=4,column=1)#.pack()
+        HPmiscskills_HMX_BOX = Entry(HPmiscskills_LF,width = 4,textvariable = self.HPmiscskills_HMX_BOX_VAR,state = DISABLED)             .grid(row=4,column=1)#.pack()
         HPmiscskills_HMX_LBL = Label(HPmiscskills_LF,text = 'MAX HP')        .grid(row=4,column=0)#.pack()
         HPmiscskills_HTP_BOX = Entry(HPmiscskills_LF,width = 4,textvariable = self.HPmiscskills_HTP_BOX_VAR,state = DISABLED)              .grid(row=5,column=1)#.pack()
         HPmiscskills_HTP_LBL = Label(HPmiscskills_LF,text = 'temp HP')        .grid(row=5,column=0)#.pack()
-        HPmiscskills_HCR_BOX = Entry(HPmiscskills_LF,width = 4,textvariable = self.HPmiscskills_HCR_BOX_VAR)              .grid(row=6,column=1)#.pack()
+        HPmiscskills_HCR_BOX = Entry(HPmiscskills_LF,width = 4,textvariable = self.HPmiscskills_HCR_BOX_VAR,state = DISABLED)              .grid(row=6,column=1)#.pack()
         HPmiscskills_HCR_LBL = Label(HPmiscskills_LF,text = 'current HP')        .grid(row=6,column=0)#.pack()
         HPmiscskills_LF.place(x=500,y=675)##was 375
 
@@ -1845,7 +1845,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         secondaryskills_LF.place(x=325,y=315)
 
         Backgrounds_hitdie_LF = LabelFrame(self.This_win,text = 'BG\nHit Dice')
-        Backgrounds_hitdie_HTD_BOX = Entry(Backgrounds_hitdie_LF,width = 5,textvariable = self.Backgrounds_hitdie_HTD_BOX_VAR).grid(row=0,column=1)
+        Backgrounds_hitdie_HTD_BOX = Entry(Backgrounds_hitdie_LF,width = 5,textvariable = self.Backgrounds_hitdie_HTD_BOX_VAR,state = DISABLED).grid(row=0,column=1)
         Backgrounds_hitdie_HTD_LBL = Label(Backgrounds_hitdie_LF,text = 'hit die = ').grid(row=0,column=0)
         Backgrounds_hitdie_LF.place(x=675,y=340)
         
