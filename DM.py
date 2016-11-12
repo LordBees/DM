@@ -997,8 +997,10 @@ class main_win:
             FPath = self.QS_path_currfile
             dat = self.internal_prepsave(dat)
             #dat = dat[0]
-            self.base_ADV.close()
-            self.base_ADV.LOADED = True##hack to open so megafile thinks can be read
+            self.base_ADV.clear()##edit: method replaces this
+            #self.base_ADV.close()
+            #self.base_ADV.LOADED = True##hack to open so megafile thinks can be read
+            
             #self.base_ADV.save()
             #self.base_ADV = None
             #self.base_ADV = MEGA.mega2(FPath)
@@ -1033,8 +1035,9 @@ class main_win:
             if FP[1] == True:
                 if messagebox.askokcancel(title = 'confirm',message = 'this will OVERWRITE the selected file with data\nare you sure?'):
                     self.base_ADV = MEGA.mega2(FP[0])
-                    self.base_ADV.close()##clear file
-                    self.base_ADV.LOADED = True##hack to open so megafile thinks can be read
+                    #self.base_ADV.close()##clear file
+                    #self.base_ADV.LOADED = True##hack to open so megafile thinks can be read
+                    self.base_ADV.clear()##edit: this replaces the close fix
                     for x in dat:
                         print(x)
                     for x in range(len(dat)-1):
@@ -2095,6 +2098,10 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                     ##saving data
 
                     Fs = MEGA.mega2(saveloc[0])
+                    if saveloc[1]:##if file exists already
+                        Fs.clear()##clears data
+                        #Fs.close()
+                        #Fs.LOADED = True## hack to overwrite the file
 
                     TOSAVE = self.internal_prepsave(TOSAVE)
                     for x in range(len(TOSAVE)-1):

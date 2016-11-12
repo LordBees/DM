@@ -320,6 +320,11 @@ class mega2:
         self.data_main = []##clear main
         self.LOADED = False
         
+    def clear(self):##clears object data
+        self.offsets = []
+        self.file_names = []
+        self.data_main = []##clear main
+        
     
     def isloaded(self):
         return self.LOADED
