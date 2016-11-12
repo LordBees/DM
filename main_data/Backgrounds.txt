@@ -1,1 +1,1 @@
-Noble,Thief,
+Cleric,Fighter,Rogue,Wizard,,
