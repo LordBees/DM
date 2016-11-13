@@ -461,13 +461,13 @@ class main_win:
         Menu_settings = Menu(Menu_main,tearoff = 0)##tools tab
         #Menu_settings = Menu(menubar, tearoff=0)
         Menu_settings.add_command(label="dice roller", command=dicewin)
-        Menu_settings.add_command(label="combat helper")#, command=Menu_customchoose_window)
+        Menu_settings.add_command(label="combat helper",state = DISABLED)#, command=Menu_customchoose_window)
 
         ##top menu(the strip across the top of the windw with the options on)
         ##define menu dropdowns
         Menu_main.add_cascade(label = '|File|',menu = Menu_FileIO)
         Menu_main.add_cascade(label = '|Tools|',menu = Menu_settings)
-        Menu_main.add_command(label="|Options|",command = optwin)#, command=Menu_preview_window)
+        Menu_main.add_command(label="|Options|",command = optwin,state = DISABLED)#, command=Menu_preview_window)##EDIT disabled button
         Menu_main.add_command(label="|create new preset character|",command = createcharwin)#, command=Menu_preview_window)
 
         ##post widget code
@@ -1877,14 +1877,14 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
         Backgrounds_misctraits_inventory_LF = LabelFrame(self.This_win,text = 'INV\nbasic inventory')
         self.Backgrounds_misctraits_inventory_INV_TXT = Text(Backgrounds_misctraits_inventory_LF,width = 50,height = 10)
         self.Backgrounds_misctraits_inventory_INV_TXT.grid(row=0,column=0)
-        Backgrounds_misctraits_inventory_LF.place(x=900,y=600)
+        Backgrounds_misctraits_inventory_LF.place(x=825,y=475)#(x=900,y=600)
 
 
 
         finalizechar_setup_LF = LabelFrame(self.This_win,text = 'options')
         finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'create character',command = self.sub_button_FIN).grid(row=0,column=0)
         finalizechar_setup_FIN_BTN = Button(finalizechar_setup_LF,text = 'reset character',command = self.sub_button_CLR).grid(row=1,column=0)
-        finalizechar_setup_LF.place(x=825,y=500)
+        finalizechar_setup_LF.place(x=825,y=700)
         #print('x',self.primaryattributes_setup_DRL_LBX)
 
         
@@ -3354,23 +3354,28 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
             
             
 class optwin:##options window
+             ##working on options as an improvement to my existing project for the next development cycle
     #CHANGED= True
     OPTIONSNAME = 'OPTIONS.CFF'
     optionssnapshot = []
     optionsmain=[]
 
     load_RCL_BTN_VAR = IntVar()
+    load_RCL_BOX_VAR = StringVar()
+    load_UPDATE_RM_BTN = IntVar()
     def __init__(self):
         self.This_win = Toplevel()
         self.This_win.title('Options Menu')
         self.This_win.geometry('600x200')
         ##widgets
         
-        load_LF = LabelFrame(self.This_win)
-        load_RCL_BTN = Checkbutton(load_LF,text = 'resume last loaded character sheet',variable = self.load_RCL_BTN_VAR).grid(row=0,column=0) 
+        load_LF = LabelFrame(self.This_win,text = 'resume last loaded character sheet')
+        load_RCL_BTN = Checkbutton(load_LF,text = 'load file at startup',variable = self.load_RCL_BTN_VAR).grid(row=0,column=0)
+        load_RCL_BOX = Entry(load_LF,textvariable = self.load_RCL_BOX_VAR).grid(row=0,column=1)
+        load_UPDATE_RM_BTN = Checkbutton(load_LF,text = 'auto update roll modifiers',variable = self.load_UPDATE_RM_BTN).grid(row=1,column=0) 
         load_LF.place(x=5,y=5)
 
-        main_SAV_BTN = Button(Self.This_win,text = 'save changes',command = self.savedata).place(x=50,y=50)
+        main_SAV_BTN = Button(self.This_win,text = 'save changes',command = self.savedata).place(x=100,y=100)
         ## post widget code
         self.This_win.after(1500,self.Alt_loop)
         self.This_win.mainloop()
@@ -3387,8 +3392,10 @@ class optwin:##options window
 
         ##end
         self.This_win.after(1500,self.Alt_loop)
+        
     def get_load(self):
         return load_RCL_BTN_VAR.get()
+    
     def get_ALL(self):
         return[
             self.get_load()
@@ -3437,7 +3444,7 @@ class fileIO:##unused atm
 ##    def __init__(self):
 ##        pass
 
-##actually starts the tkinter programand loads data file 
-datamain = MEGA.mega2('DATA')##loads main data 
+##actually starts the tkinter program and loads data file 
+datamain = MEGA.mega2('DATA')##loads main data file
 m = main_win()##actually instanciates the window
 
