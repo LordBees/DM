@@ -2867,7 +2867,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 PRIM_PROF[5] = (1,PRIM_PROF[5][1])
                 SEC_PROF[1][15] = 1#(1,SEC_PROF[15][1])
                 SEC_PROF[1][6] = 1#(1,SEC_PROF[6][1])
-                INV = ['A holy symbol (a gift to you when you entered the priesthood)\n','a prayer book or prayer wheel\n','5 sticks of incense\n','vestments\n','a set of common clothes\n','a pouch containing 15 gp\n','Priest’s Pack']
+                INV = ['A holy symbol (a gift to you when you entered the priesthood)\n','a prayer book or prayer wheel\n','5 sticks of incense\n','vestments\n','a set of common clothes\n','a pouch containing 15 gp\n','Priests Pack']
                 
             elif charclass == 'Fighter':
                 HITDICE = 'D10'
@@ -2875,14 +2875,14 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 PRIM_PROF[2] = (1,PRIM_PROF[2][1])
                 SEC_PROF[1][3] = 1#(1,SEC_PROF[5][1])
                 SEC_PROF[1][7] = 1#(1,SEC_PROF[2][1])
-                INV = ['An insignia of rank\n', 'a trophy taken from a fallen enemy\n','a deck of cards\n','a set of common clothes\n','a pouch containing 10 gp\n','Dungeoneer’s Pack']
+                INV = ['An insignia of rank\n', 'a trophy taken from a fallen enemy\n','a deck of cards\n','a set of common clothes\n','a pouch containing 10 gp\n','Dungeoneers Pack']
             elif charclass == 'Rogue':
                 HITDICE = 'D8'
                 PRIM_PROF[1] = (1,PRIM_PROF[1][1])
                 PRIM_PROF[3] = (1,PRIM_PROF[3][1])
                 SEC_PROF[1][4] = 1#(1,SEC_PROF[5][1])
                 SEC_PROF[1][16] = 1#(1,SEC_PROF[2][1])
-                INV = ['A crowbar\n','a set of dark common clothes including a hood\n','a pouch containing 15 gp\n','Burglar’s Pack']
+                INV = ['A crowbar\n','a set of dark common clothes including a hood\n','a pouch containing 15 gp\n','Burglars Pack']
                 
             elif charclass == 'Wizard':
                 HITDICE = 'D6'
@@ -2890,7 +2890,7 @@ class createcharwin:#(main_win):##better to create new window form,from scratch
                 PRIM_PROF[4] = (1,PRIM_PROF[4][1])
                 SEC_PROF[1][5] = 1#(1,SEC_PROF[5][1])
                 SEC_PROF[1][2] = 1#(1,SEC_PROF[2][1])
-                INV = ['A bottle of black ink\n','a quill\n','a small knife\n','a letter from a dead colleague posing a question\n you have not yet been able to answer\n','a set of common clothes\n','a pouch containing 10 gp\n','Scholar’s Pack']
+                INV = ['A bottle of black ink\n','a quill\n','a small knife\n','a letter from a dead colleague posing a question\n you have not yet been able to answer\n','a set of common clothes\n','a pouch containing 10 gp\n','Scholars Pack']
                 
 
             
